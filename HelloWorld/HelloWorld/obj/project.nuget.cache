@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZFASm94ORRxv9+NQkuKRhAbDjR+Y4jiDX5vMGbD4taln/cW0vRZ+/H07MXIH8lbn03jCz9alBtYQijU84aKFgw==",
+  "dgSpecHash": "zLtKisZG4dm5aDSVZV/exgW0yDexe0Bpl1vFyc7EFuY0dh1+1BBwjHkNetIfJ0I8qE9pJa2BA4Bl0MdT8sDRaw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DELL\\source\\repos\\HelloWorld\\HelloWorld\\HelloWorld.csproj",
+  "projectFilePath": "C:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
