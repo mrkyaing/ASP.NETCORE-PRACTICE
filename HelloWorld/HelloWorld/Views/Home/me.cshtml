@@ -1,0 +1,59 @@
+﻿<style>
+    form {
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.form-group {
+  margin: 20px 0;
+}
+
+    label, input[type="text"], input[type="email"], input[type="password"], input[type="date"], select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  box-sizing:border-box;
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+</style>
+    <form action="/home/me" method="post">
+<fieldset style="width:350px">
+    <legend style="text-align:center">Register Here</legend>
+        <div class="form-group"> <label>Name:</label><input type="text" /></div>
+        <div class="form-group">   <label>Email:</label><input type="text" name="txtemail" /></div>
+       <div class="form-group">Password:<input type="password" /></div>
+        <div class="form-group">ConfirmPassword:<input type="password" /></div>
+        <div class="form-group"> 
+         <label>Gender:</label>
+         <input type="radio" value="Male" checked />Male
+         <input type="radio" value="FeMale"  />Female</div>
+        <div class="form-group"> <label>Date Of Birth:</label><input type="date" /></div>
+        <div class="form-group">
+            <label>City:</label>    <select>
+                <option value="ygn">Yangon</option>
+                 <option value="mdy">Mandalay</option>
+            </select></div>
+        <div class="form-group"> <label>Address:</label><textarea cols="50" rows="5"></textarea></div>
+        <div class="form-group" style="text-align:center">
+            <button type="submit"/>Register
+            </div>
+        <div class="form-group">
+                @if (@ViewBag.Msg != null)
+                {
+                  <label>   You are successfully register with
+                    @ViewBag.Msg address.</label>                   
+                }
+            </div>
+</fieldset>
+</form>
