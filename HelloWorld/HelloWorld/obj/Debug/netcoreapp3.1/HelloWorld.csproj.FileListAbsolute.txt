@@ -385,3 +385,6 @@ C:\ASP.NETCORE-PRACTICE\HelloWorld\HelloWorld\bin\Debug\netcoreapp3.1\zh-Hans\Mi
 C:\ASP.NETCORE-PRACTICE\HelloWorld\HelloWorld\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\ASP.NETCORE-PRACTICE\HelloWorld\HelloWorld\obj\Debug\netcoreapp3.1\HelloWorld.MvcApplicationPartsAssemblyInfo.cs
 C:\ASP.NETCORE-PRACTICE\HelloWorld\HelloWorld\obj\Debug\netcoreapp3.1\Razor\Views\Home\multiple.cshtml.g.cs
+C:\ASP.NETCORE-PRACTICE\HelloWorld\HelloWorld\obj\Debug\netcoreapp3.1\Razor\Views\AboutUs\hi.cshtml.g.cs
+C:\ASP.NETCORE-PRACTICE\HelloWorld\HelloWorld\obj\Debug\netcoreapp3.1\Razor\Views\AboutUs\me.cshtml.g.cs
+C:\ASP.NETCORE-PRACTICE\HelloWorld\HelloWorld\obj\Debug\netcoreapp3.1\Razor\Views\AboutUs\Calculate.cshtml.g.cs
