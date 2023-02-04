@@ -1,0 +1,3 @@
+﻿ASP.NET MVC Action Methods are responsible to execute requests and generate responses to it
+By default, it generates a response in the form of IActionResult.
+Controllers define action methods and these action methods generally have a one-to-one mapping with user interaction such as clicking a button or a link, etc.

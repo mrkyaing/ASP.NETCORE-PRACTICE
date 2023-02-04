@@ -25,9 +25,8 @@ namespace HelloWorld.Controllers
             return View();
         }
 
-        public string Ok() {
-            return "ok";
-        }
+        public string Ok() => "ok";
+   
 
         public ContentResult ShowContent()
         {
@@ -50,6 +49,12 @@ namespace HelloWorld.Controllers
         {
             ViewBag.Result = n1 + n2;
             return View();
+        }
+        public FileResult DownloadFile()
+        {
+            string fileName = "Pro_ASP.NET_Core_3.pdf";
+            var myfile = System.IO.File.ReadAllBytes("Files/"+fileName);
+            return File(myfile,"text/pdf", fileName);
         }
     }
 }
