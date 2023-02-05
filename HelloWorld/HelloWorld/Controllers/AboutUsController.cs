@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Web;
@@ -14,17 +15,18 @@ namespace HelloWorld.Controllers
         {
             _webHostEnvironment = webHostEnvironment;
         }
+
         public IActionResult Hi()
         {
            return View();
         }
-
+       // [ActionName("Me")]
         public ViewResult Me(string firstName,string lastName)
         {
             ViewBag.myName =$"{firstName} {lastName}" ;
             return View();
         }
-
+        [NonAction]
         public string Ok() => "ok";
    
 
@@ -32,7 +34,7 @@ namespace HelloWorld.Controllers
         {
             return Content ("<h1>I am C# Developer <h1>","text/html");
         }
-
+        [Authorize]
         public FileResult DownloadApp()
         {
             string fileName = "UserManual.txt";
@@ -52,9 +54,21 @@ namespace HelloWorld.Controllers
         }
         public FileResult DownloadFile()
         {
-            string fileName = "Pro_ASP.NET_Core_3.pdf";
-            var myfile = System.IO.File.ReadAllBytes("Files/"+fileName);
-            return File(myfile,"text/pdf", fileName);
+            string fileName = "UserManual.txt";
+            byte[] myFile = System.IO.File.ReadAllBytes("Files/"+fileName);
+            return File(myFile, "text/txt", fileName);
+        }
+        [HttpPost]
+        public IActionResult Sum(int n1,int n2)
+        {
+            ViewBag.Result = n1 + n2;
+            return View();
+        }
+
+        public  ViewResult Testing()
+        {
+            ViewData["FullName"] = "John Smith";
+            return View();
         }
     }
 }

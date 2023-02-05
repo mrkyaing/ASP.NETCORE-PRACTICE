@@ -388,3 +388,6 @@ C:\ASP.NETCORE-PRACTICE\HelloWorld\HelloWorld\obj\Debug\netcoreapp3.1\Razor\View
 C:\ASP.NETCORE-PRACTICE\HelloWorld\HelloWorld\obj\Debug\netcoreapp3.1\Razor\Views\AboutUs\hi.cshtml.g.cs
 C:\ASP.NETCORE-PRACTICE\HelloWorld\HelloWorld\obj\Debug\netcoreapp3.1\Razor\Views\AboutUs\me.cshtml.g.cs
 C:\ASP.NETCORE-PRACTICE\HelloWorld\HelloWorld\obj\Debug\netcoreapp3.1\Razor\Views\AboutUs\Calculate.cshtml.g.cs
+C:\ASP.NETCORE-PRACTICE\HelloWorld\HelloWorld\obj\Debug\netcoreapp3.1\Razor\Views\AboutUs\Sum.cshtml.g.cs
+C:\ASP.NETCORE-PRACTICE\HelloWorld\HelloWorld\obj\Debug\netcoreapp3.1\Razor\Views\AboutUs\Testing.cshtml.g.cs
+C:\ASP.NETCORE-PRACTICE\HelloWorld\HelloWorld\obj\Debug\netcoreapp3.1\Razor\Views\ContactUs\Index.cshtml.g.cs

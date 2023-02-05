@@ -14,13 +14,13 @@ namespace HelloWorld.Controllers
             int hour = DateTime.Now.Hour;
             if (hour < 12)
             {
-                amOrPm = "Good Morning";
+                amOrPm = "Good Morning"+DateTime.Now;
             }else
             {
                 amOrPm = "Good Afternoon";
-
             }
             ViewBag.MyTime = amOrPm;
+            TempData["myTime"] = amOrPm;
             return View();
         }
 

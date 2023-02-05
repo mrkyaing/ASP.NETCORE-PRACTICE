@@ -1,0 +1,42 @@
+﻿<style>
+    form {
+        display: table;
+    }
+
+    div{
+        display: table-row;
+    }
+
+    label {
+        display: table-cell;
+    }
+
+    input {
+        display: table-cell;
+    }
+</style>
+<fieldset>
+    <legend>Calculate Exchange Rate</legend>
+<form action="/Home/Compute" method="post">
+    <div>
+       <label>Choose Currency</label>
+        <select name="fromCurrency">
+           <option value="usd">US Dollor</option>
+            <option value="sgd">Singapore Dollar</option>
+            <option value="thb">Thaiht</option>
+            <option value="chy">Cinese Yun</option>
+       </select>
+    </div>
+    <div>
+        <label>Amount</label>
+        <input type="number" name="amount" />
+    </div>
+    <div>
+        <label>Exchange Result (MMK)</label>
+        <input type="text" value=@ViewBag.CurrentResult readonly />
+    </div>
+    <div>
+            <input type="submit" value="Convert"/>
+    </div>
+</form>
+</fieldset>
