@@ -1,0 +1,47 @@
+﻿<style>
+    form{
+        display:table
+    }
+    div,hr{
+        display:table-row
+    }
+    label,input{
+        display:table-cell
+    }
+</style>
+<form action="/Course/Create" method="post">
+    <div>
+        <label>Fist Course Id </label>
+        <input  type="text" name="Id"/>
+    </div>
+    <div>
+        <label>First Couse Name</label>
+        <input type="text" name="[0].Name"/>
+    </div>
+    <div>
+        <label>First Course StartDate</label>
+        <input type="date" name="StartDate" />
+    </div>
+    <hr />
+ <div>
+        <label>Second Course Id</label>
+        <input type="text" name="Id"/>
+    </div> 
+    <div>
+        <label>Second  Course Name</label>
+        <input type="text" name="Name"/>
+    </div>
+    <div>
+        <label>Second Course StartDate</label>
+        <input type="date" name="StartDate" />
+    </div>
+    <div>
+        <input  type="submit" value="Create Course"/>
+    </div>
+</form>
+@if (@ViewBag.FirstCourseInfo != null)
+{
+    <h2>Frist Course Information @ViewBag.FirstCourseInfo</h2>
+    <h2>Second Course Information @ViewBag.SecondCourseInfo</h2>
+}
+

@@ -1,0 +1,29 @@
+﻿<style>
+    form{
+        display:table
+    }
+    div{
+        display:table-row
+    }
+
+    label, input {
+        display:table-cell
+    }
+</style>
+<form action="@Url.Action("Register","Home")" method="post">
+  <div>
+        <label>Id</label>
+        <input type="text" name="id" />
+  </div>
+    <div>
+        <label>FirstName</label>
+        <input type="text" name="firstName" />
+    </div>
+    <div>
+        <label>Last Name</label>
+        <input type="text" name="lastName" />
+    </div>
+    <div>
+        <input type="submit" value="Register" />
+    </div>
+</form>

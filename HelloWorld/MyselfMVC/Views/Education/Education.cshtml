@@ -1,0 +1,65 @@
+﻿<style>
+    * {
+        box-sizing: border-box
+    }
+
+    header {
+        background-color: gray;
+        text-align: center;
+        padding: 10px;
+    }
+
+    nav {
+        padding: 10px;
+        background-color: wheat;
+        width: 30%;
+        height: 300px;
+        float: left;
+    }
+
+        nav ul {
+            padding: 0px;
+            list-style-type: none;
+        }
+
+    article {
+        padding: 10px;
+        float: left;
+        width: 70%;
+        height: 300px;
+        background-color: bisque;
+    }
+
+    footer {
+        padding: 10px;
+        text-align: center;
+        background-color: gray;
+    }
+
+    section::after {
+        display: table;
+    }
+</style>
+<html>
+<head>
+    <title>Myself</title>
+</head>
+<body>
+    <header><h1> <a href="/Master/Master">MySelf</a> </h1></header>
+    <section>
+        <nav>
+            <ul>
+                 <li><a href="/education/education">Education</a></li>
+                <li><a href="#">Hobbies</a></li>
+                <li><a href="#">Daily Activities</a></li>
+                <li><a href="/ContactMe/Index">Contact Me</a></li>
+            </ul>
+        </nav>
+        <article>
+          <h1> i am educationed from ucsm.</h1>
+            <h1> i am attending at asp.net core mvc with app dev in ACE Inspriation.</h1>
+        </article>
+    </section>
+    <footer>Copy right by me @DateTime.Now.Year.ToString()</footer>
+</body>
+</html>

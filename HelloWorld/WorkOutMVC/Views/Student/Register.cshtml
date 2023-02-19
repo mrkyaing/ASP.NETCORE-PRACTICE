@@ -1,0 +1,47 @@
+﻿<style>
+    form{
+        display:table
+    }
+    div{
+        display:table-row
+    }
+
+    label, input {
+        display:table-cell
+    }
+</style>
+<form action="@Url.Action("Register","Student")" method="post">
+  <div>
+        <label>Id</label>
+        <input type="number" name="Id" />
+  </div>
+    <div>
+        <label>FirstName</label>
+        <input type="text" name="FirstName" />
+    </div>
+    <div>
+        <label>Last Name</label>
+        <input type="text" name="LastName" />
+    </div>
+    <div>
+        <label>Street</label>
+        <input type="text" name="HomeAddress.Street" />
+    </div>
+    <div>
+        <label>City</label>
+        <input type="text" name="HomeAddress.City" />
+    </div>
+    <div>
+        <label>PostalCode</label>
+        <input type="text" name="HomeAddress.PostalCode" />
+    </div>
+
+    <div>
+        <input type="submit" value="Register" />
+    </div>
+</form>
+    @if (ViewBag.StudentInfo != null)
+    {
+      <h1 style="color:green">@ViewBag.StudentInfo </h1>
+    }
+    

@@ -1,5 +1,8 @@
-﻿<style>
-    form {
+﻿<html>
+    <head>
+       <title>Exchange Currency</title>
+       <style>
+    form{
         display: table;
     }
 
@@ -15,28 +18,41 @@
         display: table-cell;
     }
 </style>
-<fieldset>
-    <legend>Calculate Exchange Rate</legend>
-<form action="/Home/Compute" method="post">
-    <div>
-       <label>Choose Currency</label>
-        <select name="fromCurrency">
-           <option value="usd">US Dollor</option>
-            <option value="sgd">Singapore Dollar</option>
-            <option value="thb">Thaiht</option>
-            <option value="chy">Cinese Yun</option>
-       </select>
-    </div>
-    <div>
-        <label>Amount</label>
-        <input type="number" name="amount" />
-    </div>
-    <div>
-        <label>Exchange Result (MMK)</label>
-        <input type="text" value=@ViewBag.CurrentResult readonly />
-    </div>
-    <div>
-            <input type="submit" value="Convert"/>
-    </div>
-</form>
-</fieldset>
+<script type="text/javascript">
+    function loadingControl(){
+            if ("@ViewBag.selectedfromCurrency" != "")
+                document.getElementById("selfromCurrency").value = "@ViewBag.selectedfromCurrency";
+    if("@ViewBag.filledAmount">=0)
+                document.getElementById("txtamount").value = "@ViewBag.filledAmount"    
+    }
+</script>
+ </head>
+<body onload="loadingControl()">
+    <fieldset style="width:350px">
+        <legend>Calculate Exchange Rate</legend>
+        <form action="/Home/Compute" method="post">
+            <div>
+                <label>Choose Currency</label>
+                <select name="fromCurrency" id="selfromCurrency">
+                    <option value="">--Select One--</option>
+                    <option value="usd">US Dollor</option>
+                    <option value="sgd">Singapore Dollar</option>
+                    <option value="thb">Thaiht</option>
+                    <option value="chy">Cinese Yun</option>
+                </select>
+            </div>
+            <div>
+                <label>Amount</label>
+                <input type="number" name="amount"  id="txtamount"/>
+            </div>
+            <div>
+                <label>Exchange Result (MMK)</label>
+                <input type="text" value=@ViewBag.CurrentResult readonly />
+            </div>
+            <div>
+                <input type="submit" value="Convert" />
+            </div>
+        </form>
+    </fieldset>
+</body>
+</html>
