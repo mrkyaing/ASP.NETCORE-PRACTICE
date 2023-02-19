@@ -11,8 +11,8 @@
 
     nav {
         padding: 10px;
-        background-color: wheat;
-        width: 30%;
+        background-color: darkgray;
+        width: 20%;
         height: 300px;
         float: left;
     }
@@ -25,9 +25,9 @@
     article {
         padding: 10px;
         float: left;
-        width: 70%;
+        width: 80%;
         height: 300px;
-        background-color: bisque;
+        background-color: azure;
     }
 
     footer {
@@ -38,15 +38,6 @@
 
     section::after {
         display: table;
-    }
-    form{
-        display:table
-    }
-    div{
-        display:table-row
-    }
-    label,input,textarea{
-        display:table-cell
     }
 </style>
 <html>
@@ -81,8 +72,7 @@
                 <div>
                    <input  type="submit" value="Send Me"/> 
                </div>
-           </form>
-            
+           </form>        
                 <h1>@ViewBag.ContactMe</h1> 
         </article>
     </section>
