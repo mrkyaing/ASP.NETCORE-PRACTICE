@@ -1,0 +1,15 @@
+﻿<link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+ <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<form>
+    <button id="btnRefresh" class="btn btn-primary">Tell me today date</button>
+    <label>Current Date time is :</label><h1 id="now"></h1>
+</form>
+
+<script type="text/javascript">
+    $("#btnRefresh").click(function(){
+        var url = "/order/TellMeDateTime";
+        $.get(url,null,function(data){
+         $("#now").html=data;
+        });
+    });
+</script>

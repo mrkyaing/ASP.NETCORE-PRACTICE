@@ -1,0 +1,53 @@
+﻿<link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+<script src="~/lib/jquery/jquery.js"></script>
+<form>
+    <div class="form-group row">
+        <label>Order Id</label>
+        <div class="col-sm-10">  
+            <input type="text" id="orderId" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label>Order Status</label>
+        <select  class="form-control" id="orderStatus">
+          <option value="Cancel">Cancel</option>
+          <option value="InProgress">In Progress</option>
+      </select>
+    </div>
+    <div class="form-group row">
+        <label>Order Quantity</label>
+        <input type="text" id="orderQuantity" class="form-control" />
+    </div>
+    <div class="form-group row">
+     <button id="btnMakeOrder">Make Order</button>
+    </div>
+    <div class="form-check">
+        <p id="msg" class="alert alert-success"></p>
+    </div>
+</form>
+<script type="text/javascript">
+    $("#btnMakeOrder").click(function(e){
+        var url = "/order/MakeOrder";
+        var order={};
+        e.preventDefault();
+        order.Id = $("#orderId").val();
+        order.Status = $("#orderStatus").val();
+        order.Quantity = $("#orderQuantity").val();
+       $.ajax({
+           type:"post",
+           url:url,
+            data: order,
+            success:function(response){
+             var msg=JSON.stringify(response);
+                alert("your submitted value :" + msg);
+                $("#msg").value=msg;
+            },
+            failure:function(response){
+            alert("error occur"+response.responseText);
+            },
+            error:function(response){
+                alert("error occur" + response.responseText);
+            }
+       });
+    });
+</script>

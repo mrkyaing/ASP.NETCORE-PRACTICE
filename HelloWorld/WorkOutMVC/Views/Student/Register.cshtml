@@ -10,38 +10,41 @@
         display:table-cell
     }
 </style>
+<head>
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+</head>
 <form action="@Url.Action("Register","Student")" method="post">
-  <div>
+  <div class="for-group">
         <label>Id</label>
-        <input type="number" name="Id" />
+        <input type="number" name="Id" class="form-control" />
   </div>
-    <div>
+    <div class="form-group">
         <label>FirstName</label>
-        <input type="text" name="FirstName" />
+        <input type="text" name="FirstName" class="form-control"/>
     </div>
-    <div>
+    <div class="form-group">
         <label>Last Name</label>
-        <input type="text" name="LastName" />
+        <input type="text" name="LastName" class="form-control"/>
     </div>
-    <div>
+    <div class="form-group">
         <label>Street</label>
-        <input type="text" name="HomeAddress.Street" />
+        <input type="text" name="HomeAddress.Street" class="form-control"/>
     </div>
-    <div>
+    <div class="form-group">
         <label>City</label>
-        <input type="text" name="HomeAddress.City" />
+        <input type="text" name="HomeAddress.City" class="form-control"/>
     </div>
-    <div>
+    <div class="form-group">
         <label>PostalCode</label>
-        <input type="text" name="HomeAddress.PostalCode" />
+        <input type="text" name="HomeAddress.PostalCode" class="form-control"/>
     </div>
 
-    <div>
-        <input type="submit" value="Register" />
+    <div class="form-group">
+        <input type="submit" value="Register" class="btn btn-success">
     </div>
 </form>
     @if (ViewBag.StudentInfo != null)
     {
-      <h1 style="color:green">@ViewBag.StudentInfo </h1>
+      <h1 class="alert alert-success">@ViewBag.StudentInfo </h1>
     }
     

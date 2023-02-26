@@ -1,42 +1,31 @@
-﻿<style>
-    form{
-        display:table
-    }
-    div,hr{
-        display:table-row
-    }
-    label,input{
-        display:table-cell
-    }
-</style>
-<head>
+﻿<head>
     <meta name="viewport" content="width=device-width" />
     <title>Create Course</title>
-    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
 </head>
-<form action="/Course/Create" method="post" class="form-horizontal">
-    <div class="class="form-group"">
-        <label>Fist Course Id </label>
+<form action="/Course/Create" method="post" >
+    <div class="form-group">
+        <label class="form-control">Fist Course Id </label>
         <input type="text" name="Id" class="form-control" />
     </div>
-    <div class="class=" form-group"">
+    <div class="form-group">
         <label>First Couse Name</label>
         <input type="text" name="Name" class="form-control" />
     </div>
-    <div class="class=" form-group"">
+    <div class="form-group">
         <label>First Course StartDate</label>
         <input type="date" name="StartDate" class="form-control" />
     </div>
     <hr />
-    <div class="class=" form-group"">
+    <div class="form-group">
         <label>Second Course Id</label>
         <input type="text" name="Id" class="form-control" />
-    </div> 
-    <div class="class=" form-group"">
+    </div>
+    <div class="form-group">
         <label>Second  Course Name</label>
         <input type="text" name="Name" class="form-control" />
     </div>
-    <div class="class=" form-group"">
+    <div class="form-group">
         <label>Second Course StartDate</label>
         <input type="date" name="StartDate" class="form-control" />
     </div>
