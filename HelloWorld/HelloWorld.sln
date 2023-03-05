@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkOutMVC", "WorkOutMVC\Wo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyselfMVC", "MyselfMVC\MyselfMVC.csproj", "{A92A9244-F59C-4ABD-8111-B088A20FFC6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFMS", "SFMS\SFMS.csproj", "{9D1323EC-F160-4F7C-9FFB-637BD8EC93DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFMS", "SFMS\SFMS.csproj", "{9D1323EC-F160-4F7C-9FFB-637BD8EC93DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleCollectionPractice", "ConsoleCollectionPractice\ConsoleCollectionPractice.csproj", "{269F8A15-0198-454F-95FA-44856D30F5CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{9D1323EC-F160-4F7C-9FFB-637BD8EC93DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D1323EC-F160-4F7C-9FFB-637BD8EC93DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D1323EC-F160-4F7C-9FFB-637BD8EC93DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{269F8A15-0198-454F-95FA-44856D30F5CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{269F8A15-0198-454F-95FA-44856D30F5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{269F8A15-0198-454F-95FA-44856D30F5CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{269F8A15-0198-454F-95FA-44856D30F5CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

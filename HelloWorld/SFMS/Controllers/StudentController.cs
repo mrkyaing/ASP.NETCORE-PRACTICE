@@ -3,8 +3,9 @@ using SFMS.Models.ViewModels;
 using SFMS.Models.DAO;
 using SFMS.Models;
 using System;
-using System.Transactions;
 using System.Net;
+using Microsoft.EntityFrameworkCore;
+using System.Net.Sockets;
 
 namespace SFMS.Controllers
 {
@@ -22,15 +23,13 @@ namespace SFMS.Controllers
         [HttpPost]
         public  IActionResult Entry(StudentViewModel studentViewModel)
         {
-            bool isSuccess = false;
+            bool isSuccess;
             try {
                 Student student = new Student();
                 //audit columns
                 student.Id = Guid.NewGuid().ToString();
                 student.CreatedDte = DateTime.Now;
-                string hostName = Dns.GetHostName(); // Retrive the Name of HOST
-                string myIP = Dns.GetHostByName(hostName).AddressList[0].ToString();
-                student.IP = myIP;
+                student.IP = GetLocalIPAddress();//calling the method 
                 //ui columns
                 student.Code = studentViewModel.Code;
                 student.Name = studentViewModel.Name;
@@ -44,12 +43,81 @@ namespace SFMS.Controllers
                 isSuccess= true;
             }
             catch(Exception ex) {
-              
+                isSuccess = false;
             }
             if(isSuccess) {
                 ViewBag.Msg = "saving success";
             }
-            else ViewBag.Msg = "error occur when saving student information!!";
+            else 
+                ViewBag.Msg = "error occur when saving student information!!";
+
+            return View();
+        }//end of entry post method
+        
+
+        //finding the local ip in your machine
+        private static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList) {
+                if (ip.AddressFamily == AddressFamily.InterNetwork) {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
+        [HttpPost]
+        public IActionResult Update(StudentViewModel studentViewModel)
+        {
+            bool isUpdateSuccess = false;
+            try {
+                Student student = new Student();
+                //audit columns
+                student.ModifiedDate = DateTime.Now;
+                student.IP = GetLocalIPAddress();
+                //ui columns
+                student.Code = studentViewModel.Code;
+                student.Name = studentViewModel.Name;
+                student.Email = studentViewModel.Email;
+                student.Phone = studentViewModel.Phone;
+                student.Address = studentViewModel.Address;
+                student.NRC = studentViewModel.NRC;
+                student.FatherName = studentViewModel.FatherName;
+                _applicationDbContext.Entry(student).State = EntityState.Modified;//Updating the record Students DBSet
+                _applicationDbContext.SaveChanges();//Upding the record to the database
+                isUpdateSuccess = true;
+            }
+            catch (Exception ex) {
+
+            }
+            if (isUpdateSuccess) {
+                ViewBag.Msg = "Update success";
+            }
+            else ViewBag.Msg = "error occur when updating student information!!";
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Delete(string Id)
+        {
+            bool isDeleteSuccess = false;
+            try {
+                var student = _applicationDbContext.Students.Find(Id);
+                if (student != null) {
+                    _applicationDbContext.Entry(student).State = EntityState.Deleted;//Remove the record Students DBSet
+                    _applicationDbContext.SaveChanges();//Deleting the record to the database
+                    isDeleteSuccess = true;
+                }
+                else
+                    isDeleteSuccess = false;
+            }
+            catch (Exception ex) {
+
+            }
+            if (isDeleteSuccess) {
+                ViewBag.Msg = "Delete success";
+            }
+            else ViewBag.Msg = "error occur when deleting student information!!";
             return View();
         }
     }
