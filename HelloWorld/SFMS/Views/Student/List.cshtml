@@ -4,19 +4,19 @@
     <title>Student List</title>
 </head>
 <h1>Student Information list</h1>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>Code</th>
-            <th>Name</th>
-            <th>DOB</th>
-            <th>NRC</th>
-            <th>Address</th>
+            <th scope="col">Code</th>
+            <th scope="col">Name</th>
+            <th scope="col">DOB</th>
+            <th scope="col">NRC</th>
+            <th scope="col">Address</th>
         </tr>
     </thead>
     <tbody>
         @foreach(var s in Model) {
-     <tr>
+            <tr scope="row">
                 <td>@s.Code</td>
                 <td>@s.Name</td>
                 <td>@s.DOB</td>
@@ -24,6 +24,5 @@
                 <td>@s.Address</td>
      </tr>
         }
-
     </tbody>
 </table>

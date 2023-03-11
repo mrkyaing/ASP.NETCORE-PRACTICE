@@ -40,6 +40,7 @@ namespace SFMS.Controllers
                 student.Phone = studentViewModel.Phone;
                 student.Address = studentViewModel.Address;
                 student.NRC = studentViewModel.NRC;
+                student.DOB=studentViewModel.DOB;
                 student.FatherName = studentViewModel.FatherName;
                 _applicationDbContext.Students.Add(student);//Adding the record Students DBSet
                 _applicationDbContext.SaveChanges();//saving the record to the database
@@ -60,8 +61,8 @@ namespace SFMS.Controllers
 
         public IActionResult List()
         {
-          IList<StudentViewModel> students= _applicationDbContext.Students.Select(s=>new StudentViewModel
-          {
+          IList<StudentViewModel> students= _applicationDbContext.Students.Select
+                (s=>new StudentViewModel{
               Code=s.Code,
               Name=s.Name,
               Email=s.Email,
@@ -73,8 +74,6 @@ namespace SFMS.Controllers
           }).ToList();
             return View(students);
         }
-
-
         //finding the local ip in your machine
         private static string GetLocalIPAddress()
         {
