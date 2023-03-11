@@ -70,6 +70,8 @@ namespace ConsoleCollectionPractice
             gp.ListDemo();//method invoke for IListDemo 
 
             gp.GetPersonListDemo();
+            Console.WriteLine("==============================");
+            gp.GetTeenAgerStudent();
             Console.WriteLine("program finished");
         }
     }

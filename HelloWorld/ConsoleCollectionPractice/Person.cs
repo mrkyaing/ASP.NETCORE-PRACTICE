@@ -17,6 +17,7 @@ namespace ConsoleCollectionPractice
             Name = name;
             Address = address;
         }
+        //Member variable of Person Class
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }

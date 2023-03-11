@@ -1,0 +1,29 @@
+﻿@model IList<StudentViewModel>
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <title>Student List</title>
+</head>
+<h1>Student Information list</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>DOB</th>
+            <th>NRC</th>
+            <th>Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var s in Model) {
+     <tr>
+                <td>@s.Code</td>
+                <td>@s.Name</td>
+                <td>@s.DOB</td>
+                <td>@s.NRC</td>
+                <td>@s.Address</td>
+     </tr>
+        }
+
+    </tbody>
+</table>

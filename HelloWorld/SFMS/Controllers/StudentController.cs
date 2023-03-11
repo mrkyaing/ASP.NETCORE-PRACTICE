@@ -6,6 +6,9 @@ using System;
 using System.Net;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Sockets;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace SFMS.Controllers
 {
@@ -54,6 +57,23 @@ namespace SFMS.Controllers
             return View();
         }//end of entry post method
         
+
+        public IActionResult List()
+        {
+          IList<StudentViewModel> students= _applicationDbContext.Students.Select(s=>new StudentViewModel
+          {
+              Code=s.Code,
+              Name=s.Name,
+              Email=s.Email,
+              Address=s.Address,
+              Phone=s.Phone,
+              FatherName=s.FatherName,
+              NRC=s.NRC,
+              DOB = s.DOB,
+          }).ToList();
+            return View(students);
+        }
+
 
         //finding the local ip in your machine
         private static string GetLocalIPAddress()

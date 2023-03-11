@@ -1,0 +1,56 @@
+﻿<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <title>Teacher Entry</title>
+</head>
+
+<form action="/Teacher/Entry" method="post">
+    @if (ViewBag.Msg != null) {
+        <div class="alert alert-success">
+            @ViewBag.Msg
+        </div>
+    }
+    <div class="mb-3">
+        <label class="form-label">Code</label>
+        <input type="text" class="form-control" name="Code" placeholder="Code" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" name="Name" placeholder="Name" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" name="Email" placeholder="Email">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Date Of Birth</label>
+        <input type="date" class="form-control" name="DOB" placeholder="Date Of Birth" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <input type="text" class="form-control" name="Phone" placeholder="Phone">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">National Registration Card</label>
+        <input type="text" class="form-control" name="NRC" placeholder="NRC" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Position</label>
+       <select name="Position" class="form-control">
+            <option value="SeniorLectureJava">Senior Lecture (Java)</option>
+            <option value="SeniorLectureC#">Senior Lecture(C#)</option>
+            <option value="JuniorLecture">Junior Lecture</option>
+            <option value="DatabaseLecture">Database Lecture</option>
+       </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Address</label>
+        <textarea name="Address" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <div class="col">
+            <input type="submit" class="btn btn-success" value="Entry">
+            <input type="reset" class="btn btn-secondary" value="Cancel">
+        </div>
+    </div>
+</form>
+
