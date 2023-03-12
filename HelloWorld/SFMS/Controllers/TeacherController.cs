@@ -3,6 +3,8 @@ using SFMS.Models;
 using SFMS.Models.DAO;
 using SFMS.Models.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SFMS.Controllers
 {
@@ -14,9 +16,20 @@ namespace SFMS.Controllers
         {
             this._applicationDbContext = applicationDbContext;
         }
-        public IActionResult Index()
+        public IActionResult List()
         {
-            return View();
+            IList<TeacherViewModel> teachers=_applicationDbContext.Teachers.Select(s=>new TeacherViewModel
+            {
+                Code= s.Code,
+                Name= s.Name,
+                Email= s.Email,
+                Phone= s.Phone,
+                Address= s.Address,
+                NRC=s.NRC,
+                DOB=s.DOB,
+                Position= s.Position,
+            }).ToList();
+            return View(teachers);
         }
 
         public IActionResult Entry() =>View();

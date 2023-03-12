@@ -1,0 +1,32 @@
+﻿@model IList<TeacherViewModel>
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <title>Teacher List</title>
+</head>
+<h1>Teacher Information list</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Code</th>
+            <th scope="col">Position</th>
+            <th scope="col">Name</th>
+            <th scope="col">DOB</th>
+            <th scope="col">NRC</th>
+            <th scope="col">Address</th>
+            <th scope="col">Position</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model) {
+            <tr scope="row">
+                <td>@s.Code</td>
+                <td>@s.Email</td>
+                <td>@s.Name</td>
+                <td>@s.DOB</td>
+                <td>@s.NRC</td>
+                <td>@s.Address</td>
+                <td>@s.Position</td>
+            </tr>
+        }
+    </tbody>
+</table>
