@@ -4,7 +4,13 @@
     <title>Student List</title>
 </head>
 <h1>Student Information list</h1>
-<button class="">Create </button>
+@if (TempData["msg"] != null) {
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
+<a href="/Student/Entry" class="btn btn-info" role="button">Create</a>
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -26,8 +32,8 @@
                 <td>@s.DOB.ToString("yyyy-MM-dd")</td>
                 <td>@s.NRC</td>
                 <td>@s.Address</td>
-                <td><a href="/Student/Edit?Id=@s.Id">Edit</a></td>
-                <td><a href="/Student/Delete?Id=@s.Id" onclick="return confirm('are you sure to delete this recrod?')">Delete</a> </td>
+                <td><a href="/Student/Edit?Id=@s.Id" class="btn btn-success" role="button">Edit</a></td>
+                <td><a href="/Student/Delete?Id=@s.Id" onclick="return confirm('are you sure to delete this recrod?')" class="btn btn-danger" role="button">Delete</a> </td>
      </tr>
         }
     </tbody>

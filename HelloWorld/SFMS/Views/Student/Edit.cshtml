@@ -5,12 +5,9 @@
 </head>
 
 <form action="/Student/Edit" method="post">
-    @if (ViewBag.Msg != null) {
-        <div class="alert alert-success">
-            @ViewBag.Msg
-        </div>
-    }
+
     <div class="mb-3">
+        <input type="text" hidden value="@Model.Id" name="Id"/>
         <label class="form-label">Code</label>
         <input type="text" class="form-control" value="@Model.Code" name="Code" required>
     </div>

@@ -103,6 +103,40 @@ namespace SFMS.Controllers
         }).SingleOrDefault();
             return View(studentViewModel);
         }
+
+        [HttpPost]
+        public IActionResult Edit(StudentViewModel studentViewModel) {
+            bool isSuccess;
+            try {
+                Student student = new Student();
+                //audit columns
+                student.Id=studentViewModel.Id;
+                student.ModifiedDate = DateTime.Now;
+                student.IP = GetLocalIPAddress();//calling the method 
+                //ui columns
+                student.Code = studentViewModel.Code;
+                student.Name = studentViewModel.Name;
+                student.Email = studentViewModel.Email;
+                student.Phone = studentViewModel.Phone;
+                student.Address = studentViewModel.Address;
+                student.NRC = studentViewModel.NRC;
+                student.DOB = studentViewModel.DOB;
+                student.FatherName = studentViewModel.FatherName;
+                _applicationDbContext.Entry(student).State=EntityState.Modified;//Updating the existing recrod in db set 
+                _applicationDbContext.SaveChanges();//Updating  the record to the database
+                isSuccess = true;
+            }
+            catch (Exception ex) {
+                isSuccess = false;
+            }
+            if (isSuccess) {
+                TempData["msg"]= "Update success";
+            }
+            else
+                TempData["msg"] = "error occur when Updating student information!!";
+            return RedirectToAction("List");
+        }
+
         //finding the local ip in your machine
         private static string GetLocalIPAddress()
         {
