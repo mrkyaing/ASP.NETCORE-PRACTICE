@@ -64,7 +64,6 @@ namespace SFMS.Controllers
             }
             else
                 ViewBag.Msg = "error occur when saving Teacher information!!";
-
             return View();
         }
     }

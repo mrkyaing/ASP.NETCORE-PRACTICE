@@ -8,9 +8,9 @@
     <thead>
         <tr>
             <th scope="col">Code</th>
-            <th scope="col">Position</th>
             <th scope="col">Name</th>
-            <th scope="col">DOB</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
             <th scope="col">NRC</th>
             <th scope="col">Address</th>
             <th scope="col">Position</th>
@@ -20,9 +20,9 @@
         @foreach (var s in Model) {
             <tr scope="row">
                 <td>@s.Code</td>
-                <td>@s.Email</td>
                 <td>@s.Name</td>
-                <td>@s.DOB</td>
+                <td>@s.Email</td>
+                <td>@s.Phone</td>
                 <td>@s.NRC</td>
                 <td>@s.Address</td>
                 <td>@s.Position</td>

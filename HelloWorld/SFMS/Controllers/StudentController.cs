@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Web;
 
 namespace SFMS.Controllers
 {
@@ -55,7 +56,7 @@ namespace SFMS.Controllers
             else 
                 ViewBag.Msg = "error occur when saving student information!!";
 
-            return View();
+            return RedirectToAction("List");
         }//end of entry post method
         
 
@@ -63,6 +64,7 @@ namespace SFMS.Controllers
         {
           IList<StudentViewModel> students= _applicationDbContext.Students.Select
                 (s=>new StudentViewModel{
+               Id=s.Id,
               Code=s.Code,
               Name=s.Name,
               Email=s.Email,
@@ -73,6 +75,33 @@ namespace SFMS.Controllers
               DOB = s.DOB,
           }).ToList();
             return View(students);
+        }
+
+        public IActionResult Delete(string id) {
+            Student student=_applicationDbContext.Students.Find(id);
+            if (student != null) {
+                _applicationDbContext.Students.Remove(student);//remove the  student record from DBSET
+                _applicationDbContext.SaveChanges();//remove effect to the database.
+            }
+            return RedirectToAction("List");
+        }
+
+        public IActionResult Edit(string id) {
+            StudentViewModel studentViewModel = _applicationDbContext.Students
+                .Where(w => w.Id == id)
+                .Select(s => new StudentViewModel
+                {
+                      Id=s.Id,
+                     Code = s.Code,
+                    Name = s.Name,
+                    Email = s.Email,
+                    Phone = s.Phone,
+                    Address = s.Address,
+                    NRC = s.NRC,
+                    DOB = s.DOB,
+                    FatherName = s.FatherName
+        }).SingleOrDefault();
+            return View(studentViewModel);
         }
         //finding the local ip in your machine
         private static string GetLocalIPAddress()
@@ -116,28 +145,28 @@ namespace SFMS.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Delete(string Id)
-        {
-            bool isDeleteSuccess = false;
-            try {
-                var student = _applicationDbContext.Students.Find(Id);
-                if (student != null) {
-                    _applicationDbContext.Entry(student).State = EntityState.Deleted;//Remove the record Students DBSet
-                    _applicationDbContext.SaveChanges();//Deleting the record to the database
-                    isDeleteSuccess = true;
-                }
-                else
-                    isDeleteSuccess = false;
-            }
-            catch (Exception ex) {
+        //[HttpPost]
+        //public IActionResult Delete(string Id)
+        //{
+        //    bool isDeleteSuccess = false;
+        //    try {
+        //        var student = _applicationDbContext.Students.Find(Id);
+        //        if (student != null) {
+        //            _applicationDbContext.Entry(student).State = EntityState.Deleted;//Remove the record Students DBSet
+        //            _applicationDbContext.SaveChanges();//Deleting the record to the database
+        //            isDeleteSuccess = true;
+        //        }
+        //        else
+        //            isDeleteSuccess = false;
+        //    }
+        //    catch (Exception ex) {
 
-            }
-            if (isDeleteSuccess) {
-                ViewBag.Msg = "Delete success";
-            }
-            else ViewBag.Msg = "error occur when deleting student information!!";
-            return View();
-        }
+        //    }
+        //    if (isDeleteSuccess) {
+        //        ViewBag.Msg = "Delete success";
+        //    }
+        //    else ViewBag.Msg = "error occur when deleting student information!!";
+        //    return View();
+        //}
     }
 }

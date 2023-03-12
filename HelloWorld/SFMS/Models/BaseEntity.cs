@@ -1,10 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SFMS.Models
-{
-    public class BaseEntity
-    {
+namespace SFMS.Models{
+    public class BaseEntity{
         [Key]
         public string Id { get; set; }
         public DateTime CreatedDte { get; set; }
