@@ -51,10 +51,10 @@ namespace SFMS.Controllers
                 isSuccess = false;
             }
             if(isSuccess) {
-                ViewBag.Msg = "saving success";
+                TempData["msg"] = "saving success";
             }
-            else 
-                ViewBag.Msg = "error occur when saving student information!!";
+            else
+                TempData["msg"] = "error occur when saving student information!!";
 
             return RedirectToAction("List");
         }//end of entry post method

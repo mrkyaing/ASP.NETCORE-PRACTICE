@@ -1,0 +1,55 @@
+﻿@model TeacherViewModel;
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <title>Student Update</title>
+</head>
+
+<form action="/Teacher/Edit" method="post">
+
+    <div class="mb-3">
+        <input type="text" hidden value="@Model.Id" name="Id" />
+        <label class="form-label">Code</label>
+        <input type="text" class="form-control" value="@Model.Code" name="Code" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" name="Name" value="@Model.Name" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" name="Email" value="@Model.Email">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Date Of Birth</label>
+        <input type="date" class="form-control" name="DOB" value="@Model.DOB.ToString("yyyy-MM-dd")" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <input type="text" class="form-control" name="Phone" value="@Model.Phone">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">National Registration Card</label>
+        <input type="text" class="form-control" name="NRC" value="@Model.NRC" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Position</label>
+        <select name="Position" class="form-control">
+            <option value="@Model.Position">Senior Lecture (Java)</option>
+            <option value="SeniorLectureJava">Senior Lecture (Java)</option>
+            <option value="SeniorLectureC#">Senior Lecture(C#)</option>
+            <option value="JuniorLecture">Junior Lecture</option>
+            <option value="DatabaseLecture">Database Lecture</option>
+        </select>
+      </div>
+    <div class="mb-3">
+        <label class="form-label">Address</label>
+        <textarea name="Address" class="form-control">@Model.Address</textarea>
+    </div>
+    <div class="mb-3">
+        <div class="col">
+            <input type="submit" class="btn btn-success" value="Update">
+            <input type="reset" class="btn btn-secondary" value="Cancel">
+        </div>
+    </div>
+</form>
+

@@ -1,32 +1,62 @@
 ﻿@model IList<TeacherViewModel>
 <head>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/datatables/css/datatables.bootstrap4.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
     <title>Teacher List</title>
 </head>
-<h1>Teacher Information list</h1>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">Code</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">NRC</th>
-            <th scope="col">Address</th>
-            <th scope="col">Position</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var s in Model) {
-            <tr scope="row">
-                <td>@s.Code</td>
-                <td>@s.Name</td>
-                <td>@s.Email</td>
-                <td>@s.Phone</td>
-                <td>@s.NRC</td>
-                <td>@s.Address</td>
-                <td>@s.Position</td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <h1>Teacher Information list</h1>
+    @if (TempData["msg"] != null) {
+        <div class="alert alert-success">
+            @TempData["msg"]
+        </div>
+    }
+<div>   <a href="/Teacher/Entry" class="btn btn-info" role="button">Create</a></div>
+ <div class="container">
+    <div style="margin:0 auto;">
+        <table id="teacherTable" class="table table-striped table-bordered dt-responsive nowrap" width="100%">
+            <thead>
+                <tr>
+                    <th scope="col">Code</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">NRC</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Position</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                    <tr scope="row">
+                        <td>@item.Code</td>
+                        <td>@item.Name</td>
+                        <td>@item.Email</td>
+                        <td>@item.Phone</td>
+                        <td>@item.NRC</td>
+                        <td>@item.Address</td>
+                        <td>@item.Position</td>
+                        <td><a href="/Teacher/Edit?Id=@item.Id" class="btn btn-success" role="button">Edit</a></td>
+                        <td><a href="/Teacher/Delete?Id=@item.Id" onclick="return confirm('are you sure to delete this recrod?')" class="btn btn-danger" role="button">Delete</a> </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+ </div>
+
+@section Scripts
+    {
+    <script src="~/lib/datatables/js/jquery.datatables.js"></script>
+    <script src="~/lib/datatables/js/jquery.datatables.min.js"></script>
+}
+<script>
+    $(document).ready(function () {
+        $('#teacherTable').dataTable({
+        });
+    });
+</script>

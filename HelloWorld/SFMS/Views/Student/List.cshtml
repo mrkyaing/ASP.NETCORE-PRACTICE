@@ -1,6 +1,9 @@
 ﻿@model IList<StudentViewModel>
 <head>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/datatables/css/datatables.bootstrap4.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
     <title>Student List</title>
 </head>
 <h1>Student Information list</h1>
@@ -11,7 +14,7 @@
 }
 <a href="/Student/Entry" class="btn btn-info" role="button">Create</a>
 
-<table class="table table-striped">
+<table class="table table-striped" id="StudentTable">
     <thead>
         <tr>
             <th scope="col">Code</th>
@@ -38,3 +41,14 @@
         }
     </tbody>
 </table>
+@section Scripts
+    {
+    <script src="~/lib/datatables/js/jquery.datatables.js"></script>
+    <script src="~/lib/datatables/js/jquery.datatables.min.js"></script>
+}
+<script>
+    $(document).ready(function () {
+        $('#StudentTable').dataTable({
+        });
+    });
+</script>

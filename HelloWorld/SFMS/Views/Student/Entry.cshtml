@@ -2,13 +2,7 @@
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <title>Student Entry</title>
 </head>
-
 <form action="/Student/Entry" method="post">
-    @if (ViewBag.Msg != null) {
-        <div class="alert alert-success">
-            @ViewBag.Msg
-        </div>
-    }
     <div class="mb-3">
         <label class="form-label">Code</label>
         <input type="text" class="form-control" name="Code" placeholder="Student Code" required>
