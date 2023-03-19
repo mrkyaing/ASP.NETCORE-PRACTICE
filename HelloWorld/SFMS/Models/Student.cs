@@ -15,5 +15,8 @@ namespace SFMS.Models
         public string Address { get; set; }
         public string Phone { get; set; }
         public string FatherName { get; set; }
+        public string BathId { get; set; }
+        [ForeignKey("BathId")]
+        public Batch Batch { get; set; }
     }
 }

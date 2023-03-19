@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace SFMS.Models.ViewModels
+namespace SFMS.REPORT
 {
-    public class StudentViewModel
+    public class StudentReport
     {
         public string Id { get; set; }
         public string Code { get; set; }
@@ -13,8 +13,5 @@ namespace SFMS.Models.ViewModels
         public string Address { get; set; }
         public string Phone { get; set; }
         public string FatherName { get; set; }
-        public string BathId { get; set; }
-        public string BathName { get; set; }
-
     }
 }

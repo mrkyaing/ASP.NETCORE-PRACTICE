@@ -1,0 +1,38 @@
+﻿@model CourseViewModel
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <title>Course Edit</title>
+</head>
+<h1>Course Edit</h1>
+<hr />
+<form action="/Course/Edit" method="post">
+    <div class="mb-3">
+        <input type="text" hidden name="Id" value="@Model.Id" required>
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" name="Name"  value="@Model.Name" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <input type="text" class="form-control" name="Description" value="@Model.Description" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Opening Date</label>
+        <input type="date" class="form-control" name="OpeningDate" value="@Model.OpeningDate.ToString("yyyy-MM-dd")" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Duration In Hour</label>
+        <input type="number" class="form-control" name="DurationInHour" value="@Model.DurationInHour" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Fees (MMK)</label>
+        <input type="number" class="form-control" name="Fees" value="@Model.Fees" required>
+    </div>
+    <div class="mb-3">
+        <div class="col">
+            <input type="submit" class="btn btn-success" value="Update">
+            <input type="reset" class="btn btn-secondary" value="Cancel">
+        </div>
+    </div>
+</form>
+

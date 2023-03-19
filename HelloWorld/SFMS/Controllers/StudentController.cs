@@ -22,7 +22,14 @@ namespace SFMS.Controllers
             _applicationDbContext = applicationDbContext;
         }
 
-        public IActionResult Entry()=>View();
+        public IActionResult Entry() {
+            IList<BatchViewModel> batches = _applicationDbContext.Batches.Select(b => new BatchViewModel
+            {
+                Name = b.Name,
+                Id = b.Id,
+            }).ToList();
+            return View(batches);
+        }
 
         [HttpPost]
         public  IActionResult Entry(StudentViewModel studentViewModel)
@@ -43,6 +50,7 @@ namespace SFMS.Controllers
                 student.NRC = studentViewModel.NRC;
                 student.DOB=studentViewModel.DOB;
                 student.FatherName = studentViewModel.FatherName;
+                student.BathId= studentViewModel.BathId;
                 _applicationDbContext.Students.Add(student);//Adding the record Students DBSet
                 _applicationDbContext.SaveChanges();//saving the record to the database
                 isSuccess= true;
@@ -51,10 +59,10 @@ namespace SFMS.Controllers
                 isSuccess = false;
             }
             if(isSuccess) {
-                TempData["msg"] = "saving success";
+                TempData["msg"] = "Saving success for "+studentViewModel.Code;
             }
             else
-                TempData["msg"] = "error occur when saving student information!!";
+                TempData["msg"] = "Error occur when saving student information!!";
 
             return RedirectToAction("List");
         }//end of entry post method
@@ -73,6 +81,7 @@ namespace SFMS.Controllers
               FatherName=s.FatherName,
               NRC=s.NRC,
               DOB = s.DOB,
+              BathName=s.Batch.Name
           }).ToList();
             return View(students);
         }
@@ -179,28 +188,5 @@ namespace SFMS.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult Delete(string Id)
-        //{
-        //    bool isDeleteSuccess = false;
-        //    try {
-        //        var student = _applicationDbContext.Students.Find(Id);
-        //        if (student != null) {
-        //            _applicationDbContext.Entry(student).State = EntityState.Deleted;//Remove the record Students DBSet
-        //            _applicationDbContext.SaveChanges();//Deleting the record to the database
-        //            isDeleteSuccess = true;
-        //        }
-        //        else
-        //            isDeleteSuccess = false;
-        //    }
-        //    catch (Exception ex) {
-
-        //    }
-        //    if (isDeleteSuccess) {
-        //        ViewBag.Msg = "Delete success";
-        //    }
-        //    else ViewBag.Msg = "error occur when deleting student information!!";
-        //    return View();
-        //}
     }
 }

@@ -13,7 +13,6 @@
     </div>
 }
 <a href="/Student/Entry" class="btn btn-info" role="button">Create</a>
-
 <table class="table table-striped" id="StudentTable">
     <thead>
         <tr>
@@ -22,8 +21,8 @@
             <th scope="col">DOB</th>
             <th scope="col">NRC</th>
             <th scope="col">Address</th>
-             
-            <th scope="col">Actions</th>
+            <th scope="col">Bath</th>
+            <th scope="col" colspan="2" style="text-align:center">Actions</th>
             <th scope="col"></th>
         </tr>
     </thead>
@@ -35,6 +34,7 @@
                 <td>@s.DOB.ToString("yyyy-MM-dd")</td>
                 <td>@s.NRC</td>
                 <td>@s.Address</td>
+                <td>@s.BathName</td>
                 <td><a href="/Student/Edit?Id=@s.Id" class="btn btn-success" role="button">Edit</a></td>
                 <td><a href="/Student/Delete?Id=@s.Id" onclick="return confirm('are you sure to delete this recrod?')" class="btn btn-danger" role="button">Delete</a> </td>
      </tr>

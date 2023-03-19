@@ -7,7 +7,6 @@ namespace SFMS.Models
     [Table("Teacher")]
     public class Teacher:BaseEntity
     {
-        
         public string Code { get; set; }
         public string Name { get; set; }
         public DateTime DOB { get; set; }

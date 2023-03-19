@@ -1,4 +1,5 @@
-﻿<head>
+﻿@model IList<BatchViewModel>
+<head>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <title>Student Entry</title>
 </head>
@@ -34,6 +35,14 @@
      <div class="mb-3">
         <label class="form-label">Address</label>
        <textarea name="Address" class="form-control"></textarea>
+    </div>
+     <div class="mb-3">
+        <label class="form-label">Bath Name</label>
+        <select name="BathId" class="form-control">
+            @foreach (var item in Model) {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
     </div>
     <div class="mb-3">
             <div class="col">

@@ -1,0 +1,31 @@
+﻿@model BatchViewModel;
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <title>Batch Update</title>
+</head>
+<form action="/Batch/Edit" method="post">
+    <div class="mb-3">
+        <input type="text" hidden value="@Model.Id" name="Id" />
+        <label class="form-label">Code</label>
+        <input type="text" class="form-control" value="@Model.Name" name="Name" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <input type="text" class="form-control" name="Description" value="@Model.Description" required>
+    </div>
+      <div class="mb-3">
+        <label class="form-label">Course</label>
+        <select name="CourseId" class="form-control">
+            @foreach (var item in ViewBag.CoursesList) {
+                    <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+    <div class="mb-3">
+        <div class="col">
+            <input type="submit" class="btn btn-success" value="Update">
+            <input type="reset" class="btn btn-secondary" value="Cancel">
+        </div>
+    </div>
+</form>
+
