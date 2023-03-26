@@ -1,9 +1,9 @@
 ﻿@model IList<CourseViewModel>
-<head>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <title>Batch Entry</title>
-</head>
-<h1>Create Batch</h1>
+    @{
+    ViewData["Title"] = "Batch Entry";
+    }
+<h1>Batch Entry</h1>
 <hr />
 <form action="/Batch/Entry" method="post">
     <div class="mb-3">

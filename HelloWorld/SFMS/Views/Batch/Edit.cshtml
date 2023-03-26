@@ -1,8 +1,10 @@
 ﻿@model BatchViewModel;
-<head>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <title>Batch Update</title>
-</head>
+    @{
+        ViewData["Title"] = "Bath Edit";
+    }
+<h1>Batch Edit</h1>
+<hr />
 <form action="/Batch/Edit" method="post">
     <div class="mb-3">
         <input type="text" hidden value="@Model.Id" name="Id" />
@@ -16,7 +18,8 @@
       <div class="mb-3">
         <label class="form-label">Course</label>
         <select name="CourseId" class="form-control">
-            @foreach (var item in ViewBag.CoursesList) {
+            <option value="@Model.CourseId">@Model.CourseName</option>
+            @foreach (var item in ViewBag.Courses) {
                     <option value="@item.Value">@item.Text</option>
             }
         </select>

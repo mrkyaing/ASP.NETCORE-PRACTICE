@@ -87,10 +87,11 @@ namespace SFMS.Controllers
                     Id = s.Id,
                    Description= s.Description,
                    Name= s.Name,
-                   CourseId= s.CourseId
+                   CourseId= s.CourseId,
+                   CourseName=s.Course.Name
                 }).SingleOrDefault();
-            ViewBag.CoursesList = _applicationDbContext.Courses.Select(s => new SelectListItem
-            {
+            ViewBag.Courses= _applicationDbContext.Courses.Where(x=>x.Id!= batchViewModel.CourseId)
+                .Select(s => new SelectListItem{
                 Value = s.Id,
                 Text = s.Name
             }).ToList();

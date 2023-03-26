@@ -1,8 +1,8 @@
 ﻿@model CourseViewModel
-<head>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <title>Course Edit</title>
-</head>
+    @{
+        ViewData["Title"] = "Course Edit";
+    }
 <h1>Course Edit</h1>
 <hr />
 <form action="/Course/Edit" method="post">

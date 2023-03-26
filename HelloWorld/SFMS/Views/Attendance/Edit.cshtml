@@ -1,0 +1,56 @@
+﻿@model AttendanceViewModel
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<script src="~/lib/jquery/dist/jquery.js"></script>
+@{
+    ViewData["Title"] = "Attendance Edit";
+}
+<h1>Attendance Edit</h1>
+<hr />
+<form action="/Attendance/Edit" method="post">
+    <div class="mb-3">
+        <input type="text" class="form-control" name="@Model.Id" required hidden>
+        <label class="form-label">Attendance Date</label>
+        <input type="date" class="form-control" name="@Model.AttendaceDate" value="@Model.AttendaceDate.ToString("yyyy-MM-dd")" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">In Time</label>
+        <input type="time" class="form-control" name="@Model.InTime" placeholder="Student Name" required value=@Model.InTime>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Out Time</label>
+        <input type="time" class="form-control" name="@Model.OutTime" placeholder="Student Email" value=@Model.OutTime>
+    </div>
+    <div class="mb-2">
+        <label class="form-label">Is Late</label><input type="radio" class="form-control" name="IsLate" value="Is Late" id="rdoIsLate" checked=@Model.IsLate>
+        <label class="form-label">Is Leve</label><input type="radio" class="form-control" name="IsLeave" value="Is Leave" id="rdoIsLeave" checked=@Model.IsLeave>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Student</label>
+        <select name="StudentId" class="form-control">
+            <option value="@Model.StudentId">@Model.Student.Code</option>
+            @foreach (var item in ViewBag.Students) {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+    <div class="mb-3">
+        <div class="col">
+            <input type="submit" class="btn btn-success" value="Update">
+            <input type="reset" class="btn btn-secondary" value="Cancel">
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#rdoIsLate').click(function () {
+            $("#rdoIsLeave").prop("checked", false);
+        });
+        $('#rdoIsLeave').click(function () {
+            $("#rdoIsLate").prop("checked", false);
+        });
+    });
+</script>
+
+
+
+

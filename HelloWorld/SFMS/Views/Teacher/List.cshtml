@@ -1,12 +1,13 @@
 ﻿@model IList<TeacherViewModel>
-<head>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="~/lib/datatables/css/datatables.bootstrap4.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
-    <title>Teacher List</title>
-</head>
+    @{
+        ViewData["Title"] = "Teacher Information List";
+    }
     <h1>Teacher Information list</h1>
+    <hr />
     @if (TempData["msg"] != null) {
         <div class="alert alert-success">
             @TempData["msg"]

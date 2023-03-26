@@ -1,14 +1,25 @@
-﻿<head>
-    <title>Student Detail Report</title>
-</head>
+﻿@model IList<StudentReport>
+@{
+    ViewData["Title"] = "Student Detail Report";
+}
+<h1>Student Detail Report</h1>
+<hr />
 <form action="/Report/StudentDetailFromCodeToCode" method="get" target="_blank">
     <div class="mb-3">
         <label class="form-label">From Code</label>
-        <input type="text" class="form-control" name="FromCode" placeholder="From Code" required>
+       <select name="FromCode" class="form-control">
+            @foreach(var item in Model) {
+                <option value="@item.Code">@item.Code</option>
+            }
+        </select>
     </div>
     <div class="mb-3">
         <label class="form-label">From Code</label>
-        <input type="text" class="form-control" name="ToCode" placeholder="To Code" required>
+        <select name="ToCode" class="form-control">
+            @foreach (var item in Model) {
+                <option value="@item.Code">@item.Code</option>
+            }
+        </select>
     </div>
     <div class="mb-3">
         <div class="col">

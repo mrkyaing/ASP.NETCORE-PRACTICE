@@ -1,6 +1,7 @@
 ﻿using AspNetCore.Reporting;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SFMS.Models.DAO;
 using SFMS.REPORT;
 using System.Collections.Generic;
@@ -19,7 +20,12 @@ namespace SFMS.Controllers {
            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         }
         public IActionResult StudentDetail() {
-            return View();
+            IList<StudentReport> students = _applicationDbContext.Students
+                   .Select(s => new StudentReport
+                   {
+                       Code = s.Code,
+                   }).OrderBy(o => o.Code).ToList();
+            return View(students);
         }
 
         public IActionResult StudentDetailFromCodeToCode(string FromCode,string ToCode) {
@@ -27,8 +33,8 @@ namespace SFMS.Controllers {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("rp1", $"From Code:{FromCode} To Code :{ToCode}");
             LocalReport localReport = new LocalReport(rdlcFilePath); 
-            IList<StudentReport> students = _applicationDbContext.Students.Where(x=>x.Code.CompareTo(FromCode) >= 0 && x.Code.CompareTo(ToCode) <= 0).Select
-                  (s => new StudentReport{
+            IList<StudentReport> students = _applicationDbContext.Students.Where(x=>x.Code.CompareTo(FromCode) >= 0 && x.Code.CompareTo(ToCode) <= 0)
+                .Select(s => new StudentReport{
                       Code = s.Code,
                       Name = s.Name,
                       Email = s.Email,

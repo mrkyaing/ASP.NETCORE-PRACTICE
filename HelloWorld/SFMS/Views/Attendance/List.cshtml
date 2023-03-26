@@ -1,0 +1,55 @@
+﻿@model IList<AttendanceViewModel>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/datatables/css/datatables.bootstrap4.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    @{
+        ViewData["Title"] = "Attendance Information List";
+    }
+<h1>Attendance Information list</h1>
+<hr />
+@if (TempData["msg"] != null) {
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
+<a href="/Attendance/Entry" class="btn btn-info" role="button">Create</a>
+<table class="table table-striped" id="AttendanceTable">
+    <thead>
+        <tr>
+            <th scope="col">AttendaceDate</th>
+            <th scope="col">InTime</th>
+            <th scope="col">OutTime</th>
+            <th scope="col">IsLate</th>
+            <th scope="col">IsLeave</th>
+            <th scope="col">Student Code</th>
+            <th scope="col">Student Name</th>
+            <th scope="col" >Actions</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model) {
+            <tr scope="row">
+                <td>@item.AttendaceDate.ToString("yyyy-MM-dd")</td>
+                <td>@item.InTime</td>
+                <td>@item.OutTime</td>
+                <td>@item.IsLate</td>
+                <td>@item.IsLeave</td>
+                <td>@item.Student.Code</td>
+                <td>@item.Student.Name</td>
+                <td><a href="/Attendance/Edit?Id=@item.Id" class="btn btn-success" role="button">Edit</a></td>
+                <td><a href="/Attendance/Delete?Id=@item.Id" onclick="return confirm('are you sure to delete this recrod?')" class="btn btn-danger" role="button">Delete</a> </td>
+     </tr>
+        }
+    </tbody>
+</table>
+@section Scripts
+    {
+    <script src="~/lib/datatables/js/jquery.datatables.js"></script>
+}
+<script>
+    $(document).ready(function () {
+        $('#AttendanceTable').dataTable({
+        });
+    });
+</script>

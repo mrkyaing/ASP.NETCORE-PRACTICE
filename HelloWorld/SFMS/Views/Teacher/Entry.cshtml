@@ -1,8 +1,9 @@
-﻿<head>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <title>Teacher Entry</title>
-</head>
-
+﻿<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    @{
+        ViewData["Title"] = "Teacher Entry";
+    }
+<h1>Teacher Entry</h1>
+<hr />
 <form action="/Teacher/Entry" method="post">
     @if (ViewBag.Msg != null) {
         <div class="alert alert-success">

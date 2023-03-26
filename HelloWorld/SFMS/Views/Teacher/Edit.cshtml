@@ -1,11 +1,11 @@
 ﻿@model TeacherViewModel;
-<head>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <title>Student Update</title>
-</head>
-
+    @{
+        ViewData["Title"] = "Teacher Edit";
+    }
+<h1>Teacher Edit</h1>
+<hr />
 <form action="/Teacher/Edit" method="post">
-
     <div class="mb-3">
         <input type="text" hidden value="@Model.Id" name="Id" />
         <label class="form-label">Code</label>

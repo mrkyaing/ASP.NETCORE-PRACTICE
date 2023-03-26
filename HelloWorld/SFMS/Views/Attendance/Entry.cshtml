@@ -1,0 +1,54 @@
+﻿@model IList<StudentViewModel>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    @{
+    ViewData["Title"] = "Attendance Entry";
+    }
+<h1>Attendance Entry</h1>
+<hr />
+<form action="/Attendance/Entry" method="post">
+    <div class="mb-3">
+        <label class="form-label">Attendance Date</label>
+        <input type="date" class="form-control" name="AttendaceDate" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">InTime</label>
+        <input type="time" class="form-control" name="InTime" placeholder="Student Name" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">OutTime</label>
+        <input type="time" class="form-control" name="OutTime" placeholder="Student Email">
+    </div>
+    <div class="mb-2">
+        <label class="form-label">Is Late</label><input type="radio" class="form-control" name="IsLate" value="Is Late" id="rdoIsLate">
+        <label class="form-label">Is Leve</label><input type="radio" class="form-control" name="IsLeave" value="Is Leave" id="rdoIsLeave">
+    </div>
+     <div class="mb-3">
+        <label class="form-label">Student</label>
+        <select name="StudentId" class="form-control">
+            @foreach (var item in Model) {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+    </div>
+    <div class="mb-3">
+            <div class="col">
+                <input type="submit" class="btn btn-success" value="Entry">
+            <input type="reset" class="btn btn-secondary" value="Cancel">
+            </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#rdoIsLate').click(function () {
+                $("#rdoIsLeave").prop("checked", false);
+            });
+        $('#rdoIsLeave').click(function () {
+            $("#rdoIsLate").prop("checked", false);
+            });
+    });
+</script>
+
+
+
+
