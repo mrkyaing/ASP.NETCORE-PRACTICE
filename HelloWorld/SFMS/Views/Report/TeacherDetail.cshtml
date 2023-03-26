@@ -1,0 +1,30 @@
+﻿@model IList<TeacherDetail>
+@{
+    ViewData["Title"] = "Teacher Detail Report";
+}
+<h1>Teacher Detail Report</h1>
+<hr />
+<form action="/Report/TeacherDetailFromCodeToCode" method="get" target="_blank">
+    <div class="mb-3">
+        <label class="form-label">From Code</label>
+        <select name="FromCode" class="form-control">
+            @foreach (var item in Model) {
+                <option value="@item.Code">@item.Code</option>
+            }
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">From Code</label>
+        <select name="ToCode" class="form-control">
+            @foreach (var item in Model) {
+                <option value="@item.Code">@item.Code</option>
+            }
+        </select>
+    </div>
+    <div class="mb-3">
+        <div class="col">
+            <input type="submit" class="btn btn-success" value="Show">
+            <input type="reset" class="btn btn-primary" value="Cancel">
+        </div>
+    </div>
+</form>

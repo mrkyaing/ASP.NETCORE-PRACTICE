@@ -5,12 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\ReportFiles\TeacherDetail.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Properties\launchSettings.json" />
     <None Remove="wwwroot\ReportFiles\StudentReport.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Properties\launchSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\ReportFiles\TeacherDetail.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
