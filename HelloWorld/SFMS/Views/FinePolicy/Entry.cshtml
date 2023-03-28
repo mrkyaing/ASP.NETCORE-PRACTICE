@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Fine Policy Entry";
+}
+<h1>Fine Policy Create</h1>
+<hr />
+<form action="/FinePolicy/Entry" method="post">
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" name="Name" placeholder="Fine Policy Name" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Rule</label>
+        <input type="text" class="form-control" name="Rule" placeholder="Rule" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Fine Amount (MMK)</label>
+        <input type="number" class="form-control" name="FineAmount" placeholder="Fine Amount" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Fine After Minutes</label>
+        <input type="number" class="form-control" name="FineAfterMinutes" placeholder="Fine After Minutes" required>
+    </div>
+    <div class="mb-3">
+        <div class="col">
+            <input type="submit" class="btn btn-success" value="Entry">
+            <input type="reset" class="btn btn-secondary" value="Cancel">
+        </div>
+    </div>
+</form>
+

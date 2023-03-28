@@ -59,8 +59,8 @@ namespace SFMS.Controllers {
 
         public IActionResult TeacherDetailFromCodeToCode(string FromCode, string ToCode) {
             var rdlcFilePath = $"{webHostEnvironment.WebRootPath}\\ReportFiles\\TeacherDetail.rdlc";
-          //  Dictionary<string, string> parameters = new Dictionary<string, string>();
-           // parameters.Add("rp1", $"From Code:{FromCode} To Code :{ToCode}");
+          Dictionary<string, string> parameters = new Dictionary<string, string>();
+           parameters.Add("rp1", $"From Code:{FromCode} To Code :{ToCode}");
             LocalReport localReport = new LocalReport(rdlcFilePath);
             IList<TeacherDetail> teachers = _applicationDbContext.Teachers.Where(x => x.Code.CompareTo(FromCode) >= 0 && x.Code.CompareTo(ToCode) <= 0)
                 .Select(s => new TeacherDetail
@@ -75,7 +75,7 @@ namespace SFMS.Controllers {
                     DOB = s.DOB,
                 }).OrderBy(o => o.Code).ToList();
             localReport.AddDataSource("DataSetTeacherDetail", teachers);
-            var result = localReport.Execute(RenderType.Excel, 1, null, null);
+            var result = localReport.Execute(RenderType.Excel, 1, parameters, null);
             return File(result.MainStream, "application/vnd.ms-excel");
         }
     }
