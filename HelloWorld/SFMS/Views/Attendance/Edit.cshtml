@@ -20,6 +20,7 @@
         <label class="form-label">Out Time</label>
         <input type="time" class="form-control" name="OutTime" value=@Model.OutTime>
     </div>
+
     <div class="mb-2">
         @if(Model.IsLate.Equals("True")) {
             <label class="form-label">Is Late</label>
@@ -37,6 +38,7 @@
             <input type="radio" class="form-control" name="IsLeave" value="Leave" id="rdoIsLeave">
         }
     </div>
+
     <div class="mb-3">
         <label class="form-label">Student</label>
         <select name="StudentId" class="form-control">

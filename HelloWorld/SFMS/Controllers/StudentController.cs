@@ -155,7 +155,6 @@ namespace SFMS.Controllers
                 TempData["msg"] = "error occur when Updating student information!!";
             return RedirectToAction("List");
         }
-
         //finding the local ip in your machine
         private static string GetLocalIPAddress()
         {
@@ -166,36 +165,6 @@ namespace SFMS.Controllers
                 }
             }
             throw new Exception("No network adapters with an IPv4 address in the system!");
-        }
-        [HttpPost]
-        public IActionResult Update(StudentViewModel studentViewModel)
-        {
-            bool isUpdateSuccess = false;
-            try {
-                Student student = new Student();
-                //audit columns
-                student.ModifiedDate = DateTime.Now;
-                student.IP = GetLocalIPAddress();
-                //ui columns
-                student.Code = studentViewModel.Code;
-                student.Name = studentViewModel.Name;
-                student.Email = studentViewModel.Email;
-                student.Phone = studentViewModel.Phone;
-                student.Address = studentViewModel.Address;
-                student.NRC = studentViewModel.NRC;
-                student.FatherName = studentViewModel.FatherName;
-                _applicationDbContext.Entry(student).State = EntityState.Modified;//Updating the record Students DBSet
-                _applicationDbContext.SaveChanges();//Upding the record to the database
-                isUpdateSuccess = true;
-            }
-            catch (Exception ex) {
-
-            }
-            if (isUpdateSuccess) {
-                ViewBag.Msg = "Update success";
-            }
-            else ViewBag.Msg = "error occur when updating student information!!";
-            return View();
         }
 
     }

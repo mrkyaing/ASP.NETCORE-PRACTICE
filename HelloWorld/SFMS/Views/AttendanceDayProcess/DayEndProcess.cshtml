@@ -1,35 +1,39 @@
 ﻿@model AttendanceDayEndProcessViewModel
 <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 @{
-    ViewData["Title"] = "Student Entry";
+    ViewData["Title"] = "Attendance Day End Process";
 }
-<h1>Student Entry</h1>
+<h1>Attendance Day End Process</h1>
 <hr />
 <form action="/AttendanceDayProcess/DayEndProcess" method="post">
+
     <div class="mb-3">
-        <label class="form-label">Bath Name</label>
-        <select name="BathId" class="form-control">
-            @foreach (var item in Model.batches) {
-                <option value="@item.Id">@item.Name</option>
-            }
-        </select>
+        <label class="form-label">From Attendance Date</label>
+        <input type="date" class="form-control" name="FromDayEndDate" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">To Attendance Date</label>
+        <input type="date" class="form-control" name="ToDayEndDate" required>
     </div>
     <div class="mb-3">
         <label class="form-label">Student</label>
         <select name="StudentId" class="form-control">
+            <option value="so">--Select One--</option>
             @foreach (var item in Model.students) {
                 <option value="@item.Id">@item.Name</option>
             }
         </select>
     </div>
     <div class="mb-3">
-        <label class="form-label">To Attendance Date</label>
-        <input type="date" class="form-control" name="FromDayEndDate" required>
+        <label class="form-label">Bath Name</label>
+        <select name="BathId" class="form-control">
+            <option value="so">--Select One--</option>
+            @foreach (var item in Model.batches) {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
     </div>
-    <div class="mb-3">
-        <label class="form-label">From Attendance Date</label>
-        <input type="date" class="form-control" name="ToDayEndDate" required>
-    </div>
+
     <div class="mb-3">
         <div class="col">
             <input type="submit" class="btn btn-success" value="Day End Process">

@@ -92,6 +92,7 @@ namespace SFMS.Controllers
             if (model != null) {
                 _applicationDbContext.Attendances.Remove(model);//remove the  student record from DBSET
                 _applicationDbContext.SaveChanges();//remove effect to the database.
+                TempData["msg"] = $"Deleted successed.";
             }
             return RedirectToAction("List");
         }
