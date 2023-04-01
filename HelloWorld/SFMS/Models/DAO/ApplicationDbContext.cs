@@ -11,5 +11,6 @@ namespace SFMS.Models.DAO{
         public DbSet<Course> Courses { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<FinePolicy> FinePolicies { get; set; }
+        public DbSet<FineTransaction> FineTransactions { get; set; }
     }
 }

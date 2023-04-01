@@ -47,6 +47,7 @@ namespace SFMS.Controllers
                 attendance.AttendaceDate = viewModel.AttendaceDate;
                 attendance.InTime = viewModel.InTime;
                 attendance.OutTime = viewModel.OutTime;
+              
                 attendance.IsLate=string.IsNullOrEmpty(viewModel.IsLate)?false:true;
                 attendance.IsLeave = string.IsNullOrEmpty(viewModel.IsLeave) ? false : true;
                 attendance.StudentId=viewModel.StudentId;
@@ -87,9 +88,9 @@ namespace SFMS.Controllers
         }
 
         public IActionResult Delete(string id) {
-            Student student=_applicationDbContext.Students.Find(id);
-            if (student != null) {
-                _applicationDbContext.Students.Remove(student);//remove the  student record from DBSET
+            var model=_applicationDbContext.Attendances.Find(id);
+            if (model != null) {
+                _applicationDbContext.Attendances.Remove(model);//remove the  student record from DBSET
                 _applicationDbContext.SaveChanges();//remove effect to the database.
             }
             return RedirectToAction("List");
@@ -98,15 +99,17 @@ namespace SFMS.Controllers
         public IActionResult Edit(string id) {
             var attendanceViewModel = _applicationDbContext.Attendances
                 .Where(w => w.Id == id)
-                .Select(s => new AttendanceViewModel{
-                 Id=s.Id,
-                 AttendaceDate = s.AttendaceDate,
-                 InTime=s.InTime,
-                 OutTime=s.OutTime,
-                 StudentId=s.StudentId,
-                 Student= s.Student,
-                 IsLate= s.IsLate == true ? "true" : "false",
-                 IsLeave =s.IsLeave==true?"true":"false"}).SingleOrDefault();
+                .Select(s => new AttendanceViewModel
+                {
+                    Id = s.Id,
+                    AttendaceDate = s.AttendaceDate,
+                    InTime = s.InTime,
+                    OutTime = s.OutTime,
+                    StudentId = s.StudentId,
+                    Student = s.Student,
+                    IsLate =Convert.ToString(s.IsLate),
+                    IsLeave = Convert.ToString(s.IsLeave)
+                }).SingleOrDefault();
             ViewBag.Students = _applicationDbContext.Students.Where(x=>x.Id!=attendanceViewModel.StudentId).Select(s => new SelectListItem
             {
                 Value = s.Id,
@@ -116,25 +119,22 @@ namespace SFMS.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(StudentViewModel studentViewModel) {
+        public IActionResult Edit(AttendanceViewModel viewModel) {
             bool isSuccess;
             try {
-                Student student = new Student();
+                Attendance attendance = new Attendance();
                 //audit columns
-                student.Id=studentViewModel.Id;
-                student.ModifiedDate = DateTime.Now;
-                student.IP = GetLocalIPAddress();//calling the method 
+                attendance.Id= viewModel.Id;
+                attendance.ModifiedDate = DateTime.Now;
+                attendance.IP = GetLocalIPAddress();//calling the method 
                 //ui columns
-                student.Code = studentViewModel.Code;
-                student.Name = studentViewModel.Name;
-                student.Email = studentViewModel.Email;
-                student.Phone = studentViewModel.Phone;
-                student.Address = studentViewModel.Address;
-                student.NRC = studentViewModel.NRC;
-                student.DOB = studentViewModel.DOB;
-                student.FatherName = studentViewModel.FatherName;
-                student.BathId = studentViewModel.BathId;
-                _applicationDbContext.Entry(student).State=EntityState.Modified;//Updating the existing recrod in db set 
+                attendance.AttendaceDate = viewModel.AttendaceDate;
+                attendance.InTime = viewModel.InTime;
+                attendance.OutTime = viewModel.OutTime;
+                attendance.IsLate = string.IsNullOrEmpty(viewModel.IsLate) ? false : true;
+                attendance.IsLeave = string.IsNullOrEmpty(viewModel.IsLeave) ? false : true;
+                attendance.StudentId = viewModel.StudentId;
+                _applicationDbContext.Entry(attendance).State=EntityState.Modified;//Updating the existing recrod in db set 
                 _applicationDbContext.SaveChanges();//Updating  the record to the database
                 isSuccess = true;
             }
@@ -145,7 +145,7 @@ namespace SFMS.Controllers
                 TempData["msg"]= "Update success";
             }
             else
-                TempData["msg"] = "error occur when Updating student information!!";
+                TempData["msg"] = "error occur when Updating attendance information!!";
             return RedirectToAction("List");
         }
 
@@ -159,36 +159,6 @@ namespace SFMS.Controllers
                 }
             }
             throw new Exception("No network adapters with an IPv4 address in the system!");
-        }
-        [HttpPost]
-        public IActionResult Update(StudentViewModel studentViewModel)
-        {
-            bool isUpdateSuccess = false;
-            try {
-                Student student = new Student();
-                //audit columns
-                student.ModifiedDate = DateTime.Now;
-                student.IP = GetLocalIPAddress();
-                //ui columns
-                student.Code = studentViewModel.Code;
-                student.Name = studentViewModel.Name;
-                student.Email = studentViewModel.Email;
-                student.Phone = studentViewModel.Phone;
-                student.Address = studentViewModel.Address;
-                student.NRC = studentViewModel.NRC;
-                student.FatherName = studentViewModel.FatherName;
-                _applicationDbContext.Entry(student).State = EntityState.Modified;//Updating the record Students DBSet
-                _applicationDbContext.SaveChanges();//Upding the record to the database
-                isUpdateSuccess = true;
-            }
-            catch (Exception ex) {
-
-            }
-            if (isUpdateSuccess) {
-                ViewBag.Msg = "Update success";
-            }
-            else ViewBag.Msg = "error occur when updating student information!!";
-            return View();
         }
 
     }

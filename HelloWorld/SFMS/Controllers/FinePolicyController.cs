@@ -22,6 +22,7 @@ namespace SFMS.Controllers
         {
            var finePolicies=_applicationDbContext.FinePolicies.Select(s=>new FinePolicyViewModel
             {
+               Id = s.Id,
                Name= s.Name,
                FineAfterMinutes= s.FineAfterMinutes,
                FineAmount= s.FineAmount,
@@ -62,44 +63,42 @@ namespace SFMS.Controllers
 
 
         public IActionResult Delete(string id) {
-            var model = _applicationDbContext.Courses.Find(id);
+            var model = _applicationDbContext.FinePolicies.Find(id);
             if (model != null) {
-                _applicationDbContext.Courses.Remove(model);//remove the  record from DBSET
+                _applicationDbContext.FinePolicies.Remove(model);//remove the  record from DBSET
                 _applicationDbContext.SaveChanges();//remove effect to the database.
             }
             return RedirectToAction("List");
         }
 
         public IActionResult Edit(string id) {
-            var   viewModel= _applicationDbContext.Courses
+            var   viewModel= _applicationDbContext.FinePolicies
                 .Where(w => w.Id == id)
-                .Select(s => new CourseViewModel
+                .Select(s => new FinePolicyViewModel
                 {
                     Id = s.Id,
-                   Description= s.Description,
-                   Name= s.Name,
-                   OpeningDate= s.OpeningDate,
-                   DurationInHour= s.DurationInHour,
-                   Fees= s.Fees,
+                    Name = s.Name,
+                    FineAfterMinutes= s.FineAfterMinutes,
+                    Rule= s.Rule,
+                    FineAmount= s.FineAmount
                 }).SingleOrDefault();
             return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(CourseViewModel viewModel) {
+        public IActionResult Edit(FinePolicyViewModel viewModel) {
             bool isSuccess;
             try {
-                var  model = new Course();
+                var  model = new FinePolicy();
                 //audit columns
                 model.Id = viewModel.Id;
                 model.ModifiedDate = DateTime.Now;
                 model.IP = GetLocalIPAddress();//calling the method 
                 //ui columns
                model.Name=viewModel.Name;
-                model.Description = viewModel.Description;
-                model.OpeningDate = viewModel.OpeningDate;
-                model.DurationInHour = viewModel.DurationInHour;
-                model.Fees = viewModel.Fees;
+              model.Rule = viewModel.Rule;
+               model.FineAmount = viewModel.FineAmount;
+                model.FineAfterMinutes = viewModel.FineAfterMinutes;
                 _applicationDbContext.Entry(model).State = EntityState.Modified;//Updating the existing recrod in db set 
                 _applicationDbContext.SaveChanges();//Updating  the record to the database
                 isSuccess = true;

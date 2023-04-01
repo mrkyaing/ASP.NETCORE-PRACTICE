@@ -1,0 +1,33 @@
+﻿@model FinePolicyViewModel
+@{
+    ViewData["Title"] = "Fine Policy Edit";
+}
+<h1>Fine Policy Edit</h1>
+<hr />
+<form action="/FinePolicy/Edit" method="post">
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" name="Id" value=@Model.Id hidden>
+        <input type="text" class="form-control" name="Name" value=@Model.Name required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Rule</label>
+        <input type="text" class="form-control" name="Rule" value=@Model.Rule required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Fine Amount (MMK)</label>
+        <input type="number" class="form-control" name="FineAmount" value="@Model.FineAmount" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Fine After Minutes</label>
+        <input type="number" class="form-control" name="FineAfterMinutes"  value="@Model.FineAfterMinutes" required>
+    </div>
+    <div class="mb-3">
+        <div class="col">
+            <input type="submit" class="btn btn-success" value="Update">
+            <input type="reset" class="btn btn-secondary" value="Cancel">
+        </div>
+    </div>
+</form>
+

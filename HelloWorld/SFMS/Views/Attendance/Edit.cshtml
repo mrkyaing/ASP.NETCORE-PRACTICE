@@ -8,26 +8,39 @@
 <hr />
 <form action="/Attendance/Edit" method="post">
     <div class="mb-3">
-        <input type="text" class="form-control" name="@Model.Id" required hidden>
+        <input type="text" class="form-control" name="Id" value="@Model.Id" required hidden>
         <label class="form-label">Attendance Date</label>
-        <input type="date" class="form-control" name="@Model.AttendaceDate" value="@Model.AttendaceDate.ToString("yyyy-MM-dd")" required>
+        <input type="date" class="form-control" name="AttendaceDate" value="@Model.AttendaceDate.ToString("yyyy-MM-dd")" required>
     </div>
     <div class="mb-3">
         <label class="form-label">In Time</label>
-        <input type="time" class="form-control" name="@Model.InTime" placeholder="Student Name" required value=@Model.InTime>
+        <input type="time" class="form-control" name="InTime" value=@Model.InTime required>
     </div>
     <div class="mb-3">
         <label class="form-label">Out Time</label>
-        <input type="time" class="form-control" name="@Model.OutTime" placeholder="Student Email" value=@Model.OutTime>
+        <input type="time" class="form-control" name="OutTime" value=@Model.OutTime>
     </div>
     <div class="mb-2">
-        <label class="form-label">Is Late</label><input type="radio" class="form-control" name="IsLate" value="Is Late" id="rdoIsLate" checked=@Model.IsLate>
-        <label class="form-label">Is Leve</label><input type="radio" class="form-control" name="IsLeave" value="Is Leave" id="rdoIsLeave" checked=@Model.IsLeave>
+        @if(Model.IsLate.Equals("True")) {
+            <label class="form-label">Is Late</label>
+            <input type="radio" class="form-control" name="IsLate" value="Late" id="rdoIsLate" checked>
+        }else {
+            <label class="form-label">Is Late</label>
+            <input type="radio" class="form-control" name="IsLate" value="Late" id="rdoIsLate">
+        }
+        @if(Model.IsLeave.Equals("True")) {
+            <label class="form-label">Is Leve</label>
+            <input type="radio" class="form-control" name="IsLeave" value="Leave" id="rdoIsLeave" checked>
+        }
+        else {
+            <label class="form-label">Is Leve</label>
+            <input type="radio" class="form-control" name="IsLeave" value="Leave" id="rdoIsLeave">
+        }
     </div>
     <div class="mb-3">
         <label class="form-label">Student</label>
         <select name="StudentId" class="form-control">
-            <option value="@Model.StudentId">@Model.Student.Code</option>
+            <option value="@Model.StudentId">@Model.Student.Name</option>
             @foreach (var item in ViewBag.Students) {
                 <option value="@item.Value">@item.Text</option>
             }
