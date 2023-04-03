@@ -5,8 +5,7 @@
 }
 <h1>Attendance Day End Process</h1>
 <hr />
-<form action="/AttendanceDayProcess/DayEndProcess" method="post">
-
+<form action="/AttendanceDayEndProcess/DayEndProcess" method="post">
     <div class="mb-3">
         <label class="form-label">From Attendance Date</label>
         <input type="date" class="form-control" name="FromDayEndDate" required>
@@ -15,12 +14,13 @@
         <label class="form-label">To Attendance Date</label>
         <input type="date" class="form-control" name="ToDayEndDate" required>
     </div>
+
     <div class="mb-3">
         <label class="form-label">Student</label>
         <select name="StudentId" class="form-control">
             <option value="so">--Select One--</option>
             @foreach (var item in Model.students) {
-                <option value="@item.Id">@item.Name</option>
+                <option value="@item.Id">@item.Code : @item.Name </option>
             }
         </select>
     </div>
@@ -29,7 +29,7 @@
         <select name="BathId" class="form-control">
             <option value="so">--Select One--</option>
             @foreach (var item in Model.batches) {
-                <option value="@item.Id">@item.Name</option>
+                <option value="@item.Id">@item.Name : @item.Description </option>
             }
         </select>
     </div>
