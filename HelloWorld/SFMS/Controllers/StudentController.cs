@@ -11,9 +11,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Web;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SFMS.Controllers
 {
+    [Authorize]
     public class StudentController : Controller
     {
         private readonly ApplicationDbContext _applicationDbContext;
@@ -67,7 +69,6 @@ namespace SFMS.Controllers
 
             return RedirectToAction("List");
         }//end of entry post method
-        
 
         public IActionResult List()
         {

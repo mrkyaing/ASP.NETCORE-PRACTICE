@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Net.Sockets;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SFMS.Controllers
 {
@@ -31,8 +32,9 @@ namespace SFMS.Controllers
             }).ToList();
             return View(courses);
         }
-
+        [Authorize(Roles ="Admin,Teacher")]
         public IActionResult Entry() =>View();
+        [Authorize(Roles = "Admin,Teacher")]
         [HttpPost]
         public IActionResult Entry(CourseViewModel viewModel)
         {
@@ -63,7 +65,7 @@ namespace SFMS.Controllers
             return RedirectToAction("List");
         }
 
-
+        [Authorize(Roles = "Admin,Teacher")]
         public IActionResult Delete(string id) {
             var model = _applicationDbContext.Courses.Find(id);
             if (model != null) {
@@ -72,7 +74,7 @@ namespace SFMS.Controllers
             }
             return RedirectToAction("List");
         }
-
+        [Authorize(Roles = "Admin,Teacher")]
         public IActionResult Edit(string id) {
             var   viewModel= _applicationDbContext.Courses
                 .Where(w => w.Id == id)
@@ -87,7 +89,7 @@ namespace SFMS.Controllers
                 }).SingleOrDefault();
             return View(viewModel);
         }
-
+        [Authorize(Roles = "Admin,Teacher")]
         [HttpPost]
         public IActionResult Edit(CourseViewModel viewModel) {
             bool isSuccess;
