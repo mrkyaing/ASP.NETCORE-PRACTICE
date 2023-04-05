@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Net;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using NuGet.Protocol.Plugins;
 
 namespace SFMS.Controllers
 {
@@ -31,15 +33,30 @@ namespace SFMS.Controllers
                 NRC=s.NRC,
                 DOB=s.DOB,
                 Position= s.Position,
-                Id= s.Id
+                Id= s.Id,
+                Courses=(from tc in _applicationDbContext.TeacherCourses join c in _applicationDbContext.Courses on tc.CourseId equals c.Id
+                         where tc.TeacherId==s.Id
+                         select new CourseViewModel
+                         {
+                             Name=c.Name,
+                             Id=c.Id
+                         }).ToList(),
             }).ToList();
             return View(teachers);
         }
 
-        public IActionResult Entry() =>View();
+        public IActionResult Entry() {
+            ViewBag.Courses = _applicationDbContext.Courses.Select(s => new SelectListItem
+            {
+                Text =s.Name,
+                Value = s.Id
+            }).ToList();
+            return View();
+        }
         [HttpPost]
         public IActionResult Entry(TeacherViewModel model)
         {
+            string[] courseIds = Request.Form["CourseIds"].ToString().Split(",");
             bool isSuccess = false;
             try {
                 if (ModelState.IsValid) {
@@ -47,6 +64,7 @@ namespace SFMS.Controllers
                     {
                         Id = Guid.NewGuid().ToString(),
                         CreatedDte = DateTime.Now,
+                        IP= GetLocalIPAddress(),
                         Email = model.Email,
                         Phone = model.Phone,
                         Position = model.Position,
@@ -58,6 +76,20 @@ namespace SFMS.Controllers
                     };
                     _applicationDbContext.Teachers.Add(teacher);
                     _applicationDbContext.SaveChanges();
+                    if (courseIds.Count() > 0) {
+                        foreach(string courseId in courseIds) {
+                            TeacherCourses tc = new TeacherCourses()
+                            {
+                                Id = Guid.NewGuid().ToString(),
+                                CreatedDte = DateTime.Now,
+                                IP = GetLocalIPAddress(),
+                                CourseId = courseId,
+                                TeacherId = teacher.Id
+                            };
+                           _applicationDbContext.TeacherCourses.Add(tc);
+                            _applicationDbContext.SaveChanges();
+                        }
+                    }
                     isSuccess = true;
                 }
             }
@@ -68,7 +100,7 @@ namespace SFMS.Controllers
             }
             else
                 ViewBag.Msg = "error occur when saving Teacher information!!";
-            return View();
+            return RedirectToAction("List");
         }
 
 
