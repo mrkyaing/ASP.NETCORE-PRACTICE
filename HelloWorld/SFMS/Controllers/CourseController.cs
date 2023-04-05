@@ -41,9 +41,14 @@ namespace SFMS.Controllers
             bool isSuccess = false;
             try {
                 if (ModelState.IsValid) {
+                    if (_applicationDbContext.Courses.Any(x => x.Name.Equals(viewModel.Name)))
+                    {
+                        ViewBag.AlreadyExistsMsg = $"{viewModel.Name} is already exists in system.";
+                        return View(viewModel);
+                    }
                     var  model = new Course(){
-                        Id = Guid.NewGuid().ToString(),
-                        CreatedDte = DateTime.Now,
+                     Id = Guid.NewGuid().ToString(),
+                     CreatedDte = DateTime.Now,
                       Name= viewModel.Name,
                       Description= viewModel.Description,
                       OpeningDate= viewModel.OpeningDate,
@@ -55,7 +60,7 @@ namespace SFMS.Controllers
                     isSuccess = true;
                 }
             }
-            catch (Exception) {
+            catch (Exception ex) {
             }
             if (isSuccess) {
                 TempData["msg"] = "saving success";
