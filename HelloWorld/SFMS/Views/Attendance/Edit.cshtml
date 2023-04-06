@@ -22,21 +22,10 @@
     </div>
 
     <div class="mb-2">
-        @if(Model.IsLate.Equals("True")) {
             <label class="form-label">Is Late</label>
-            <input type="radio" class="form-control" name="IsLate" value="Late" id="rdoIsLate" checked>
-        }else {
-            <label class="form-label">Is Late</label>
-            <input type="radio" class="form-control" name="IsLate" value="Late" id="rdoIsLate">
-        }
-        @if(Model.IsLeave.Equals("True")) {
+            <input type="radio" class="form-control" name="IsLate" value="@Model.IsLate" id="rdoIsLate">
             <label class="form-label">Is Leve</label>
-            <input type="radio" class="form-control" name="IsLeave" value="Leave" id="rdoIsLeave" checked>
-        }
-        else {
-            <label class="form-label">Is Leve</label>
-            <input type="radio" class="form-control" name="IsLeave" value="Leave" id="rdoIsLeave">
-        }
+            <input type="radio" class="form-control" name="IsLeave" value="@Model.IsLeave" id="rdoIsLeave">    
     </div>
 
     <div class="mb-3">

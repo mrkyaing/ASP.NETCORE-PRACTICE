@@ -46,13 +46,18 @@ namespace SFMS.Controllers
             bool isSuccess = false;
             try {
                 if (ModelState.IsValid) {
+                    if (_applicationDbContext.Batches.Any(x => x.Name.Equals(viewModel.Name)))
+                    {
+                        ViewBag.AlreadyExistsMsg = $"{viewModel.Name} is already exists in system.";
+                        return View(viewModel);
+                    }
                     var  b = new Batch()
                     {
-                        Id = Guid.NewGuid().ToString(),
-                        CreatedDte = DateTime.Now,
-                      Name= viewModel.Name,
-                      Description= viewModel.Description,
-                      CourseId=viewModel.CourseId
+                    Id = Guid.NewGuid().ToString(),
+                    CreatedDte = DateTime.Now,
+                    Name= viewModel.Name,
+                    Description= viewModel.Description,
+                    CourseId=viewModel.CourseId
                     };
                     _applicationDbContext.Batches.Add(b);
                     _applicationDbContext.SaveChanges();

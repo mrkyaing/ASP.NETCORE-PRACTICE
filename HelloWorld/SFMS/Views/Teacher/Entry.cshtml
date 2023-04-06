@@ -8,6 +8,12 @@
     }
 <h1>Teacher Entry</h1>
 <hr />
+@if (ViewBag.AlreadyExistsMsg != null)
+{
+    <div class="alert alert-warning">
+        @ViewBag.AlreadyExistsMsg
+    </div>
+}
 <form action="/Teacher/Entry" method="post">
     @if (ViewBag.Msg != null) {
         <div class="alert alert-success">

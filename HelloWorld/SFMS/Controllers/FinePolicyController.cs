@@ -38,10 +38,15 @@ namespace SFMS.Controllers
             bool isSuccess = false;
             try {
                 if (ModelState.IsValid) {
+                    if (_applicationDbContext.FinePolicies.Any(x => x.Name.Equals(viewModel.Name)))
+                    {
+                        ViewBag.AlreadyExistsMsg = $"{viewModel.Name} is already exists in system.";
+                        return View(viewModel);
+                    }
                     var  model = new FinePolicy(){
-                        Id = Guid.NewGuid().ToString(),
-                        CreatedDte = DateTime.Now,
-                      Name= viewModel.Name,
+                    Id = Guid.NewGuid().ToString(),
+                    CreatedDte = DateTime.Now,
+                    Name= viewModel.Name,
                     Rule= viewModel.Rule,
                     FineAmount = viewModel.FineAmount,
                     FineAfterMinutes = viewModel.FineAfterMinutes,

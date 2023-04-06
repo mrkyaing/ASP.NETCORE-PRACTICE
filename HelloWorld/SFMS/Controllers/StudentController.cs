@@ -37,36 +37,37 @@ namespace SFMS.Controllers
         [HttpPost]
         public  IActionResult Entry(StudentViewModel studentViewModel)
         {
-            bool isSuccess;
             try {
-                Student student = new Student();
-                //audit columns
-                student.Id = Guid.NewGuid().ToString();
-                student.CreatedDte = DateTime.Now;
-                student.IP = GetLocalIPAddress();//calling the method 
-                //ui columns
-                student.Code = studentViewModel.Code;
-                student.Name = studentViewModel.Name;
-                student.Email = studentViewModel.Email;
-                student.Phone = studentViewModel.Phone;
-                student.Address = studentViewModel.Address;
-                student.NRC = studentViewModel.NRC;
-                student.DOB=studentViewModel.DOB;
-                student.FatherName = studentViewModel.FatherName;
-                student.BathId= studentViewModel.BathId;
-                _applicationDbContext.Students.Add(student);//Adding the record Students DBSet
-                _applicationDbContext.SaveChanges();//saving the record to the database
-                isSuccess= true;
+                if (ModelState.IsValid)
+                {
+                    if (_applicationDbContext.Teachers.Any(x => x.Name.Equals(studentViewModel.Code)))
+                    {
+                        ViewBag.AlreadyExistsMsg = $"{studentViewModel.Code} is already exists in system.";
+                        return View(studentViewModel);
+                    }
+                    Student student = new Student();
+                    //audit columns
+                    student.Id = Guid.NewGuid().ToString();
+                    student.CreatedDte = DateTime.Now;
+                    student.IP = GetLocalIPAddress();//calling the method 
+                    //ui columns
+                    student.Code = studentViewModel.Code;
+                    student.Name = studentViewModel.Name;
+                    student.Email = studentViewModel.Email;
+                    student.Phone = studentViewModel.Phone;
+                    student.Address = studentViewModel.Address;
+                    student.NRC = studentViewModel.NRC;
+                    student.DOB = studentViewModel.DOB;
+                    student.FatherName = studentViewModel.FatherName;
+                    student.BathId = studentViewModel.BathId;
+                    _applicationDbContext.Students.Add(student);//Adding the record Students DBSet
+                    _applicationDbContext.SaveChanges();//saving the record to the database
+                    TempData["msg"] = "Saving success for " + studentViewModel.Code;
+                }             
             }
             catch(Exception ex) {
-                isSuccess = false;
-            }
-            if(isSuccess) {
-                TempData["msg"] = "Saving success for "+studentViewModel.Code;
-            }
-            else
                 TempData["msg"] = "Error occur when saving student information!!";
-
+            }        
             return RedirectToAction("List");
         }//end of entry post method
 

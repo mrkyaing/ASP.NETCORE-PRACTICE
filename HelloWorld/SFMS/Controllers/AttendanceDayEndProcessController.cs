@@ -55,6 +55,7 @@ namespace SFMS.Controllers
                     _applicationDbContext.SaveChanges();//saving the record to the database
                 }
                 IList<FineTransaction> fts = new List<FineTransaction>();
+                
                 //start processing the fine transaction by student Id and between attendance Date (from & to)
                 if (!viewModel.StudentId.Equals("so")) {
                     var attendances = _applicationDbContext.Attendances.Where(x=>x.StudentId.Equals(viewModel.StudentId)
@@ -78,9 +79,9 @@ namespace SFMS.Controllers
                                 OutTime= attendance.OutTime,
                                 FineAmount=finePolicy.FineAmount
                             };
-                            fts.Add(ft);//for each student and its attendance fine amount 
+                            fts.Add(ft);//adding list of fineTransaction for each student and its attendance fine amount 
                         }
-                    }//end of looping throuth for the whole attendance of student id 
+                    }//end of looping  for the whole attendance of student id 
                     _applicationDbContext.FineTransactions.AddRange(fts);//Adding the record Students DBSet
                     _applicationDbContext.SaveChanges();//saving the record to the database
                     isSuccess = true;
@@ -118,7 +119,7 @@ namespace SFMS.Controllers
                                 OutTime = item.OutTime,
                                 FineAmount = finePolicy.FineAmount
                             };
-                            fts.Add(ft);
+                            fts.Add(ft);// adding list of fineTransaction for each student and its attendance fine amount
                         }
                     }//end of foreach attendance 
                     _applicationDbContext.FineTransactions.AddRange(fts);//Adding the record Students DBSet
