@@ -1,5 +1,9 @@
-﻿<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    @{
+﻿
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" />
+<script type="text/javascript" src="https://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"></script>
+
+@{
         ViewData["Title"] = "Teacher Entry";
     }
 <h1>Teacher Entry</h1>
@@ -44,6 +48,15 @@
        </select>
     </div>
     <div class="mb-3">
+        <label class="form-label">Course</label>
+        <select name="CourseIds" class="form-control" id="CourseIds" multiple>
+            @foreach (var item in ViewBag.Courses) {
+                <option value="@item.Value">@item.Text</option>
+            }
+
+        </select>
+    </div>
+    <div>
         <label class="form-label">Address</label>
         <textarea name="Address" class="form-control"></textarea>
     </div>
@@ -54,4 +67,10 @@
         </div>
     </div>
 </form>
-
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#CourseIds').multiselect({
+            includeSelectAllOption: true
+        });
+    });
+</script>

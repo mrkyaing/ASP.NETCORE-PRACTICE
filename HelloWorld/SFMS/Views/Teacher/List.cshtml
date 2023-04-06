@@ -26,6 +26,7 @@
                     <th scope="col">NRC</th>
                     <th scope="col">Address</th>
                     <th scope="col">Position</th>
+                    <th scope="col">Courses</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -40,6 +41,9 @@
                         <td>@item.NRC</td>
                         <td>@item.Address</td>
                         <td>@item.Position</td>
+                        <td>
+                          @item.Courses.First().Name
+                        </td>
                         <td><a href="/Teacher/Edit?Id=@item.Id" class="btn btn-success" role="button">Edit</a></td>
                         <td><a href="/Teacher/Delete?Id=@item.Id" onclick="return confirm('are you sure to delete this recrod?')" class="btn btn-danger" role="button">Delete</a> </td>
                     </tr>
