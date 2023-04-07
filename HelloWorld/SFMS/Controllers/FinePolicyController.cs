@@ -7,6 +7,8 @@ using System;
 using System.Linq;
 using System.Net.Sockets;
 using System.Net;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SFMS.Controllers
 {
@@ -27,20 +29,30 @@ namespace SFMS.Controllers
                FineAfterMinutes= s.FineAfterMinutes,
                FineAmount= s.FineAmount,
                Rule= s.Rule,
+               IsEnable= s.IsEnable,
+               Batch=s.Batch
             }).ToList();
             return View(finePolicies);
         }
 
-        public IActionResult Entry() =>View();
+        public IActionResult Entry()
+        {
+            ViewBag.Baths = _applicationDbContext.Batches.Select(s => new SelectListItem
+            {
+                Text = s.Name,
+                Value = s.Id
+            }).ToList();
+            return View();
+        }
         [HttpPost]
         public IActionResult Entry(FinePolicyViewModel viewModel)
         {
             bool isSuccess = false;
             try {
-                if (ModelState.IsValid) {
-                    if (_applicationDbContext.FinePolicies.Any(x => x.Name.Equals(viewModel.Name)))
+                if (ModelState.IsValid) {                  
+                    if (_applicationDbContext.FinePolicies.Any(x => x.BathId.Equals(viewModel.BathId) && x.IsEnable==true))
                     {
-                        ViewBag.AlreadyExistsMsg = $"{viewModel.Name} is already exists in system.";
+                        ViewBag.AlreadyExistsMsg = $"{viewModel.Name} is already enabled on policy rule .Only one rule apply on Bath.";
                         return View(viewModel);
                     }
                     var  model = new FinePolicy(){
@@ -48,6 +60,8 @@ namespace SFMS.Controllers
                     CreatedDte = DateTime.Now,
                     Name= viewModel.Name,
                     Rule= viewModel.Rule,
+                    BathId= viewModel.BathId,
+                    IsEnable= viewModel.IsEnable,
                     FineAmount = viewModel.FineAmount,
                     FineAfterMinutes = viewModel.FineAfterMinutes,
                     };
@@ -77,16 +91,22 @@ namespace SFMS.Controllers
         }
 
         public IActionResult Edit(string id) {
-            var   viewModel= _applicationDbContext.FinePolicies
+            var viewModel= _applicationDbContext.FinePolicies
                 .Where(w => w.Id == id)
-                .Select(s => new FinePolicyViewModel
-                {
+                .Select(s => new FinePolicyViewModel{
                     Id = s.Id,
                     Name = s.Name,
                     FineAfterMinutes= s.FineAfterMinutes,
                     Rule= s.Rule,
-                    FineAmount= s.FineAmount
+                    FineAmount= s.FineAmount,
+                    BathId = s.BathId,
+                    IsEnable = s.IsEnable,
+                    Batch=s.Batch
                 }).SingleOrDefault();
+            ViewBag.Baths = _applicationDbContext.Batches.Where(x=>x.Id!=viewModel.BathId).Select(s => new SelectListItem{
+                Text = s.Name,
+                Value = s.Id
+            }).ToList();
             return View(viewModel);
         }
 
@@ -102,6 +122,8 @@ namespace SFMS.Controllers
                 //ui columns
                model.Name=viewModel.Name;
               model.Rule = viewModel.Rule;
+                model.BathId = viewModel.BathId;
+                model.IsEnable = viewModel.IsEnable;
                model.FineAmount = viewModel.FineAmount;
                 model.FineAfterMinutes = viewModel.FineAfterMinutes;
                 _applicationDbContext.Entry(model).State = EntityState.Modified;//Updating the existing recrod in db set 

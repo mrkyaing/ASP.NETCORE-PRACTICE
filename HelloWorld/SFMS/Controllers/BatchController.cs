@@ -33,7 +33,7 @@ namespace SFMS.Controllers
         }
 
         public IActionResult Entry() {
-            IList<CourseViewModel> coursesViewModel = _applicationDbContext.Courses.Select(s => new CourseViewModel
+            IList<BathViewModel> coursesViewModel = _applicationDbContext.Courses.Select(s => new BathViewModel
             {
                 Name = s.Name,
                 Id = s.Id,

@@ -1,4 +1,4 @@
-﻿@model IList<CourseViewModel>
+﻿@model IList<BathViewModel>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     @{
     ViewData["Title"] = "Batch Entry";
@@ -23,7 +23,7 @@
     <div class="mb-3">
         <label class="form-label">Course</label>
         <select name="CourseId" class="form-control">
-            @foreach (CourseViewModel item in Model) {
+            @foreach (BathViewModel item in Model) {
                 <option value="@item.Id">@item.Name</option>
             }
         </select>

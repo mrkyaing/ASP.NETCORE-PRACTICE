@@ -24,6 +24,20 @@
         <input type="number" class="form-control" name="FineAfterMinutes"  value="@Model.FineAfterMinutes" required>
     </div>
     <div class="mb-3">
+        <label class="form-label">Bath</label>
+        <select name="BathId" class="form-control">
+            <option value="@Model.BathId">@Model.Batch.Name</option>
+            @foreach (var item in @ViewBag.Baths)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Apply</label>
+        <input type="checkbox" class="form-control" name="IsEnable" value="@Model.IsEnable" required>
+    </div>
+    <div class="mb-3">
         <div class="col">
             <input type="submit" class="btn btn-success" value="Update">
             <input type="reset" class="btn btn-secondary" value="Cancel">

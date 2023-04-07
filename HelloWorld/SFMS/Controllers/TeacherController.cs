@@ -36,7 +36,7 @@ namespace SFMS.Controllers
                 Id= s.Id,
                 Courses=(from tc in _applicationDbContext.TeacherCourses join c in _applicationDbContext.Courses on tc.CourseId equals c.Id
                          where tc.TeacherId==s.Id
-                         select new CourseViewModel
+                         select new BathViewModel
                          {
                              Name=c.Name,
                              Id=c.Id

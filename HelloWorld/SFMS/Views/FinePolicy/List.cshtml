@@ -22,6 +22,8 @@
                     <th scope="col">Rule</th>
                     <th scope="col">Fine After Minutes</th>
                     <th scope="col">FineAmount(MMK)</th>
+                    <th scope="col">Apply Rule</th>
+                    <th scope="col">Bath</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -33,6 +35,8 @@
                         <td>@item.Rule</td>
                         <td>@item.FineAfterMinutes</td>
                         <td>@item.FineAmount</td>
+                        <td>@item.IsEnable</td>
+                        <td>@item.Batch.Name</td>
                         <td><a href="/FinePolicy/Edit?Id=@item.Id" class="btn btn-success" role="button">Edit</a></td>
                         <td><a href="/FinePolicy/Delete?Id=@item.Id" onclick="return confirm('are you sure to delete this recrod?')" class="btn btn-danger" role="button">Delete</a> </td>
                     </tr>
