@@ -7,7 +7,6 @@ using System;
 using System.Linq;
 using System.Net.Sockets;
 using System.Net;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SFMS.Controllers
