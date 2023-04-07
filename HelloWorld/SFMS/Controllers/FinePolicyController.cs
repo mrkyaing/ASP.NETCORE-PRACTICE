@@ -114,6 +114,11 @@ namespace SFMS.Controllers
         public IActionResult Edit(FinePolicyViewModel viewModel) {
             bool isSuccess;
             try {
+                if (_applicationDbContext.FinePolicies.Any(x => x.BathId.Equals(viewModel.BathId) && x.IsEnable == true))
+                {
+                    ViewBag.AlreadyExistsMsg = $"{viewModel.Name} is already enabled on policy rule .Only 1 enabled-rule apply on Bath.";
+                    return View(viewModel);
+                }
                 var  model = new FinePolicy();
                 //audit columns
                 model.Id = viewModel.Id;

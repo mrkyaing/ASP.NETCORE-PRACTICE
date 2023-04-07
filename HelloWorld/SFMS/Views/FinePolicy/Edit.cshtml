@@ -4,6 +4,12 @@
 }
 <h1>Fine Policy Edit</h1>
 <hr />
+@if (ViewBag.AlreadyExistsMsg != null)
+{
+    <div class="alert alert-warning">
+        @ViewBag.AlreadyExistsMsg
+    </div>
+}
 <form action="/FinePolicy/Edit" method="post">
     <div class="mb-3">
         <label class="form-label">Name</label>
