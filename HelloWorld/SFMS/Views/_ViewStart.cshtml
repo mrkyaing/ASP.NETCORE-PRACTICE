@@ -1,3 +1,10 @@
 ﻿@{
-    Layout = "_Layout";
+    if (User.IsInRole("admin"))
+    {
+        Layout = "/AdminLTE/_Layout";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
 }
