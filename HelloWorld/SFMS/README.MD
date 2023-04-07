@@ -12,10 +12,11 @@
 - Attendance Day End Process for Fine Transaction for Each Student according to attending Bath
 - Reporting
 # Used Technoligies
-- ASP.NET Core 7.0 MVC
-- Entity Framework Core 7.0
-- Bootstrap 3.3 & JQuery 3.3
-- RDLC Reporting 
-- MS SQL Server 2014 Express Edition
-- JQuery Datatable 
-- Admin LTE for Admin Dashboard
+- MVC Architecture Pattern With ASP.NET Core 7.0 MVC
+- ORM (Object Relational Mapper) With Entity Framework Core 7.0
+- Authentication & Authorization With ASP.NET Core Identity Membership 
+- UI/UX With Bootstrap 3.3 & JQuery 3.3
+- Reporting With RDLC  
+- Data Storage With MS SQL Server 2014 Express Edition
+- Paging & Sorting With JQuery Datatable 
+- Admin Dashboard With AdminLTE 
