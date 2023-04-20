@@ -1,8 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
- @if (User.IsInRole("admin")){
-    <div class="container">
+@if (User.IsInRole("Teacher")) {
+ 
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
@@ -589,11 +589,10 @@
             </div>
             <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
-    </div>
 }
 else
 {
-        <div class="container">
+
          <h1 class="m-0">Welcome to Student Fund Management System (SFMS)</h1>
-    </div>
+
 }

@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj": {}
+    "C:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj": {}
   },
   "projects": {
-    "D:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj": {
+    "C:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj",
+        "projectUniqueName": "C:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj",
         "projectName": "HelloWorld",
-        "projectPath": "D:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj",
-        "packagesPath": "C:\\Users\\mgkyaing\\.nuget\\packages\\",
-        "outputPath": "D:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\obj\\",
+        "projectPath": "C:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj",
+        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+        "outputPath": "C:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\mgkyaing\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -68,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
