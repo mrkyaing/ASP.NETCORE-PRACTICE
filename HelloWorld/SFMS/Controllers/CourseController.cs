@@ -21,7 +21,7 @@ namespace SFMS.Controllers
         }
         public IActionResult List()
         {
-           var courses=_applicationDbContext.Courses.Select(s=>new BathViewModel
+           var courses=_applicationDbContext.Courses.Select(s=>new CourseViewModel
             {
                Name= s.Name,
                Description= s.Description,
@@ -36,7 +36,7 @@ namespace SFMS.Controllers
         public IActionResult Entry() =>View();
         [Authorize(Roles = "Admin,Teacher")]
         [HttpPost]
-        public IActionResult Entry(BathViewModel viewModel)
+        public IActionResult Entry(CourseViewModel viewModel)
         {
             bool isSuccess = false;
             try {
@@ -83,7 +83,7 @@ namespace SFMS.Controllers
         public IActionResult Edit(string id) {
             var   viewModel= _applicationDbContext.Courses
                 .Where(w => w.Id == id)
-                .Select(s => new BathViewModel
+                .Select(s => new CourseViewModel
                 {
                     Id = s.Id,
                    Description= s.Description,
@@ -96,7 +96,7 @@ namespace SFMS.Controllers
         }
         [Authorize(Roles = "Admin,Teacher")]
         [HttpPost]
-        public IActionResult Edit(BathViewModel viewModel) {
+        public IActionResult Edit(CourseViewModel viewModel) {
             bool isSuccess;
             try {
                 var  model = new Course();

@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace SFMS.Models.ViewModels {
-    public class BathViewModel {
+    public class CourseViewModel {
         public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
