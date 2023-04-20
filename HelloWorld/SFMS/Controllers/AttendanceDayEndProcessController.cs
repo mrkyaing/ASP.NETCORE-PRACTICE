@@ -43,33 +43,40 @@ namespace SFMS.Controllers
         [HttpPost]
         public  IActionResult DayEndProcess(AttendanceDayEndProcessViewModel viewModel)
         {
-            var finePolicy = _applicationDbContext.FinePolicies.SingleOrDefault();
-            bool isSuccess=false;
+            //declare fts for collecting fineTransaction and then pass to database for inserting process 
+            IList<FineTransaction> fts = new List<FineTransaction>();
+            bool isSuccess =false;
             try {
                 //getting the existing fine transaction before dayend Process by student Id and between attendance Date (from & to)
-                var ftsCheckBeforeDayEndProcess = _applicationDbContext.FineTransactions.Where(x => x.StudentId.Equals(viewModel.StudentId) 
-                && (x.FinedDate >= viewModel.FromDayEndDate && x.FinedDate <= viewModel.ToDayEndDate)).ToList();
+                var ftsBeforeDayEndProcess = _applicationDbContext.FineTransactions.Where(x => x.StudentId.Equals(viewModel.StudentId) 
+                                            && (x.FinedDate >= viewModel.FromDayEndDate && x.FinedDate <= viewModel.ToDayEndDate)).ToList();
               
-                if(null!=ftsCheckBeforeDayEndProcess) {
-                    _applicationDbContext.FineTransactions.RemoveRange(ftsCheckBeforeDayEndProcess);
+                if(ftsBeforeDayEndProcess.Count()>0) {
+                    _applicationDbContext.FineTransactions.RemoveRange(ftsBeforeDayEndProcess);
                     _applicationDbContext.SaveChanges();//saving the record to the database
                 }
-                IList<FineTransaction> fts = new List<FineTransaction>();
+
                 //start processing the fine transaction by student Id and between attendance Date (from & to)
                 if (!viewModel.StudentId.Equals("so")) {
+                    //get the finePolicy accroding to student by by looking up three tables (FinePolicy , Bath, Student )
+                    var finePolicy = (from fp in _applicationDbContext.FinePolicies 
+                                      join b in _applicationDbContext.Batches 
+                                      on fp.BathId equals b.Id
+                                      join s in _applicationDbContext.Students
+                                      on b.Id equals s.BathId
+                                      where s.Id==viewModel.StudentId && fp.IsEnable==true select fp).SingleOrDefault();
                     var attendances = _applicationDbContext.Attendances.Where(x=>x.StudentId.Equals(viewModel.StudentId)
                     && x.IsLate==true
-                    && (x.AttendaceDate>=viewModel.FromDayEndDate && x.AttendaceDate<=viewModel.ToDayEndDate))
-                    .ToList();
+                    && (x.AttendaceDate>=viewModel.FromDayEndDate && x.AttendaceDate<=viewModel.ToDayEndDate)).ToList();
                     foreach(var attendance in attendances) {
                         TimeSpan inTime=TimeSpan.Parse(attendance.InTime);//change string value "13:10" to TimeSpan Type 13:10
                         //13:10 >> 13:05
                         if (inTime.Minutes > finePolicy.FineAfterMinutes) { //if your inTime is greater than Fine After Minutes,you are fine accroding to fine rules.
                             FineTransaction ft = new FineTransaction(){
                                 //audit columns
-                                Id = Guid.NewGuid().ToString(),
-                               CreatedDte = DateTime.Now,
-                               IP = GetLocalIPAddress(),//calling the method 
+                            Id = Guid.NewGuid().ToString(),
+                            CreatedDte = DateTime.Now,
+                            IP = GetLocalIPAddress(),//calling the method 
                                //process columns 
                                 FinedDate = attendance.AttendaceDate,
                                 StudentId = attendance.StudentId,
@@ -78,9 +85,9 @@ namespace SFMS.Controllers
                                 OutTime= attendance.OutTime,
                                 FineAmount=finePolicy.FineAmount
                             };
-                            fts.Add(ft);//for each student and its attendance fine amount 
+                            fts.Add(ft);//adding list of fineTransaction for each student and its attendance fine amount 
                         }
-                    }//end of looping throuth for the whole attendance of student id 
+                    }//end of looping  for the whole attendance of student id 
                     _applicationDbContext.FineTransactions.AddRange(fts);//Adding the record Students DBSet
                     _applicationDbContext.SaveChanges();//saving the record to the database
                     isSuccess = true;
@@ -88,6 +95,8 @@ namespace SFMS.Controllers
 
                 //start processing the fine transaction by bath Id and between attendance Date (from & to)
                 if (!viewModel.BathId.Equals("so")) {
+                    //get the finePolicy accroding to Bath by looking up FinePolicy Table 
+                    var finePolicy =_applicationDbContext.FinePolicies.Where(x=>x.BathId.Equals(viewModel.BathId) && x.IsEnable==true).SingleOrDefault();
                     var attendances = (from a in _applicationDbContext.Attendances
                                                 join s in _applicationDbContext.Students
                                                 on a.StudentId equals s.Id
@@ -95,8 +104,7 @@ namespace SFMS.Controllers
                                                 on s.BathId equals b.Id
                                                 where s.BathId.Equals(viewModel.BathId) 
                                                 && (a.AttendaceDate>=viewModel.FromDayEndDate && a.AttendaceDate<=viewModel.ToDayEndDate)
-                                                select new AttendanceViewModel
-                                                {
+                                                select new AttendanceViewModel{
                                                     AttendaceDate=a.AttendaceDate,
                                                     StudentId=s.Id,
                                                     InTime=a.InTime,
@@ -105,8 +113,7 @@ namespace SFMS.Controllers
                     foreach (var item in attendances) {
                         TimeSpan inTime = TimeSpan.Parse(item.InTime);
                         if (inTime.Minutes > finePolicy.FineAfterMinutes) {
-                            FineTransaction ft = new FineTransaction()
-                            {
+                            FineTransaction ft = new FineTransaction(){
                                 //audit columns
                                 Id = Guid.NewGuid().ToString(),
                                 CreatedDte = DateTime.Now,
@@ -118,7 +125,7 @@ namespace SFMS.Controllers
                                 OutTime = item.OutTime,
                                 FineAmount = finePolicy.FineAmount
                             };
-                            fts.Add(ft);
+                            fts.Add(ft);// adding list of fineTransaction for each student and its attendance fine amount
                         }
                     }//end of foreach attendance 
                     _applicationDbContext.FineTransactions.AddRange(fts);//Adding the record Students DBSet
@@ -139,9 +146,7 @@ namespace SFMS.Controllers
 
         public IActionResult List()
         {
-          IList<FineTransactionViewModel> fines= _applicationDbContext.FineTransactions.Select
-                (s=>new FineTransactionViewModel
-                {
+          IList<FineTransactionViewModel> fines= _applicationDbContext.FineTransactions.Select(s=>new FineTransactionViewModel{
                 Id=s.Id,
                 FinedDate=s.FinedDate,
                 InTime=s.InTime,
@@ -158,13 +163,12 @@ namespace SFMS.Controllers
         public IActionResult Delete(string Id) {
             var ft=_applicationDbContext.FineTransactions.Find(Id);
             if (ft != null) {
-                _applicationDbContext.FineTransactions.Remove(ft);//remove the  student record from DBSET
+                _applicationDbContext.FineTransactions.Remove(ft);//remove the  record from DBSET
                 _applicationDbContext.SaveChanges();//remove effect to the database.
                 TempData["msg"] = $"Deleted successed.";
             }
             return RedirectToAction("List");
-        }
-   
+        } 
         //finding the local ip in your machine
         private static string GetLocalIPAddress()
         {

@@ -9,7 +9,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using NuGet.Protocol.Plugins;
+
 
 namespace SFMS.Controllers
 {
@@ -60,6 +60,11 @@ namespace SFMS.Controllers
             bool isSuccess = false;
             try {
                 if (ModelState.IsValid) {
+                    if (_applicationDbContext.Teachers.Any(x => x.Name.Equals(model.Code)))
+                    {
+                        ViewBag.AlreadyExistsMsg = $"{model.Code} is already exists in system.";
+                        return View(model);
+                    }
                     Teacher teacher = new Teacher()
                     {
                         Id = Guid.NewGuid().ToString(),
@@ -75,8 +80,8 @@ namespace SFMS.Controllers
                         DOB = model.DOB,
                     };
                     _applicationDbContext.Teachers.Add(teacher);
-                    _applicationDbContext.SaveChanges();
-                    if (courseIds.Count() > 0) {
+                   int result= _applicationDbContext.SaveChanges();
+                    if (courseIds.Count() > 0 && result>0) { //there is courses selected from ui and teacher record is created first.
                         foreach(string courseId in courseIds) {
                             TeacherCourses tc = new TeacherCourses()
                             {
@@ -96,10 +101,10 @@ namespace SFMS.Controllers
             catch (Exception) {
             }
             if (isSuccess) {
-                ViewBag.Msg = "saving success";
+                TempData["msg"] = "Saving success for " + model.Code;
             }
             else
-                ViewBag.Msg = "error occur when saving Teacher information!!";
+                TempData["msg"]= "error occur when saving Teacher information!!";
             return RedirectToAction("List");
         }
 

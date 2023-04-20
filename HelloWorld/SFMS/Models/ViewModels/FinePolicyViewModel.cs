@@ -5,5 +5,8 @@
         public string Rule { get; set; }
         public int FineAmount { get; set; }
         public int FineAfterMinutes { get; set; }
+        public string BathId { get; set; }
+        public virtual Batch Batch { get; set; }
+        public bool IsEnable { get; set; }
     }
 }

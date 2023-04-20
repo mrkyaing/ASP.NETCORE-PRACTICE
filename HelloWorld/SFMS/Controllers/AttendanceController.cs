@@ -18,7 +18,6 @@ namespace SFMS.Controllers
     public class AttendanceController : Controller
     {
         private readonly ApplicationDbContext _applicationDbContext;
-        //Constructore Inject Apporach for ApplicationDbContext;
         public AttendanceController(ApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
@@ -46,12 +45,11 @@ namespace SFMS.Controllers
                  //ui columns
                 attendance.AttendaceDate = viewModel.AttendaceDate;
                 attendance.InTime = viewModel.InTime;
-                attendance.OutTime = viewModel.OutTime;
-              
+                attendance.OutTime = viewModel.OutTime;             
                 attendance.IsLate=string.IsNullOrEmpty(viewModel.IsLate)?false:true;
                 attendance.IsLeave = string.IsNullOrEmpty(viewModel.IsLeave) ? false : true;
                 attendance.StudentId=viewModel.StudentId;
-                _applicationDbContext.Attendances.Add(attendance);//Adding the record Students DBSet
+                _applicationDbContext.Attendances.Add(attendance);//Adding the record  DBSet
                 _applicationDbContext.SaveChanges();//saving the record to the database
                 isSuccess= true;
             }
