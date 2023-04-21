@@ -28,8 +28,7 @@ namespace SFMS.Areas.Identity.Pages.Account
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
-        {
+            IEmailSender emailSender){
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
