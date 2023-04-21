@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home";
 }
 @if (User.IsInRole("Teacher")) {
- 
+        <div class="wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
@@ -589,6 +589,7 @@
             </div>
             <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
+        </div>
 }
 else
 {
