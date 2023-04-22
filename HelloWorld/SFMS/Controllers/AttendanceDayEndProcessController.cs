@@ -94,7 +94,7 @@ namespace SFMS.Controllers
                 }//end of if studnet id selected by ui 
 
                 //start processing the fine transaction by bath Id and between attendance Date (from & to)
-                if (!viewModel.BathId.Equals("so")) {
+                else if (!viewModel.BathId.Equals("so")) {
                     //get the finePolicy accroding to Bath by looking up FinePolicy Table 
                     var finePolicy =_applicationDbContext.FinePolicies.Where(x=>x.BatchId.Equals(viewModel.BathId) && x.IsEnable==true).SingleOrDefault();
                     var attendances = (from a in _applicationDbContext.Attendances
@@ -106,7 +106,7 @@ namespace SFMS.Controllers
                                                 && (a.AttendaceDate>=viewModel.FromDayEndDate && a.AttendaceDate<=viewModel.ToDayEndDate)
                                                 select new AttendanceViewModel{
                                                     AttendaceDate=a.AttendaceDate,
-                                                    StudentId=s.Id,
+                                                    StudentId=a.StudentId,
                                                     InTime=a.InTime,
                                                     OutTime=a.OutTime,
                                                 }).ToList();
@@ -146,7 +146,8 @@ namespace SFMS.Controllers
 
         public IActionResult List()
         {
-          IList<FineTransactionViewModel> fines= _applicationDbContext.FineTransactions.Select(s=>new FineTransactionViewModel{
+          IList<FineTransactionViewModel> fines= _applicationDbContext.FineTransactions.Select(s=>
+               new FineTransactionViewModel{
                 Id=s.Id,
                 FinedDate=s.FinedDate,
                 InTime=s.InTime,

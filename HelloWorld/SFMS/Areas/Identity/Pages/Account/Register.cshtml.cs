@@ -74,11 +74,11 @@ namespace SFMS.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
-                var result = await _userManager.CreateAsync(user, Input.Password);
+                var result = await _userManager.CreateAsync(user, Input.Password);//insert the recrod into the database .
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    //adding the role
+                    //adding the role WITH DEFAUL ROLE STUDENT
                     await _userManager.AddToRoleAsync(user, "Student");
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

@@ -32,8 +32,12 @@ namespace SFMS.Controllers
             }).ToList();
             return View(courses);
         }
+
         [Authorize(Roles ="Admin,Teacher")]
-        public IActionResult Entry() =>View();
+        public IActionResult Entry() {
+            return View();
+        }
+
         [Authorize(Roles = "Admin,Teacher")]
         [HttpPost]
         public IActionResult Entry(CourseViewModel viewModel)
@@ -79,6 +83,8 @@ namespace SFMS.Controllers
             }
             return RedirectToAction("List");
         }
+        
+        
         [Authorize(Roles = "Admin,Teacher")]
         public IActionResult Edit(string id) {
             var   viewModel= _applicationDbContext.Courses
@@ -94,6 +100,8 @@ namespace SFMS.Controllers
                 }).SingleOrDefault();
             return View(viewModel);
         }
+        
+        
         [Authorize(Roles = "Admin,Teacher")]
         [HttpPost]
         public IActionResult Edit(CourseViewModel viewModel) {
