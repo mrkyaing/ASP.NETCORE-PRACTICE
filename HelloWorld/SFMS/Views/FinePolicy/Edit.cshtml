@@ -32,7 +32,7 @@
     <div class="mb-3">
         <label class="form-label">Bath</label>
         <select name="BathId" class="form-control">
-            <option value="@Model.BathId">@Model.Batch.Name</option>
+            <option value="@Model.BatchId">@Model.Batch.Name</option>
             @foreach (var item in @ViewBag.Baths)
             {
                 <option value="@item.Value">@item.Text</option>

@@ -61,7 +61,7 @@ namespace SFMS.Controllers
                     //get the finePolicy accroding to student by by looking up three tables (FinePolicy , Bath, Student )
                     var finePolicy = (from fp in _applicationDbContext.FinePolicies 
                                       join b in _applicationDbContext.Batches 
-                                      on fp.BathId equals b.Id
+                                      on fp.BatchId equals b.Id
                                       join s in _applicationDbContext.Students
                                       on b.Id equals s.BathId
                                       where s.Id==viewModel.StudentId && fp.IsEnable==true select fp).SingleOrDefault();
@@ -96,7 +96,7 @@ namespace SFMS.Controllers
                 //start processing the fine transaction by bath Id and between attendance Date (from & to)
                 if (!viewModel.BathId.Equals("so")) {
                     //get the finePolicy accroding to Bath by looking up FinePolicy Table 
-                    var finePolicy =_applicationDbContext.FinePolicies.Where(x=>x.BathId.Equals(viewModel.BathId) && x.IsEnable==true).SingleOrDefault();
+                    var finePolicy =_applicationDbContext.FinePolicies.Where(x=>x.BatchId.Equals(viewModel.BathId) && x.IsEnable==true).SingleOrDefault();
                     var attendances = (from a in _applicationDbContext.Attendances
                                                 join s in _applicationDbContext.Students
                                                 on a.StudentId equals s.Id

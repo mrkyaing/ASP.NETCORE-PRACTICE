@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SFMS.Models.DAO;
 
@@ -11,9 +12,11 @@ using SFMS.Models.DAO;
 namespace SFMS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230422034705_AddColumnsInFinePolicy")]
+    partial class AddColumnsInFinePolicy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -338,7 +341,7 @@ namespace SFMS.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("BatchId")
+                    b.Property<string>("BathId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedDte")
@@ -367,7 +370,7 @@ namespace SFMS.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BatchId");
+                    b.HasIndex("BathId");
 
                     b.ToTable("FinePolicy");
                 });
@@ -615,7 +618,7 @@ namespace SFMS.Migrations
                 {
                     b.HasOne("SFMS.Models.Batch", "Batch")
                         .WithMany()
-                        .HasForeignKey("BatchId");
+                        .HasForeignKey("BathId");
 
                     b.Navigation("Batch");
                 });

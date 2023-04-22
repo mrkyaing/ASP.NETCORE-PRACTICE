@@ -29,18 +29,21 @@ namespace SFMS.Controllers
                FineAmount= s.FineAmount,
                Rule= s.Rule,
                IsEnable= s.IsEnable,
+               BatchId = s.BatchId,
                Batch=s.Batch
             }).ToList();
             return View(finePolicies);
         }
-
-        public IActionResult Entry()
-        {
+        private void BindBatches() {
             ViewBag.Baths = _applicationDbContext.Batches.Select(s => new SelectListItem
             {
                 Text = s.Name,
                 Value = s.Id
             }).ToList();
+        }
+        public IActionResult Entry()
+        {
+            BindBatches();
             return View();
         }
         [HttpPost]
@@ -49,9 +52,10 @@ namespace SFMS.Controllers
             bool isSuccess = false;
             try {
                 if (ModelState.IsValid) {                  
-                    if (_applicationDbContext.FinePolicies.Any(x => x.BathId.Equals(viewModel.BathId) && x.IsEnable==true))
+                    if (_applicationDbContext.FinePolicies.Any(x => x.BatchId.Equals(viewModel.BatchId) && x.IsEnable==viewModel.IsEnable))
                     {
                         ViewBag.AlreadyExistsMsg = $"{viewModel.Name} is already enabled on policy rule .Only 1 enabled-rule apply on Bath.";
+                        BindBatches();
                         return View(viewModel);
                     }
                     var  model = new FinePolicy(){
@@ -59,7 +63,7 @@ namespace SFMS.Controllers
                     CreatedDte = DateTime.Now,
                     Name= viewModel.Name,
                     Rule= viewModel.Rule,
-                    BathId= viewModel.BathId,
+                    BatchId = viewModel.BatchId,
                     IsEnable= viewModel.IsEnable,
                     FineAmount = viewModel.FineAmount,
                     FineAfterMinutes = viewModel.FineAfterMinutes,
@@ -69,7 +73,7 @@ namespace SFMS.Controllers
                     isSuccess = true;
                 }
             }
-            catch (Exception) {
+            catch (Exception ex) {
             }
             if (isSuccess) {
                 TempData["msg"] = "saving success";
@@ -82,10 +86,13 @@ namespace SFMS.Controllers
 
         public IActionResult Delete(string id) {
             var model = _applicationDbContext.FinePolicies.Find(id);
-            if (model != null) {
+            if (model != null && model.IsEnable==false) {
                 _applicationDbContext.FinePolicies.Remove(model);//remove the  record from DBSET
                 _applicationDbContext.SaveChanges();//remove effect to the database.
+                TempData["msg"] = "Delete process successed!!";
             }
+            else 
+                TempData["msg"] = "Delete process failed!!";
             return RedirectToAction("List");
         }
 
@@ -98,11 +105,11 @@ namespace SFMS.Controllers
                     FineAfterMinutes= s.FineAfterMinutes,
                     Rule= s.Rule,
                     FineAmount= s.FineAmount,
-                    BathId = s.BathId,
+                    BatchId = s.BatchId,
                     IsEnable = s.IsEnable,
                     Batch=s.Batch
                 }).SingleOrDefault();
-            ViewBag.Baths = _applicationDbContext.Batches.Where(x=>x.Id!=viewModel.BathId).Select(s => new SelectListItem{
+            ViewBag.Baths = _applicationDbContext.Batches.Where(x=>x.Id!=viewModel.BatchId).Select(s => new SelectListItem{
                 Text = s.Name,
                 Value = s.Id
             }).ToList();
@@ -113,7 +120,7 @@ namespace SFMS.Controllers
         public IActionResult Edit(FinePolicyViewModel viewModel) {
             bool isSuccess;
             try {
-                if (_applicationDbContext.FinePolicies.Any(x => x.BathId.Equals(viewModel.BathId) && x.IsEnable == true))
+                if (_applicationDbContext.FinePolicies.Any(x => x.BatchId.Equals(viewModel.BatchId) && x.IsEnable == true))
                 {
                     ViewBag.AlreadyExistsMsg = $"{viewModel.Name} is already enabled on policy rule .Only 1 enabled-rule apply on Bath.";
                     return View(viewModel);
@@ -126,7 +133,7 @@ namespace SFMS.Controllers
                 //ui columns
                model.Name=viewModel.Name;
               model.Rule = viewModel.Rule;
-                model.BathId = viewModel.BathId;
+                model.BatchId = viewModel.BatchId;
                 model.IsEnable = viewModel.IsEnable;
                model.FineAmount = viewModel.FineAmount;
                 model.FineAfterMinutes = viewModel.FineAfterMinutes;
