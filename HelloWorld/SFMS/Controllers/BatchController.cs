@@ -9,6 +9,8 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace SFMS.Controllers
 {
@@ -31,7 +33,7 @@ namespace SFMS.Controllers
             }).ToList();
             return View(batches);
         }
-
+        [Authorize(Roles = "Admin,Teacher")]
         public IActionResult Entry() {
             IList<CourseViewModel> coursesViewModel = _applicationDbContext.Courses.Select(s => new CourseViewModel
             {
@@ -40,6 +42,7 @@ namespace SFMS.Controllers
             }).ToList();
             return View(coursesViewModel);
         }
+        [Authorize(Roles = "Admin,Teacher")]
         [HttpPost]
         public IActionResult Entry(BatchViewModel viewModel)
         {
@@ -73,8 +76,7 @@ namespace SFMS.Controllers
                 TempData["msg"] = "error occur when saving Batch information!!";
             return RedirectToAction("List");
         }
-
-
+        [Authorize(Roles = "Admin,Teacher")]
         public IActionResult Delete(string id) {
             var b = _applicationDbContext.Batches.Find(id);
             if (b != null) {
@@ -83,7 +85,7 @@ namespace SFMS.Controllers
             }
             return RedirectToAction("List");
         }
-
+        [Authorize(Roles = "Admin,Teacher")]
         public IActionResult Edit(string id) {
             var   batchViewModel= _applicationDbContext.Batches
                 .Where(w => w.Id == id)
@@ -102,7 +104,7 @@ namespace SFMS.Controllers
             }).ToList();
             return View(batchViewModel);
         }
-
+        [Authorize(Roles = "Admin,Teacher")]
         [HttpPost]
         public IActionResult Edit(BatchViewModel viewModel) {
             bool isSuccess;

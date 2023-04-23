@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SFMS.Models;
+using SFMS.Models.DAO;
 using SFMS.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,15 @@ namespace SFMS.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _applicationDbContext;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
+        public HomeController(ApplicationDbContext applicationDbContext){
+            _applicationDbContext = applicationDbContext;
         }
 
         public IActionResult Index()
         {
+            ViewBag.TotalStudents = _applicationDbContext.Students.Count();
             return View();
         }
 

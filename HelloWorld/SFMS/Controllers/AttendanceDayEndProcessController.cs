@@ -8,19 +8,15 @@ using System.Net.Sockets;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace SFMS.Controllers
-{
-    public class AttendanceDayEndProcessController : Controller
-    {
+namespace SFMS.Controllers{
+    public class AttendanceDayEndProcessController : Controller{
         private readonly ApplicationDbContext _applicationDbContext;
         //Constructore Inject Apporach for ApplicationDbContext;
-        public AttendanceDayEndProcessController(ApplicationDbContext applicationDbContext)
-        {
+        public AttendanceDayEndProcessController(ApplicationDbContext applicationDbContext){
             _applicationDbContext = applicationDbContext;
         }
 
         public IActionResult DayEndProcess() {
-          
             IList<StudentViewModel> students = _applicationDbContext.Students.Select(b => new StudentViewModel
             {
                 Name = b.Name,
@@ -181,6 +177,5 @@ namespace SFMS.Controllers
             }
             throw new Exception("No network adapters with an IPv4 address in the system!");
         }
-
     }
 }
