@@ -210,13 +210,13 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="/Course/Entry" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="nav-icon fas fa-edit"></i>
                                         <p>Entry</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/Course/List" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="nav-icon fas fa-table"></i>
                                         <p>Listing</p>
                                     </a>
                                 </li>
@@ -233,13 +233,13 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="/Batch/Entry" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="nav-icon fas fa-edit"></i>
                                         <p>Entry</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/Course/List" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                    <a href="/Batch/List" class="nav-link">
+                                        <i class="nav-icon fas fa-table"></i>
                                         <p>Listing</p>
                                     </a>
                                 </li>
@@ -256,13 +256,13 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="/Student/Entry" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="nav-icon fas fa-edit"></i>
                                         <p>Entry</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/Student/List" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="farnav-icon fas fa-table"></i>
                                         <p>Listing</p>
                                     </a>
                                 </li>
@@ -279,13 +279,13 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="/Teacher/Entry" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="nav-icon fas fa-edit"></i>
                                         <p>Entry</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/Teacher/List" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="nav-icon fas fa-table"></i>
                                         <p>Listing</p>
                                     </a>
                                 </li>
@@ -302,13 +302,13 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="/Attendance/Entry" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="nav-icon fas fa-edit"></i>
                                         <p>Entry</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/Attendance/List" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="nav-icon fas fa-table"></i>
                                         <p>Listing</p>
                                     </a>
                                 </li>
@@ -325,13 +325,13 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="/FinePolicy/Entry" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="nav-icon fas fa-edit"></i>
                                         <p>Entry</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/FinePolicy/List" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="nav-icon fas fa-table"></i>
                                         <p>Listing</p>
                                     </a>
                                 </li>
@@ -348,13 +348,13 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="/AttendanceDayEndProcess/DayEndProcess" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="nav-icon fas fa-tree"></i>
                                         <p>Day End Process</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/AttendanceDayEndProcess/List" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="nav-icon fas fa-table"></i>
                                         <p> Transaction List</p>
                                     </a>
                                 </li>
@@ -384,8 +384,8 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button id="logout" type="submit" class="nav-link btn btn-link text-white">Logout</button>
+                            <form  asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="nav-link btn btn-danger text-white"><i class="fa far fa-arrow-left nav-icon"></i>Logout</button>
                             </form>
                         </li>
                     </ul>
