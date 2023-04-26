@@ -25,8 +25,20 @@ namespace SFMS.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Contact()
         {
+            return View();
+        }
+        public IActionResult About() {
+            return View();
+        }
+        public IActionResult Teachers() {
+            ViewBag.Teachers = _applicationDbContext.Teachers;
+            return View();
+        }
+        public IActionResult Courses() {
+            ViewBag.TopCourses = _applicationDbContext.Courses;
+            ViewBag.PopularCourses = _applicationDbContext.Courses; 
             return View();
         }
 
