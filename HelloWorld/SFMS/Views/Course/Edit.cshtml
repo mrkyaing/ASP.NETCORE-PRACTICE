@@ -3,8 +3,22 @@
     @{
         ViewData["Title"] = "Course Edit";
     }
-<h1>Course Edit</h1>
-<hr />
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Course Edit</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Course/Entry">Course</a></li>
+                    <li class="breadcrumb-item active"><a href="/Course/List">List</a></li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
 <form action="/Course/Edit" method="post">
     <div class="mb-3">
         <input type="text" hidden name="Id" value="@Model.Id" required>

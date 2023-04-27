@@ -3,8 +3,23 @@
     @{
         ViewData["Title"] = "Student Entry";
     }
-<h1>Student Entry</h1>
-<hr />
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Student Entry</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Student/Entry">Student</a></li>
+                    <li class="breadcrumb-item active"><a href="/Student/List">List</a></li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
 @if (ViewBag.AlreadyExistsMsg != null)
 {
     <div class="alert alert-warning">

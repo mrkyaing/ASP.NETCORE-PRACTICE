@@ -2,8 +2,23 @@
     ViewData["Title"] = "Fine Policy Entry";
 }
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<h1>Fine Policy Create</h1>
-<hr />
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Fine Policy Entry</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/FinePolicy/Entry">Fine Policy</a></li>
+                    <li class="breadcrumb-item active"><a href="/FinePolicy/List">List</a></li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
 @if (ViewBag.AlreadyExistsMsg != null)
 {
     <div class="alert alert-warning">
