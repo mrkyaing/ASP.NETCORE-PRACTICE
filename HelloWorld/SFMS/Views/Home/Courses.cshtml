@@ -1,15 +1,30 @@
 ﻿@{
     ViewData["Title"] = "Courses";
 }
-<!-- Top  Courses Start -->
+<!-- Header Start -->
+<div class="container-fluid page-header" style="margin-bottom: 90px;">
+    <div class="container">
+        <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
+            <h3 class="display-4 text-white text-uppercase">Courses</h3>
+            <div class="d-inline-flex text-white">
+                <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">Courses</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- Promotion  Courses Start -->
 <div class="container-fluid py-5">
     <div class="container pt-5 pb-3">
         <div class="text-center mb-5">
             <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Courses</h5>
-            <h1>Explore Top Courses</h1>
+            <h1>Our Promotion Courses</h1>
         </div>
         <div class="row">
-            @foreach (var course in ViewBag.TopCourses) {
+            @foreach (var course in ViewBag.PromotionCourses) {
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
                         <img class="img-fluid" src="~/img/cat-1.jpg" alt="">
@@ -23,7 +38,7 @@
         </div>
     </div>
 </div>
-<!-- Top  Courses End -->
+<!-- Promotion  Courses End -->
 
 <!-- Popular Courses Start -->
 <div class="container-fluid py-5">
@@ -39,7 +54,7 @@
                         <img class="img-fluid" src="~/img/course-1.jpg" alt="">
                         <div class="bg-secondary p-4">
                             <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>25 Students</small>
+                                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>100 Students</small>
                                 <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>@p.DurationInHour (hrs)</small>
                             </div>
                             <a class="h5" href="">@p.Name</a>
@@ -57,3 +72,36 @@
     </div>
 </div>
 <!--Popular  Courses End -->
+<!-- AllCourses Courses Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Courses</h5>
+            <h1>Our All Courses</h1>
+        </div>
+        <div class="row">
+            @foreach (var p in ViewBag.AllCourses) {
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="rounded overflow-hidden mb-2">
+                        <img class="img-fluid" src="~/img/course-1.jpg" alt="">
+                        <div class="bg-secondary p-4">
+                            <div class="d-flex justify-content-between mb-3">
+                                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>100 Students</small>
+                                <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>@p.DurationInHour (hrs)</small>
+                            </div>
+                            <a class="h5" href="">@p.Name</a>
+                            <div class="border-top mt-4 pt-4">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="m-0"><i class="fa fa-calendar text-primary mr-2"></i>@p.OpeningDate.ToShortDateString()</h6>
+                                    <h5 class="m-0">@p.Fees (MMK)</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!--AllCourses  Courses End -->
+                                

@@ -12,8 +12,8 @@ using SFMS.Models.DAO;
 namespace SFMS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230422034705_AddColumnsInFinePolicy")]
-    partial class AddColumnsInFinePolicy
+    [Migration("20230429172207_UpdateBaseEntity")]
+    partial class UpdateBaseEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -231,7 +231,7 @@ namespace SFMS.Migrations
                     b.Property<DateTime>("AttendaceDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("CreatedDte")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("IP")
@@ -246,14 +246,14 @@ namespace SFMS.Migrations
                     b.Property<bool>("IsLeave")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("OutTime")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StudentId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -270,7 +270,7 @@ namespace SFMS.Migrations
                     b.Property<string>("CourseId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedDte")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -279,11 +279,11 @@ namespace SFMS.Migrations
                     b.Property<string>("IP")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -300,7 +300,7 @@ namespace SFMS.Migrations
                     b.Property<string>("CourseId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedDte")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -315,9 +315,6 @@ namespace SFMS.Migrations
                     b.Property<string>("IP")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -326,6 +323,9 @@ namespace SFMS.Migrations
 
                     b.Property<string>("TeacherId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -341,10 +341,10 @@ namespace SFMS.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("BathId")
+                    b.Property<string>("BatchId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedDte")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("FineAfterMinutes")
@@ -359,18 +359,18 @@ namespace SFMS.Migrations
                     b.Property<bool>("IsEnable")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Rule")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BathId");
+                    b.HasIndex("BatchId");
 
                     b.ToTable("FinePolicy");
                 });
@@ -380,7 +380,7 @@ namespace SFMS.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedDte")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("FineAmount")
@@ -398,14 +398,14 @@ namespace SFMS.Migrations
                     b.Property<string>("InTime")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("OutTime")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StudentId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -430,7 +430,7 @@ namespace SFMS.Migrations
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDte")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DOB")
@@ -445,9 +445,6 @@ namespace SFMS.Migrations
                     b.Property<string>("IP")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("NRC")
                         .HasColumnType("nvarchar(max)");
 
@@ -456,6 +453,9 @@ namespace SFMS.Migrations
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -475,7 +475,7 @@ namespace SFMS.Migrations
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDte")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DOB")
@@ -486,9 +486,6 @@ namespace SFMS.Migrations
 
                     b.Property<string>("IP")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("NRC")
                         .HasColumnType("nvarchar(max)");
@@ -501,6 +498,9 @@ namespace SFMS.Migrations
 
                     b.Property<string>("Position")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -515,17 +515,17 @@ namespace SFMS.Migrations
                     b.Property<string>("CourseId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDte")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("IP")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("TeacherId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -597,7 +597,7 @@ namespace SFMS.Migrations
             modelBuilder.Entity("SFMS.Models.Batch", b =>
                 {
                     b.HasOne("SFMS.Models.Course", "Course")
-                        .WithMany("Batches")
+                        .WithMany()
                         .HasForeignKey("CourseId");
 
                     b.Navigation("Course");
@@ -618,7 +618,7 @@ namespace SFMS.Migrations
                 {
                     b.HasOne("SFMS.Models.Batch", "Batch")
                         .WithMany()
-                        .HasForeignKey("BathId");
+                        .HasForeignKey("BatchId");
 
                     b.Navigation("Batch");
                 });
@@ -659,11 +659,6 @@ namespace SFMS.Migrations
             modelBuilder.Entity("SFMS.Models.Batch", b =>
                 {
                     b.Navigation("Students");
-                });
-
-            modelBuilder.Entity("SFMS.Models.Course", b =>
-                {
-                    b.Navigation("Batches");
                 });
 
             modelBuilder.Entity("SFMS.Models.Teacher", b =>

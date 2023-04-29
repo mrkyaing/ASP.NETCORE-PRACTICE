@@ -33,12 +33,13 @@ namespace SFMS.Controllers
             return View();
         }
         public IActionResult Teachers() {
-            ViewBag.Teachers = _applicationDbContext.Teachers;
+            ViewBag.Teachers = _applicationDbContext.Teachers.ToList();
             return View();
         }
         public IActionResult Courses() {
-            ViewBag.TopCourses = _applicationDbContext.Courses;
-            ViewBag.PopularCourses = _applicationDbContext.Courses; 
+            ViewBag.PromotionCourses= _applicationDbContext.Courses.Where(x=>x.IsPromotion==true).ToList();
+            ViewBag.PopularCourses = _applicationDbContext.Courses.Where(x=>x.Batches.Count()>=5).ToList();
+            ViewBag.AllCourses = _applicationDbContext.Courses.ToList();
             return View();
         }
 

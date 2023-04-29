@@ -48,7 +48,7 @@ namespace SFMS.Controllers
                     Student student = new Student();
                     //audit columns
                     student.Id = Guid.NewGuid().ToString();
-                    student.CreatedDte = DateTime.Now;
+                    student.CreatedAt = DateTime.Now;
                     student.IP = GetLocalIPAddress();//calling the method 
                     //ui columns
                     student.Code = studentViewModel.Code;
@@ -131,7 +131,7 @@ namespace SFMS.Controllers
                 Student student = new Student();
                 //audit columns
                 student.Id=studentViewModel.Id;
-                student.ModifiedDate = DateTime.Now;
+                student.UpdatedAt = DateTime.Now;
                 student.IP = GetLocalIPAddress();//calling the method 
                 //ui columns
                 student.Code = studentViewModel.Code;

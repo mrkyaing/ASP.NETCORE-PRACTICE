@@ -52,12 +52,15 @@ namespace SFMS.Controllers
                     }
                     var  model = new Course(){
                      Id = Guid.NewGuid().ToString(),
-                     CreatedDte = DateTime.Now,
+                     CreatedAt = DateTime.Now,
                       Name= viewModel.Name,
                       Description= viewModel.Description,
                       OpeningDate= viewModel.OpeningDate,
                       DurationInHour= viewModel.DurationInHour,
                       Fees= viewModel.Fees,
+                      IsPromotion=viewModel.IsPromotion,
+                      Fixed=viewModel.Fixed,
+                      Percetance=viewModel.Percetance
                     };
                     _applicationDbContext.Courses.Add(model);
                     _applicationDbContext.SaveChanges();
@@ -110,7 +113,7 @@ namespace SFMS.Controllers
                 var  model = new Course();
                 //audit columns
                 model.Id = viewModel.Id;
-                model.ModifiedDate = DateTime.Now;
+                model.UpdatedAt = DateTime.Now;
                 model.IP = GetLocalIPAddress();//calling the method 
                 //ui columns
                model.Name=viewModel.Name;

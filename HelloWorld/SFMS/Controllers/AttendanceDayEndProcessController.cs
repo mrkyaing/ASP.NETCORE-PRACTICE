@@ -71,7 +71,7 @@ namespace SFMS.Controllers{
                             FineTransaction ft = new FineTransaction(){
                                 //audit columns
                             Id = Guid.NewGuid().ToString(),
-                            CreatedDte = DateTime.Now,
+                            CreatedAt = DateTime.Now,
                             IP = GetLocalIPAddress(),//calling the method 
                                //process columns 
                                 FinedDate = attendance.AttendaceDate,
@@ -112,7 +112,7 @@ namespace SFMS.Controllers{
                             FineTransaction ft = new FineTransaction(){
                                 //audit columns
                                 Id = Guid.NewGuid().ToString(),
-                                CreatedDte = DateTime.Now,
+                                CreatedAt = DateTime.Now,
                                 IP = GetLocalIPAddress(),//calling the method 
                                 FinedDate = item.AttendaceDate,
                                 StudentId = item.StudentId,

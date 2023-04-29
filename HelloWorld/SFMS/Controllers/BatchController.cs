@@ -57,7 +57,7 @@ namespace SFMS.Controllers
                     var  b = new Batch()
                     {
                     Id = Guid.NewGuid().ToString(),
-                    CreatedDte = DateTime.Now,
+                    CreatedAt = DateTime.Now,
                     Name= viewModel.Name,
                     Description= viewModel.Description,
                     CourseId=viewModel.CourseId
@@ -112,7 +112,7 @@ namespace SFMS.Controllers
                 var  b = new Batch();
                 //audit columns
                 b.Id = viewModel.Id;
-                b.ModifiedDate = DateTime.Now;
+                b.UpdatedAt = DateTime.Now;
                 b.IP = GetLocalIPAddress();//calling the method 
                 //ui columns
                b.Name=viewModel.Name;

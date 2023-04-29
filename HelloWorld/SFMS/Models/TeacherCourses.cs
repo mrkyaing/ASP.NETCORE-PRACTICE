@@ -9,6 +9,6 @@ namespace SFMS.Models {
         public virtual Teacher Teacher { get; set; }
         public string CourseId { get; set; }
         [ForeignKey("CourseId")]
-        public virtual IList<Course> Courses { get; set; }
+        public virtual Course Course { get; set; }
     }
 }

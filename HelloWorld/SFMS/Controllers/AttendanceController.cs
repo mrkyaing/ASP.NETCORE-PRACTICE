@@ -7,11 +7,9 @@ using System.Net;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Sockets;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
-using System.Web;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using SFMS.Migrations;
+
 
 namespace SFMS.Controllers
 {
@@ -40,7 +38,7 @@ namespace SFMS.Controllers
                 Attendance attendance = new Attendance();
                 //audit columns
                 attendance.Id = Guid.NewGuid().ToString();
-                attendance.CreatedDte = DateTime.Now;
+                attendance.CreatedAt = DateTime.Now;
                 attendance.IP = GetLocalIPAddress();//calling the method 
                  //ui columns
                 attendance.AttendaceDate = viewModel.AttendaceDate;
@@ -124,7 +122,7 @@ namespace SFMS.Controllers
                 Attendance attendance = new Attendance();
                 //audit columns
                 attendance.Id= viewModel.Id;
-                attendance.ModifiedDate = DateTime.Now;
+                attendance.UpdatedAt = DateTime.Now;
                 attendance.IP = GetLocalIPAddress();//calling the method 
                 //ui columns
                 attendance.AttendaceDate = viewModel.AttendaceDate;

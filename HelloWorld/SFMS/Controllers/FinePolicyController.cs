@@ -60,7 +60,7 @@ namespace SFMS.Controllers
                     }
                     var  model = new FinePolicy(){
                     Id = Guid.NewGuid().ToString(),
-                    CreatedDte = DateTime.Now,
+                    CreatedAt = DateTime.Now,
                     Name= viewModel.Name,
                     Rule= viewModel.Rule,
                     BatchId = viewModel.BatchId,
@@ -128,7 +128,7 @@ namespace SFMS.Controllers
                 var  model = new FinePolicy();
                 //audit columns
                 model.Id = viewModel.Id;
-                model.ModifiedDate = DateTime.Now;
+                model.UpdatedAt = DateTime.Now;
                 model.IP = GetLocalIPAddress();//calling the method 
                 //ui columns
                model.Name=viewModel.Name;

@@ -68,7 +68,7 @@ namespace SFMS.Controllers
                     Teacher teacher = new Teacher()
                     {
                         Id = Guid.NewGuid().ToString(),
-                        CreatedDte = DateTime.Now,
+                        CreatedAt = DateTime.Now,
                         IP= GetLocalIPAddress(),
                         Email = model.Email,
                         Phone = model.Phone,
@@ -86,7 +86,7 @@ namespace SFMS.Controllers
                             TeacherCourses tc = new TeacherCourses()
                             {
                                 Id = Guid.NewGuid().ToString(),
-                                CreatedDte = DateTime.Now,
+                                CreatedAt = DateTime.Now,
                                 IP = GetLocalIPAddress(),
                                 CourseId = courseId,
                                 TeacherId = teacher.Id
@@ -143,7 +143,7 @@ namespace SFMS.Controllers
                 Teacher teacher = new Teacher();
                 //audit columns
                 teacher.Id = teacherViewModel.Id;
-                teacher.ModifiedDate = DateTime.Now;
+                teacher.UpdatedAt = DateTime.Now;
                 teacher.IP = GetLocalIPAddress();//calling the method 
                 //ui columns
                 teacher.Code = teacherViewModel.Code;
