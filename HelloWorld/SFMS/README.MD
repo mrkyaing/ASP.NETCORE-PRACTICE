@@ -9,7 +9,7 @@
 - Student Management
 - Fine Policy Management
 - Attendance Management 
-- Attendance Day End Process for Fine Transaction for Each Student according to attending Bath
+- Attendance Day End Process for Fine Transaction for Each Student according to attending Batch
 - Reportings
 - Dashboard for each roles(Teacher,Admin,Student etc)
 
