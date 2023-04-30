@@ -11,5 +11,6 @@ namespace SFMS.Models.ViewModels {
         public bool IsPromotion { get; set; }
         public decimal Percetance { get; set; }
         public int Fixed { get; set; }
+        public decimal FeesAfterPromo { get; set; }
     }
 }

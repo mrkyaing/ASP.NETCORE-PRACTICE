@@ -38,6 +38,10 @@
                     <th scope="col">Opening Date</th>
                     <th scope="col">Duration(Hours)</th>
                     <th scope="col">Fees(MMK)</th>
+                    <th scope="col">Promotion</th>
+                    <th scope="col">Precetance (%)</th>
+                    <th scope="col">Fixed (MMK)</th>
+                    <th scope="col">Fees Ater Promotion (MMK)</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -50,6 +54,10 @@
                         <td>@item.OpeningDate.ToLongDateString()</td>
                         <td>@item.DurationInHour</td>
                         <td>@item.Fees</td>
+                        <td>@item.IsPromotion</td>
+                        <td>@item.Percetance</td>
+                        <td>@item.Fixed</td>
+                        <td>@item.FeesAfterPromo</td>
                         <td><a href="/Course/Edit?Id=@item.Id" class="btn btn-success" role="button">Edit</a></td>
                         <td><a href="/Course/Delete?Id=@item.Id" onclick="return confirm('are you sure to delete this recrod?')" class="btn btn-danger" role="button">Delete</a> </td>
                     </tr>

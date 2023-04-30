@@ -29,7 +29,11 @@ namespace SFMS.Controllers
                 OpeningDate= s.OpeningDate,
                 DurationInHour= s.DurationInHour,
                 Fees= s.Fees,
-            }).ToList();
+                IsPromotion=s.IsPromotion,
+                Fixed=s.Fixed,
+                Percetance=s.Percetance,
+               FeesAfterPromo=(s.Fees-((s.Fees*s.Percetance)/100)+s.Fixed)
+           }).ToList();
             return View(courses);
         }
 

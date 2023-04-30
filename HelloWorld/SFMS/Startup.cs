@@ -20,7 +20,7 @@ namespace SFMS{
             options.UseSqlServer(Configuration.GetConnectionString("SFMSConnectionString")));
             services.AddIdentity<IdentityUser, IdentityRole>
                  (options =>{
-                     options.SignIn.RequireConfirmedAccount = true;
+                   //  options.SignIn.RequireConfirmedAccount = true;
                      options.Password.RequireDigit = false;
                      options.Password.RequiredLength = 6;
                      options.Password.RequireNonAlphanumeric = false;

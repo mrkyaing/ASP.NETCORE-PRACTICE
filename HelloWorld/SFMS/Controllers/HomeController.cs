@@ -32,6 +32,11 @@ namespace SFMS.Controllers
         public IActionResult About() {
             return View();
         }
+        public IActionResult AllAvailableCourses() {
+            ViewBag["AllCourses"] = _applicationDbContext.Courses.ToList();
+            //returning the partial view
+            return PartialView();
+        }
         public IActionResult Teachers() {
             ViewBag.Teachers = _applicationDbContext.Teachers.ToList();
             return View();

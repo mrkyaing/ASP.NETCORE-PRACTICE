@@ -46,7 +46,7 @@
     </div>
     <div class="mb-3">
         <label class="form-label">Fees (MMK)</label>
-        <input type="number" class="form-control" name="Fees" placeholder="Fees (MMK)" required>
+        <input type="number" id="txtFees" class="form-control" name="Fees" placeholder="Fees (MMK)" required>
     </div>
     <div class="mb-3">
         <label class="form-label">Promotion/Discount</label>
@@ -54,12 +54,17 @@
     </div>
     <div class="mb-3">
         <label class="form-label">Percetance (%)</label>
-        <input type="number" class="form-control" name="Percetance" placeholder="Percetance (%)" required>
+        <input type="number" id="txtPercetance" class="form-control" name="Percetance" placeholder="Percetance (%)" required>
     </div>
     <div class="mb-3">
         <label class="form-label">Fixed Amount (MMK)</label>
-        <input type="number" class="form-control" name="Fixed" placeholder="Fixed Amount (MMK)" required>
+        <input type="number" id="txtFixed" class="form-control" name="Fixed" placeholder="Fixed Amount (MMK)" required>
     </div>
+    <div class="mb-3">
+        <label class="form-label">Fees (MMK) after apply Promotion</label>
+        <input type="number" id="txtFeesAfterPromition" class="form-control" placeholder="Fixed Amount (MMK)">
+    </div>
+
     <div class="mb-3">
         <div class="col">
             <input type="submit" class="btn btn-success" value="Entry">
@@ -74,5 +79,12 @@
         } else {
             $(this).attr("value", "false");
         }
+    });
+    $('#txtFeesAfterPromition').on('input', function (e) {
+        var fees = $('#txtFees').val();
+        var percetance = $('#txtPercetance').val();
+        var fixed = $('#txtFixed').val();
+        alert(fees)
+      // $('#txtFeesAfterPromition').value = (Number(percetance) * Number(fees) / 100) + Number(fees);
     });
 </script>
