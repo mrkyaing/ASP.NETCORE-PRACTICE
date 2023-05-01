@@ -65,7 +65,6 @@ namespace SFMS.Controllers
             }
             else
                 TempData["msg"] = "Error occur when saving attendance information!!";
-
             return RedirectToAction("List");
         }//end of entry post method
         
@@ -146,7 +145,6 @@ namespace SFMS.Controllers
                 TempData["msg"] = "error occur when Updating attendance information!!";
             return RedirectToAction("List");
         }
-
         //finding the local ip in your machine
         private static string GetLocalIPAddress()
         {
@@ -158,6 +156,5 @@ namespace SFMS.Controllers
             }
             throw new Exception("No network adapters with an IPv4 address in the system!");
         }
-
     }
 }
