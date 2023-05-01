@@ -26,3 +26,6 @@
 
 # System Public UI
 ![public](https://user-images.githubusercontent.com/9696016/235455001-df5f4f4f-c362-4be4-ac8f-9dc900eae169.png)
+
+# System Admin Dashboard UI
+![admin](https://user-images.githubusercontent.com/9696016/235455200-c9d63717-1345-4389-a012-0aafd1a7a9a8.png)
