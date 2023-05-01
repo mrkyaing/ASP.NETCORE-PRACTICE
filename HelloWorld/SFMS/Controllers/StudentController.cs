@@ -7,11 +7,12 @@ using System.Net;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Sockets;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
-using System.Web;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using AspNetCore.ReportingServices.ReportProcessing.ReportObjectModel;
+using System.Threading.Tasks;
 
 namespace SFMS.Controllers
 {
@@ -19,10 +20,12 @@ namespace SFMS.Controllers
     public class StudentController : Controller
     {
         private readonly ApplicationDbContext _applicationDbContext;
+        private readonly UserManager<IdentityUser> _userManager;
         //Constructore Inject Apporach for ApplicationDbContext;
-        public StudentController(ApplicationDbContext applicationDbContext)
+        public StudentController(ApplicationDbContext applicationDbContext, UserManager<IdentityUser> userManager)
         {
             _applicationDbContext = applicationDbContext;
+            _userManager = userManager;
         }
 
         public IActionResult Entry() {
@@ -35,7 +38,7 @@ namespace SFMS.Controllers
         }
 
         [HttpPost]
-        public  IActionResult Entry(StudentViewModel studentViewModel)
+        public async Task<IActionResult> Entry(StudentViewModel studentViewModel)
         {
             try {
                 if (ModelState.IsValid)
@@ -45,6 +48,14 @@ namespace SFMS.Controllers
                         ViewBag.AlreadyExistsMsg = $"{studentViewModel.Code} is already exists in system.";
                         return View(studentViewModel);
                     }
+                    var user = new IdentityUser { UserName = studentViewModel.Email, Email = studentViewModel.Email };
+                    var result = await _userManager.CreateAsync(user, "sfms101");//insert the recrod into the database .
+                    if (result.Succeeded) {
+                    //Set the email confirmed directly
+                    await _userManager.IsEmailConfirmedAsync(user);
+                     //adding the role WITH DEFAUL ROLE STUDENT
+                     await _userManager.AddToRoleAsync(user, "Student");
+                    //creating the student record 
                     Student student = new Student();
                     //audit columns
                     student.Id = Guid.NewGuid().ToString();
@@ -60,9 +71,11 @@ namespace SFMS.Controllers
                     student.DOB = studentViewModel.DOB;
                     student.FatherName = studentViewModel.FatherName;
                     student.BathId = studentViewModel.BathId;
+                    student.UserId = user.Id;//for identity user
                     _applicationDbContext.Students.Add(student);//Adding the record Students DBSet
                     _applicationDbContext.SaveChanges();//saving the record to the database
-                    TempData["msg"] = "Saving success for " + studentViewModel.Code;
+                     TempData["msg"] = "Saving success for " + studentViewModel.Code +" and create user for student with default password.";
+                    }
                 }             
             }
             catch(Exception ex) {
