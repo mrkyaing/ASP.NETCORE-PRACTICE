@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using SFMS.Models;
 using SFMS.Models.DAO;
 using SFMS.Models.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -47,7 +44,42 @@ namespace SFMS.Controllers
             ViewBag.AllCourses = _applicationDbContext.Courses.ToList();
             return View();
         }
-
+        public IActionResult StudentProfile() {
+            IList<StudentViewModel> students = _applicationDbContext.Students.Where(x=>x.UserId== "146a64aa-3dfa-4ef3-8ed6-8feb3b2b97ea").Select
+               (s => new StudentViewModel
+               {
+                   Id = s.Id,
+                   Code = s.Code,
+                   Name = s.Name,
+                   Email = s.Email,
+                   Address = s.Address,
+                   Phone = s.Phone,
+                   FatherName = s.FatherName,
+                   NRC = s.NRC,
+                   DOB = s.DOB,
+                   BathName = s.Batch.Name
+               }).ToList();
+            return View(students);
+        }
+        public IActionResult StudentAttendance() {
+            IList<AttendanceViewModel> attendancesOfStudent = (from a in _applicationDbContext.Attendances
+                                                               join s in _applicationDbContext.Students
+                                                               on a.StudentId equals s.Id
+                                                               where s.UserId == "146a64aa-3dfa-4ef3-8ed6-8feb3b2b97ea"
+                                                               select new AttendanceViewModel
+                                                               {
+                                                                   AttendaceDate = a.AttendaceDate,
+                                                                   InTime = a.InTime,
+                                                                   OutTime = a.OutTime,
+                                                                   IsLeave = a.IsLeave == true ? "Leave" : null,
+                                                                   IsLate = a.IsLate == true ? "Late" : null,
+                                                               }).ToList();
+            return View(attendancesOfStudent);
+          
+        }
+        public IActionResult StudentFines() {
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -22,7 +22,9 @@
 <form action="/Report/StudentDetailFromCodeToCode" method="get" target="_blank">
     <div class="mb-3">
         <label class="form-label">From Code</label>
+
        <select name="FromCode" class="form-control">
+            <option value="so">--Select One--</option>
             @foreach(var item in Model) {
                 <option value="@item.Code">@item.Code</option>
             }
@@ -31,6 +33,7 @@
     <div class="mb-3">
         <label class="form-label">From Code</label>
         <select name="ToCode" class="form-control">
+            <option value="so">--Select One--</option>
             @foreach (var item in Model) {
                 <option value="@item.Code">@item.Code</option>
             }

@@ -8,9 +8,12 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace SFMS.Controllers
 {
+    [Authorize]
     public class FinePolicyController : Controller
     {
         private readonly ApplicationDbContext _applicationDbContext;
@@ -41,11 +44,13 @@ namespace SFMS.Controllers
                 Value = s.Id
             }).ToList();
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Entry()
         {
             BindBatches();
             return View();
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Entry(FinePolicyViewModel viewModel)
         {
@@ -82,8 +87,7 @@ namespace SFMS.Controllers
                 TempData["msg"] = "error occur when saving Fine Policy information!!";
             return RedirectToAction("List");
         }
-
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(string id) {
             var model = _applicationDbContext.FinePolicies.Find(id);
             if (model != null && model.IsEnable==false) {
@@ -95,7 +99,7 @@ namespace SFMS.Controllers
                 TempData["msg"] = "Delete process failed!!";
             return RedirectToAction("List");
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(string id) {
             var viewModel= _applicationDbContext.FinePolicies
                 .Where(w => w.Id == id)
@@ -115,7 +119,7 @@ namespace SFMS.Controllers
             }).ToList();
             return View(viewModel);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Edit(FinePolicyViewModel viewModel) {
             bool isSuccess;

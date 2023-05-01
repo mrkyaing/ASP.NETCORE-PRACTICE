@@ -27,7 +27,7 @@ namespace SFMS.Controllers
             _applicationDbContext = applicationDbContext;
             _userManager = userManager;
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Entry() {
             IList<BatchViewModel> batches = _applicationDbContext.Batches.Select(b => new BatchViewModel
             {
@@ -36,7 +36,7 @@ namespace SFMS.Controllers
             }).ToList();
             return View(batches);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Entry(StudentViewModel studentViewModel)
         {
@@ -101,7 +101,7 @@ namespace SFMS.Controllers
           }).ToList();
             return View(students);
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(string id) {
             Student student=_applicationDbContext.Students.Find(id);
             if (student != null) {
@@ -110,7 +110,7 @@ namespace SFMS.Controllers
             }
             return RedirectToAction("List");
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(string id) {
             StudentViewModel studentViewModel = _applicationDbContext.Students
                 .Where(w => w.Id == id)
@@ -136,7 +136,7 @@ namespace SFMS.Controllers
               }).ToList();
             return View(studentViewModel);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Edit(StudentViewModel studentViewModel) {
             bool isSuccess;

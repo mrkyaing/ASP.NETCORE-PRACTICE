@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
-@if (User.IsInRole("Teacher")) {
+@if (User.IsInRole("Teacher") || User.IsInRole("Admin")) {
         <div class="wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">

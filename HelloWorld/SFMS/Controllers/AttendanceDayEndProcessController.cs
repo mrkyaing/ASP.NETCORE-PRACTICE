@@ -7,15 +7,18 @@ using System.Net;
 using System.Net.Sockets;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace SFMS.Controllers{
+    [Authorize]
     public class AttendanceDayEndProcessController : Controller{
         private readonly ApplicationDbContext _applicationDbContext;
         //Constructore Inject Apporach for ApplicationDbContext;
         public AttendanceDayEndProcessController(ApplicationDbContext applicationDbContext){
             _applicationDbContext = applicationDbContext;
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult DayEndProcess() {
             IList<StudentViewModel> students = _applicationDbContext.Students.Select(b => new StudentViewModel
             {
@@ -35,7 +38,7 @@ namespace SFMS.Controllers{
             };
             return View(attendanceDayEndProcessViewModel);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public  IActionResult DayEndProcess(AttendanceDayEndProcessViewModel viewModel)
         {
@@ -156,7 +159,7 @@ namespace SFMS.Controllers{
                 }).ToList();
             return View(fines);
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(string Id) {
             var ft=_applicationDbContext.FineTransactions.Find(Id);
             if (ft != null) {

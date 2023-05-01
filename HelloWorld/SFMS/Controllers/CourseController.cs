@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SFMS.Controllers
 {
+    [Authorize]
     public class CourseController : Controller
     {
         private readonly ApplicationDbContext _applicationDbContext;
@@ -36,13 +37,11 @@ namespace SFMS.Controllers
            }).ToList();
             return View(courses);
         }
-
-        [Authorize(Roles ="Admin,Teacher")]
+        [Authorize(Roles ="Admin")]
         public IActionResult Entry() {
             return View();
         }
-
-        [Authorize(Roles = "Admin,Teacher")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Entry(CourseViewModel viewModel)
         {
@@ -80,8 +79,7 @@ namespace SFMS.Controllers
                 TempData["msg"] = "error occur when saving Course information!!";
             return RedirectToAction("List");
         }
-
-        [Authorize(Roles = "Admin,Teacher")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(string id) {
             var model = _applicationDbContext.Courses.Find(id);
             if (model != null) {
@@ -90,9 +88,7 @@ namespace SFMS.Controllers
             }
             return RedirectToAction("List");
         }
-        
-        
-        [Authorize(Roles = "Admin,Teacher")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(string id) {
             var   viewModel= _applicationDbContext.Courses
                 .Where(w => w.Id == id)
@@ -107,9 +103,7 @@ namespace SFMS.Controllers
                 }).SingleOrDefault();
             return View(viewModel);
         }
-        
-        
-        [Authorize(Roles = "Admin,Teacher")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Edit(CourseViewModel viewModel) {
             bool isSuccess;

@@ -9,10 +9,12 @@ using System.Net.Sockets;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using System.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SFMS.Controllers
 {
+    [Authorize]
     public class AttendanceController : Controller
     {
         private readonly ApplicationDbContext _applicationDbContext;
@@ -20,7 +22,7 @@ namespace SFMS.Controllers
         {
             _applicationDbContext = applicationDbContext;
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Entry() {
             IList<StudentViewModel> students = _applicationDbContext.Students.Select(b => new StudentViewModel
             {
@@ -29,7 +31,7 @@ namespace SFMS.Controllers
             }).ToList();
             return View(students);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public  IActionResult Entry(AttendanceViewModel viewModel)
         {
@@ -67,7 +69,6 @@ namespace SFMS.Controllers
             return RedirectToAction("List");
         }//end of entry post method
         
-
         public IActionResult List()
         {
           IList<AttendanceViewModel> students= _applicationDbContext.Attendances.Select
@@ -82,7 +83,7 @@ namespace SFMS.Controllers
                 }).ToList();
             return View(students);
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(string id) {
             var model=_applicationDbContext.Attendances.Find(id);
             if (model != null) {
@@ -92,7 +93,7 @@ namespace SFMS.Controllers
             }
             return RedirectToAction("List");
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(string id) {
             var attendanceViewModel = _applicationDbContext.Attendances
                 .Where(w => w.Id == id)
@@ -114,7 +115,7 @@ namespace SFMS.Controllers
             }).ToList();
             return View(attendanceViewModel);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Edit(AttendanceViewModel viewModel) {
             bool isSuccess;

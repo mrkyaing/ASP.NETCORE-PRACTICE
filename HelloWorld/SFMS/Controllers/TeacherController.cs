@@ -9,10 +9,12 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using System.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SFMS.Controllers
 {
+    [Authorize]
     public class TeacherController : Controller
     {
         private readonly ApplicationDbContext _applicationDbContext;
@@ -44,7 +46,7 @@ namespace SFMS.Controllers
             }).ToList();
             return View(teachers);
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Entry() {
             ViewBag.Courses = _applicationDbContext.Courses.Select(s => new SelectListItem
             {
@@ -53,6 +55,7 @@ namespace SFMS.Controllers
             }).ToList();
             return View();
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Entry(TeacherViewModel model)
         {
@@ -108,7 +111,7 @@ namespace SFMS.Controllers
             return RedirectToAction("List");
         }
 
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(string id) {
             Teacher t = _applicationDbContext.Teachers.Find(id);
             if (t != null) {
@@ -117,7 +120,7 @@ namespace SFMS.Controllers
             }
             return RedirectToAction("List");
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(string id) {
             TeacherViewModel teacherViewModel = _applicationDbContext.Teachers
                 .Where(w => w.Id == id)
@@ -135,7 +138,7 @@ namespace SFMS.Controllers
                 }).SingleOrDefault();
             return View(teacherViewModel);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Edit(TeacherViewModel teacherViewModel) {
             bool isSuccess;

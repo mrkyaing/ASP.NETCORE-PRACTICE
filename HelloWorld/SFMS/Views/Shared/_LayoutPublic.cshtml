@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -94,15 +98,19 @@
                                 <a href="/Home/Index" class="nav-item nav-link active">Home</a>
                                 <a href="/Home/Courses" class="nav-item nav-link">Courses</a>
                             <a href="/Home/Teachers" class="nav-item nav-link">Teachers</a>
-                                @*<div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Blog</a>
-                                    <div class="dropdown-menu rounded-0 m-0">
-                                        <a href="blog.html" class="dropdown-item">Blog List</a>
-                                        <a href="single.html" class="dropdown-item">Blog Detail</a>
-                                    </div>
-                                </div>*@
+                          
                             <a href="/Home/Contact" class="nav-item nav-link">Contact</a>
                             <a href="/Home/About" class="nav-item nav-link">About</a>
+                            @if (SignInManager.IsSignedIn(User)) {
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Your</a>
+                                    <div class="dropdown-menu rounded-0 m-0">
+                                        <a href="/Home/StudentProfile" class="dropdown-item">Student Profile</a>
+                                        <a href="/Home/StudentAttendance" class="dropdown-item">Attendance</a>
+                                        <a href="single.html" class="dropdown-item">Fines</a>
+                                    </div>
+                                </div>
+                            }
                             <partial name="_LoginPartial" />
                             </div>
                         </div>

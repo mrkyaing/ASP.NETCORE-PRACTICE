@@ -1,0 +1,41 @@
+﻿@model IList<StudentViewModel>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+@{
+    ViewData["Title"] = "Student Profile";
+}
+<h1>Your Student Profile</h1>
+<hr />
+<table class="table table-striped" id="StudentTable">
+    <thead>
+        <tr>
+            <th scope="col">Code</th>
+            <th scope="col">Name</th>
+            <th scope="col">DOB</th>
+            <th scope="col">NRC</th>
+            <th scope="col">Address</th>
+            <th scope="col">Bath</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model) {
+            <tr scope="row">
+                <td>@s.Code</td>
+                <td>@s.Name</td>
+                <td>@s.DOB.ToString("yyyy-MM-dd")</td>
+                <td>@s.NRC</td>
+                <td>@s.Address</td>
+                <td>@s.BathName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts
+    {
+    <script src="~/lib/datatables/js/jquery.datatables.js"></script>
+}
+<script>
+    $(document).ready(function () {
+        $('#StudentTable').dataTable({
+        });
+    });
+</script>

@@ -1,0 +1,39 @@
+﻿@model IList<AttendanceViewModel>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+@{
+    ViewData["Title"] = "Your Attendance";
+}
+<h1>Your Attendances</h1>
+<hr />
+<table class="table table-striped" id="AttendanceTable">
+    <thead>
+        <tr>
+            <th scope="col">AttendaceDate</th>
+            <th scope="col">InTime</th>
+            <th scope="col">OutTime</th>
+            <th scope="col">IsLate</th>
+            <th scope="col">IsLeave</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr scope="row">
+                <td>@item.AttendaceDate.ToString("yyyy-MM-dd")</td>
+                <td>@item.InTime</td>
+                <td>@item.OutTime</td>
+                <td>@item.IsLate</td>
+                <td>@item.IsLeave</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts
+    {
+    <script src="~/lib/datatables/js/jquery.datatables.js"></script>
+}
+<script>
+    $(document).ready(function () {
+        $('#AttendanceTable').dataTable({
+        });
+    });
+</script>
