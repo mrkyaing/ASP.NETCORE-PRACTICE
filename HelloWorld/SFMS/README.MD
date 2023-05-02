@@ -24,7 +24,12 @@
 - Public WebSite Template (crd: https://www.free-css.com/)
 # ERD Design 
 - https://docs.google.com/spreadsheets/d/1eH7vaDPHVpRu-kuXsD2Ar5vW2pdyxaJZ/edit?usp=sharing&ouid=109497555838518947518&rtpof=true&sd=true
-# System Public UI
+# Public UI
 ![public](https://user-images.githubusercontent.com/9696016/235455001-df5f4f4f-c362-4be4-ac8f-9dc900eae169.png)
-# System Admin Dashboard UI
-![admin](https://user-images.githubusercontent.com/9696016/235455200-c9d63717-1345-4389-a012-0aafd1a7a9a8.png)
+# Admin Role Dashboard UI
+![admin](https://user-images.githubusercontent.com/9696016/235756644-9dfe2dbf-6c5c-4be4-a96b-0ec9ca300456.png)
+# Teacher Role Dashboard
+![teacherDashboard](https://user-images.githubusercontent.com/9696016/235756798-a159010b-4988-417f-b716-7ad295ded60a.png)
+# Student Role Dashboard UI
+![StudentUI](https://user-images.githubusercontent.com/9696016/235757114-8911411d-bee7-4ef2-8b37-5e3198fe9a6e.png)
+
