@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SFMS.Models.ViewModels
 {
@@ -16,5 +18,7 @@ namespace SFMS.Models.ViewModels
         public string Phone { get; set; }
         public string Position { get; set; }
         public virtual IList<CourseViewModel> Courses { get; set; }
+        public string UserId { get; set; }
+        public virtual IdentityUser User { get; set; }
     }
 }

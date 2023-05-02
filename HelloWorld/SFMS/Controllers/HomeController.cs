@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCore.ReportingServices.ReportProcessing.ReportObjectModel;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using SFMS.Models.DAO;
 using SFMS.Models.ViewModels;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace SFMS.Controllers
@@ -11,9 +14,11 @@ namespace SFMS.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _applicationDbContext;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(ApplicationDbContext applicationDbContext){
+        public HomeController(ApplicationDbContext applicationDbContext, UserManager<IdentityUser> userManager) {
             _applicationDbContext = applicationDbContext;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -45,7 +50,8 @@ namespace SFMS.Controllers
             return View();
         }
         public IActionResult StudentProfile() {
-            IList<StudentViewModel> students = _applicationDbContext.Students.Where(x=>x.UserId== "146a64aa-3dfa-4ef3-8ed6-8feb3b2b97ea").Select
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);// will give the user's userId
+            IList<StudentViewModel> students = _applicationDbContext.Students.Where(x => x.UserId.Equals(userId)).Select
                (s => new StudentViewModel
                {
                    Id = s.Id,
@@ -62,10 +68,11 @@ namespace SFMS.Controllers
             return View(students);
         }
         public IActionResult StudentAttendance() {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);// will give the user's userId
             IList<AttendanceViewModel> attendancesOfStudent = (from a in _applicationDbContext.Attendances
                                                                join s in _applicationDbContext.Students
                                                                on a.StudentId equals s.Id
-                                                               where s.UserId == "146a64aa-3dfa-4ef3-8ed6-8feb3b2b97ea"
+                                                               where s.UserId.Equals(userId)
                                                                select new AttendanceViewModel
                                                                {
                                                                    AttendaceDate = a.AttendaceDate,

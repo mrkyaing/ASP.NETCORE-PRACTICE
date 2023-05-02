@@ -53,7 +53,7 @@ namespace SFMS.Controllers
                     if (result.Succeeded) {
                     //Set the email confirmed directly
                     await _userManager.IsEmailConfirmedAsync(user);
-                     //adding the role WITH DEFAUL ROLE STUDENT
+                     //adding the role STUDENT role when student recrod is created.
                      await _userManager.AddToRoleAsync(user, "Student");
                     //creating the student record 
                     Student student = new Student();

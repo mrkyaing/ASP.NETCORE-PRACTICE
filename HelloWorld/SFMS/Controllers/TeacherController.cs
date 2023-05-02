@@ -11,6 +11,9 @@ using System.Net;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace SFMS.Controllers
 {
@@ -18,32 +21,61 @@ namespace SFMS.Controllers
     public class TeacherController : Controller
     {
         private readonly ApplicationDbContext _applicationDbContext;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public TeacherController(ApplicationDbContext applicationDbContext)
+        public TeacherController(ApplicationDbContext applicationDbContext, UserManager<IdentityUser> userManager)
         {
             this._applicationDbContext = applicationDbContext;
+            this._userManager = userManager;
         }
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
-            IList<TeacherViewModel> teachers=_applicationDbContext.Teachers.Select(s=>new TeacherViewModel
-            {
-                Code= s.Code,
-                Name= s.Name,
-                Email= s.Email,
-                Phone= s.Phone,
-                Address= s.Address,
-                NRC=s.NRC,
-                DOB=s.DOB,
-                Position= s.Position,
-                Id= s.Id,
-                Courses=(from tc in _applicationDbContext.TeacherCourses join c in _applicationDbContext.Courses on tc.CourseId equals c.Id
-                         where tc.TeacherId==s.Id
-                         select new CourseViewModel
-                         {
-                             Name=c.Name,
-                             Id=c.Id
-                         }).ToList(),
-            }).ToList();
+            IList<TeacherViewModel> teachers=null;
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);// will give the user's userId
+            var user = await _userManager.FindByIdAsync(userId); // to get current user 
+            var role = await _userManager.GetRolesAsync(user); //to get current user's roles
+            if (role.Contains("Admin")) 
+                teachers = _applicationDbContext.Teachers.Select(s => new TeacherViewModel
+                {
+                    Code = s.Code,
+                    Name = s.Name,
+                    Email = s.Email,
+                    Phone = s.Phone,
+                    Address = s.Address,
+                    NRC = s.NRC,
+                    DOB = s.DOB,
+                    Position = s.Position,
+                    Id = s.Id,
+                    Courses = (from tc in _applicationDbContext.TeacherCourses
+                               join c in _applicationDbContext.Courses on tc.CourseId equals c.Id
+                               where tc.TeacherId == s.Id
+                               select new CourseViewModel
+                               {
+                                   Name = c.Name,
+                                   Id = c.Id
+                               }).ToList()
+                }).ToList();
+            else
+                teachers = _applicationDbContext.Teachers.Where(x => x.UserId.Equals(userId)).Select(s => new TeacherViewModel
+                {
+                    Code = s.Code,
+                    Name = s.Name,
+                    Email = s.Email,
+                    Phone = s.Phone,
+                    Address = s.Address,
+                    NRC = s.NRC,
+                    DOB = s.DOB,
+                    Position = s.Position,
+                    Id = s.Id,
+                    Courses = (from tc in _applicationDbContext.TeacherCourses
+                               join c in _applicationDbContext.Courses on tc.CourseId equals c.Id
+                               where tc.TeacherId == s.Id
+                               select new CourseViewModel
+                               {
+                                   Name = c.Name,
+                                   Id = c.Id
+                               }).ToList()
+                }).ToList();
             return View(teachers);
         }
         [Authorize(Roles = "Admin")]
@@ -57,7 +89,7 @@ namespace SFMS.Controllers
         }
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public IActionResult Entry(TeacherViewModel model)
+        public async Task<IActionResult> Entry(TeacherViewModel model)
         {
             string[] courseIds = Request.Form["CourseIds"].ToString().Split(",");
             bool isSuccess = false;
@@ -68,7 +100,15 @@ namespace SFMS.Controllers
                         ViewBag.AlreadyExistsMsg = $"{model.Code} is already exists in system.";
                         return View(model);
                     }
-                    Teacher teacher = new Teacher()
+                    var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+                    var resultTeacherCreated = await _userManager.CreateAsync(user, "sfms101");//insert the recrod into the database .
+                    if (resultTeacherCreated.Succeeded) {
+                        //Set the email confirmed directly
+                        await _userManager.IsEmailConfirmedAsync(user);
+                        //adding the role Teacher Role when teacher recrod is created.
+                        await _userManager.AddToRoleAsync(user, "Teacher");
+                    }
+                        Teacher teacher = new Teacher()
                     {
                         Id = Guid.NewGuid().ToString(),
                         CreatedAt = DateTime.Now,
@@ -81,6 +121,7 @@ namespace SFMS.Controllers
                         Address = model.Address,
                         Code = model.Code,
                         DOB = model.DOB,
+                        UserId=user.Id
                     };
                     _applicationDbContext.Teachers.Add(teacher);
                    int result= _applicationDbContext.SaveChanges();

@@ -384,7 +384,7 @@
                         </li>
                         <li class="nav-item">
                             <form  asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button type="submit" class="nav-link btn btn-danger text-white"><i class="fa far fa-arrow-left nav-icon"></i>Logout</button>
+                                <button type="submit" class="nav-link btn btn-danger text-white" onclick="return confirm('are you sure to logout?')"><i class="fa far fa-arrow-left nav-icon"></i>Logout</button>
                             </form>
                         </li>
                     </ul>
