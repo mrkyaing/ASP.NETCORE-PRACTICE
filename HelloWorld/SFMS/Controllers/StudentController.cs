@@ -97,7 +97,8 @@ namespace SFMS.Controllers
               FatherName=s.FatherName,
               NRC=s.NRC,
               DOB = s.DOB,
-              BathName=s.Batch.Name
+              BathName=s.Batch.Name,
+              UserId=s.UserId
           }).ToList();
             return View(students);
         }
@@ -126,7 +127,8 @@ namespace SFMS.Controllers
                     DOB = s.DOB,
                     FatherName = s.FatherName,
                     BathId=s.BathId,
-                    BathName = s.Batch.Name
+                    BathName = s.Batch.Name,
+                    UserId=s.UserId
         }).SingleOrDefault();
             ViewBag.Bathes = _applicationDbContext.Batches.Where(x => x.Id != studentViewModel.BathId)
               .Select(s => new SelectListItem
@@ -156,6 +158,7 @@ namespace SFMS.Controllers
                 student.DOB = studentViewModel.DOB;
                 student.FatherName = studentViewModel.FatherName;
                 student.BathId = studentViewModel.BathId;
+                student.UserId= studentViewModel.UserId;
                 _applicationDbContext.Entry(student).State=EntityState.Modified;//Updating the existing recrod in db set 
                 _applicationDbContext.SaveChanges();//Updating  the record to the database
                 isSuccess = true;

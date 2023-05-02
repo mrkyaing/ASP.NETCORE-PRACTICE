@@ -22,7 +22,8 @@
 
 <form action="/Teacher/Edit" method="post">
     <div class="mb-3">
-        <input type="text" hidden value="@Model.Id" name="Id" />
+        <input type="text" hidden value="@Model.Id" name="Id" required />
+        <input type="text" hidden name="UserId" value="@Model.UserId" required>
         <label class="form-label">Code</label>
         <input type="text" class="form-control" value="@Model.Code" name="Code" required>
     </div>

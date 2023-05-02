@@ -31,5 +31,5 @@
 # Teacher Role Dashboard
 ![teacherDashboard](https://user-images.githubusercontent.com/9696016/235756798-a159010b-4988-417f-b716-7ad295ded60a.png)
 # Student Role Dashboard UI
-![StudentUI](https://user-images.githubusercontent.com/9696016/235757114-8911411d-bee7-4ef2-8b37-5e3198fe9a6e.png)
+![StudentUI](https://user-images.githubusercontent.com/9696016/235760247-eec57fae-f040-468c-9393-7814b6b6b825.png)
 

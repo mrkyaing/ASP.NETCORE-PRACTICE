@@ -45,6 +45,7 @@ namespace SFMS.Controllers
                     DOB = s.DOB,
                     Position = s.Position,
                     Id = s.Id,
+                    UserId=s.UserId,
                     Courses = (from tc in _applicationDbContext.TeacherCourses
                                join c in _applicationDbContext.Courses on tc.CourseId equals c.Id
                                where tc.TeacherId == s.Id
@@ -66,6 +67,7 @@ namespace SFMS.Controllers
                     DOB = s.DOB,
                     Position = s.Position,
                     Id = s.Id,
+                    UserId = s.UserId,
                     Courses = (from tc in _applicationDbContext.TeacherCourses
                                join c in _applicationDbContext.Courses on tc.CourseId equals c.Id
                                where tc.TeacherId == s.Id
@@ -174,7 +176,8 @@ namespace SFMS.Controllers
                     Address = s.Address,
                     NRC = s.NRC,
                     DOB = s.DOB,
-                    Position = s.Position
+                    Position = s.Position,
+                    UserId=s.UserId
                 }).SingleOrDefault();
             return View(teacherViewModel);
         }
@@ -197,6 +200,7 @@ namespace SFMS.Controllers
                 teacher.NRC = teacherViewModel.NRC;
                 teacher.DOB = teacherViewModel.DOB;
                 teacher.Position = teacherViewModel.Position;
+                teacher.UserId = teacherViewModel.UserId;
                 _applicationDbContext.Entry(teacher).State = EntityState.Modified;//Updating the existing recrod in db set 
                 _applicationDbContext.SaveChanges();//Updating  the record to the database
                 isSuccess = true;
