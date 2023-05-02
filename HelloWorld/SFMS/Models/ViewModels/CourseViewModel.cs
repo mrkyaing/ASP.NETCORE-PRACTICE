@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SFMS.Models.ViewModels {
     public class CourseViewModel {
         public string Id { get; set; }
+        [Required]
+        [Remote(action: "IsCourseAlreadyExists", controller: "Course")]
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime OpeningDate { get; set; }

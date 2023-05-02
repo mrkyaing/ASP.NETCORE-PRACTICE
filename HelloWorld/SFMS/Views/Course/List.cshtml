@@ -3,6 +3,7 @@
     <link href="~/lib/datatables/css/datatables.bootstrap4.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/rainabba/jquery-table2excel@1.1.0/dist/jquery.table2excel.min.js"></script>
 @{
     ViewData["Title"] = "Course List";
 }
@@ -64,6 +65,7 @@
                 }
             </tbody>
         </table>
+        <input type="submit" id="btnExport" value="Export" />
     </div>
 </div>
 @section Scripts
@@ -74,6 +76,11 @@
 <script>
     $(document).ready(function () {
         $('#CourseTable').dataTable({
+        });
+        $("#btnExport").click(function () {
+            $("#CourseTable").table2excel({
+                filename: "CourseInfroList.xls"
+            });
         });
     });
 </script>

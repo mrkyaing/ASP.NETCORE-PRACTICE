@@ -8,6 +8,8 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace SFMS.Controllers
 {
@@ -20,7 +22,17 @@ namespace SFMS.Controllers
         {
             this._applicationDbContext = applicationDbContext;
         }
-        public IActionResult List()
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public  IActionResult IsCourseAlreadyExists(string Name) {
+            if (_applicationDbContext.Courses.Any(x => x.Name.Equals(Name))) {
+                return Json(true);
+            }
+            else {
+                return Json($"Name {Name} is already in use.");
+            }
+        }
+            public IActionResult List()
         {
            var courses=_applicationDbContext.Courses.Select(s=>new CourseViewModel
             {
@@ -39,7 +51,7 @@ namespace SFMS.Controllers
         }
         [Authorize(Roles ="Admin")]
         public IActionResult Entry() {
-            return View();
+            return View(new CourseViewModel());
         }
         [Authorize(Roles = "Admin")]
         [HttpPost]
