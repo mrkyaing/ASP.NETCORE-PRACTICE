@@ -34,10 +34,7 @@ namespace SFMS.Controllers
         public IActionResult About() {
             return View();
         }
-        //public IActionResult AllAvailableCoursesNav() {
-        //   var AllCourses = _applicationDbContext.Courses.ToList();
-        //    return View(AllCourses);
-        //}
+
         public IActionResult Teachers() {
             ViewBag.Teachers = _applicationDbContext.Teachers.ToList();
             return View();

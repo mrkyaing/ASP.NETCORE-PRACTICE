@@ -22,7 +22,6 @@ namespace SFMS.Controllers
     {
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly UserManager<IdentityUser> _userManager;
-
         public TeacherController(ApplicationDbContext applicationDbContext, UserManager<IdentityUser> userManager)
         {
             this._applicationDbContext = applicationDbContext;
@@ -103,13 +102,13 @@ namespace SFMS.Controllers
                     var user = new IdentityUser { UserName = model.Email, Email = model.Email };
                     var resultTeacherCreated = await _userManager.CreateAsync(user, "sfms101");//insert the recrod into the database .
                     if (resultTeacherCreated.Succeeded) {
-                        //Set the email confirmed directly
-                        await _userManager.IsEmailConfirmedAsync(user);
+                        //Set the email confirmed directly (it doest not require because of config in middleware .)
+                       // await _userManager.IsEmailConfirmedAsync(user);
+                       
                         //adding the role Teacher Role when teacher recrod is created.
                         await _userManager.AddToRoleAsync(user, "Teacher");
-                    }
-                        Teacher teacher = new Teacher()
-                    {
+                     }
+                        Teacher teacher = new Teacher(){
                         Id = Guid.NewGuid().ToString(),
                         CreatedAt = DateTime.Now,
                         IP= GetLocalIPAddress(),

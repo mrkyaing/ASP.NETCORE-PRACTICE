@@ -22,6 +22,8 @@
 - Paging & Sorting With JQuery Datatable 
 - Admin Dashboard With AdminLTE ( crd : https://adminlte.io/)
 - Public WebSite Template (crd: https://www.free-css.com/)
+# ERD Design 
+- https://docs.google.com/spreadsheets/d/1eH7vaDPHVpRu-kuXsD2Ar5vW2pdyxaJZ/edit?usp=sharing&ouid=109497555838518947518&rtpof=true&sd=true
 # System Public UI
 ![public](https://user-images.githubusercontent.com/9696016/235455001-df5f4f4f-c362-4be4-ac8f-9dc900eae169.png)
 # System Admin Dashboard UI

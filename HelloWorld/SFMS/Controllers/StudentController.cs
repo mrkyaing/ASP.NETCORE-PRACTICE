@@ -21,7 +21,6 @@ namespace SFMS.Controllers
     {
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly UserManager<IdentityUser> _userManager;
-        //Constructore Inject Apporach for ApplicationDbContext;
         public StudentController(ApplicationDbContext applicationDbContext, UserManager<IdentityUser> userManager)
         {
             _applicationDbContext = applicationDbContext;
@@ -51,9 +50,10 @@ namespace SFMS.Controllers
                     var user = new IdentityUser { UserName = studentViewModel.Email, Email = studentViewModel.Email };
                     var result = await _userManager.CreateAsync(user, "sfms101");//insert the recrod into the database .
                     if (result.Succeeded) {
-                    //Set the email confirmed directly
-                    await _userManager.IsEmailConfirmedAsync(user);
-                     //adding the role STUDENT role when student recrod is created.
+                     //Set the email confirmed directly (it doest not require because of config in middleware .)
+                     // await _userManager.IsEmailConfirmedAsync(user);
+                     
+                    //adding the role STUDENT role when student recrod is created.
                      await _userManager.AddToRoleAsync(user, "Student");
                     //creating the student record 
                     Student student = new Student();
