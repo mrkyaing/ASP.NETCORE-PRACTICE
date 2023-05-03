@@ -1,6 +1,7 @@
 ﻿using AspNetCore.ReportingServices.ReportProcessing.ReportObjectModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SFMS.Models;
 using SFMS.Models.DAO;
 using SFMS.Models.ViewModels;
 using System.Collections.Generic;
@@ -15,7 +16,6 @@ namespace SFMS.Controllers
     {
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly UserManager<IdentityUser> _userManager;
-
         public HomeController(ApplicationDbContext applicationDbContext, UserManager<IdentityUser> userManager) {
             _applicationDbContext = applicationDbContext;
             _userManager = userManager;
@@ -32,7 +32,12 @@ namespace SFMS.Controllers
             return View();
         }
         public IActionResult About() {
-            return View();
+            IList<CourseViewModel> courses = _applicationDbContext.Courses.Select(c => new CourseViewModel
+            {
+                Name = c.Name,
+                Id = c.Id,
+            }).ToList();
+            return View(courses);
         }
 
         public IActionResult Teachers() {

@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "About";
 }
-
+@model IList<CourseViewModel>
 <!-- Header Start -->
 <div class="container-fluid page-header" style="margin-bottom: 90px;">
     <div class="container">
@@ -16,6 +16,7 @@
     </div>
 </div>
 <!-- Header End -->
+
 <!-- About Start -->
 <div class="container-fluid py-5">
     <div class="container py-5">
@@ -35,6 +36,7 @@
     </div>
 </div>
 <!-- About End -->
+
 <!-- Registration Start -->
 <div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
     <div class="container py-5">
@@ -63,21 +65,24 @@
                     <div class="card-body rounded-bottom bg-primary p-5">
                         <form>
                             <div class="form-group">
-                                <input type="text" class="form-control border-0 p-4" placeholder="Your name" required="required" />
+                                <input type="text" name="Name" class="form-control border-0 p-4" placeholder="Your name" required="required" />
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control border-0 p-4" placeholder="Your email" required="required" />
+                                <input type="email" name="Email"class="form-control border-0 p-4" placeholder="Your email" required="required" />
                             </div>
                             <div class="form-group">
-                                <select class="custom-select border-0 px-4" style="height: 47px;">
+                                <input type="number" name="Phone" class="form-control border-0 p-4" placeholder="Your phone" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <select name="CourseId" class="custom-select border-0 px-4" style="height: 47px;">
                                     <option selected>Select a course</option>
-                                    <option value="1">Course 1</option>
-                                    <option value="2">Course 2</option>
-                                    <option value="3">Course 3</option>
-                                    <option value="1">Course 4</option>
-                                    <option value="2">Course 5</option>
-                                    <option value="3">Course 6</option>
+                                    @foreach(var c in Model) {
+                                        <option value="@c.Id">@c.Name</option>
+                                    }
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="Remark" class="form-control border-0 p-4" placeholder="Your notes"></textarea>
                             </div>
                             <div>
                                 <button class="btn btn-dark btn-block border-0 py-3" type="submit">Register>></button>
@@ -90,6 +95,7 @@
     </div>
 </div>
 <!-- Registration End -->
+
 <!-- Testimonial Start -->
 <div class="container-fluid py-5">
     <div class="container py-5">
