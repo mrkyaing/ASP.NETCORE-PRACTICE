@@ -20,5 +20,8 @@ namespace SFMS.Models.ViewModels
         public virtual IList<CourseViewModel> Courses { get; set; }
         public string UserId { get; set; }
         public virtual IdentityUser User { get; set; }
+        public string FacebookUrl { get; set; }
+        public string LinkedinUrl { get; set; }
+        public string TwitterUrl { get; set; }
     }
 }

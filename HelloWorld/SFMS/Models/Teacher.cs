@@ -17,6 +17,9 @@ namespace SFMS.Models
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Position { get; set; }
+        public string FacebookUrl { get; set; }
+        public string LinkedinUrl { get; set; }
+        public string TwitterUrl { get; set; }
         public virtual IList<Course> Courses { get; set; }
         public string UserId { get; set; }
         [ForeignKey("UserId")]

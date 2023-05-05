@@ -34,7 +34,7 @@ namespace SFMS.Controllers
         }
             public IActionResult List()
         {
-           var courses=_applicationDbContext.Courses.Select(s=>new CourseViewModel
+           var courses=_applicationDbContext.Courses.Where(x=>x.IsActive==true).Select(s=>new CourseViewModel
             {
                Name= s.Name,
                Description= s.Description,
@@ -67,7 +67,6 @@ namespace SFMS.Controllers
                     }
                     var  model = new Course(){
                      Id = Guid.NewGuid().ToString(),
-                     CreatedAt = DateTime.Now,
                       Name= viewModel.Name,
                       Description= viewModel.Description,
                       OpeningDate= viewModel.OpeningDate,
@@ -95,8 +94,10 @@ namespace SFMS.Controllers
         public IActionResult Delete(string id) {
             var model = _applicationDbContext.Courses.Find(id);
             if (model != null) {
-                _applicationDbContext.Courses.Remove(model);//remove the  record from DBSET
-                _applicationDbContext.SaveChanges();//remove effect to the database.
+                model.IsActive = false;
+                _applicationDbContext.Entry(model).State = EntityState.Modified;//Updating the existing recrod in db set 
+                _applicationDbContext.SaveChanges();//Updating  the record to the database
+                TempData["msg"] = "delete success";
             }
             return RedirectToAction("List");
         }
