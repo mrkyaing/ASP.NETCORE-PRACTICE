@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using SFMS.Models;
 using SFMS.Models.DAO;
 using SFMS.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Sockets;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -30,6 +33,22 @@ namespace SFMS.Controllers
 
         public IActionResult Contact()
         {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Contact(ContactAnyQueryViewModel viewModel) {
+            var ContactAnyQuery = new ContactAnyQuery()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name= viewModel.Name,
+                Email = viewModel.Email,
+                Subject = viewModel.Subject,
+                IP=GetLocalIPAddress(),
+                Message = viewModel.Message
+            };
+            _applicationDbContext.ContactAnyQueries.Add(ContactAnyQuery);
+            _applicationDbContext.SaveChanges();
+            ViewBag.Message = "Send your message to the system administrator.Thanks for your message.";
             return View();
         }
         public IActionResult About() {
@@ -93,6 +112,15 @@ namespace SFMS.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        private static string GetLocalIPAddress() {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList) {
+                if (ip.AddressFamily == AddressFamily.InterNetwork) {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
         }
     }
 }

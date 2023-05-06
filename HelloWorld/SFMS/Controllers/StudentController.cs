@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using AspNetCore.ReportingServices.ReportProcessing.ReportObjectModel;
 using System.Threading.Tasks;
 
 namespace SFMS.Controllers
@@ -50,11 +49,12 @@ namespace SFMS.Controllers
                     var user = new IdentityUser { UserName = studentViewModel.Email, Email = studentViewModel.Email };
                     var result = await _userManager.CreateAsync(user, "sfms101");//insert the recrod into the database .
                     if (result.Succeeded) {
-                     //Set the email confirmed directly (it doest not require because of config in middleware .)
-                     // await _userManager.IsEmailConfirmedAsync(user);
-                     
-                    //adding the role STUDENT role when student recrod is created.
-                     await _userManager.AddToRoleAsync(user, "Student");
+                        //Set the email confirmed directly (it doest not require because of config in middleware .)
+                        // await _userManager.IsEmailConfirmedAsync(user);
+
+                        //adding the role STUDENT role when student recrod is created.
+                        await _userManager.AddToRoleAsync(user, "Student");
+                    }
                     //creating the student record 
                     Student student = new Student();
                     //audit columns
@@ -75,15 +75,13 @@ namespace SFMS.Controllers
                     _applicationDbContext.Students.Add(student);//Adding the record Students DBSet
                     _applicationDbContext.SaveChanges();//saving the record to the database
                      TempData["msg"] = "Saving success for " + studentViewModel.Code +" and create user for student with default password.";
-                    }
-                }             
+                }            
             }
             catch(Exception ex) {
                 TempData["msg"] = "Error occur when saving student information!!";
             }        
             return RedirectToAction("List");
         }//end of entry post method
-
         public IActionResult List()
         {
           IList<StudentViewModel> students= _applicationDbContext.Students.Select
