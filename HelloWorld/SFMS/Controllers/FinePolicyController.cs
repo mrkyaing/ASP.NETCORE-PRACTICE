@@ -91,8 +91,9 @@ namespace SFMS.Controllers
         public IActionResult Delete(string id) {
             var model = _applicationDbContext.FinePolicies.Find(id);
             if (model != null && model.IsEnable==false) {
-                _applicationDbContext.FinePolicies.Remove(model);//remove the  record from DBSET
-                _applicationDbContext.SaveChanges();//remove effect to the database.
+                model.IsActive = false;
+                _applicationDbContext.Entry(model).State = EntityState.Modified;//Updating the existing recrod in db set 
+                _applicationDbContext.SaveChanges();//Updating  the record to the database
                 TempData["msg"] = "Delete process successed!!";
             }
             else 

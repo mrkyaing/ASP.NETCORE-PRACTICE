@@ -157,8 +157,10 @@ namespace SFMS.Controllers
         public IActionResult Delete(string id) {
             Teacher t = _applicationDbContext.Teachers.Find(id);
             if (t != null) {
-                _applicationDbContext.Teachers.Remove(t);//remove the  Teacher record from DBSET
-                _applicationDbContext.SaveChanges();//remove effect to the database.
+                t.IsActive = false;
+                _applicationDbContext.Entry(t).State = EntityState.Modified;//Updating the existing recrod in db set 
+                _applicationDbContext.SaveChanges();//Updating  the record to the database
+                TempData["msg"] = "Delete process successed!!";
             }
             return RedirectToAction("List");
         }

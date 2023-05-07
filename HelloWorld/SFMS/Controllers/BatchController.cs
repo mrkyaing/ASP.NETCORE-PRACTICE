@@ -25,7 +25,7 @@ namespace SFMS.Controllers
         }
         public IActionResult List()
         {
-            IList<BatchViewModel> batches=_applicationDbContext.Batches.Select(b=>new BatchViewModel
+            IList<BatchViewModel> batches=_applicationDbContext.Batches.Where(x=>x.IsActive==true).Select(b=>new BatchViewModel
             {
                Name= b.Name,
                Description= b.Description,
@@ -36,7 +36,7 @@ namespace SFMS.Controllers
         }
         [Authorize(Roles = "Admin")]
         public IActionResult Entry() {
-            IList<CourseViewModel> coursesViewModel = _applicationDbContext.Courses.Select(s => new CourseViewModel
+            IList<CourseViewModel> coursesViewModel = _applicationDbContext.Courses.Where(x => x.IsActive == true).Select(s => new CourseViewModel
             {
                 Name = s.Name,
                 Id = s.Id,
@@ -81,8 +81,10 @@ namespace SFMS.Controllers
         public IActionResult Delete(string id) {
             var b = _applicationDbContext.Batches.Find(id);
             if (b != null) {
-                _applicationDbContext.Batches.Remove(b);//remove the  record from DBSET
-                _applicationDbContext.SaveChanges();//remove effect to the database.
+                b.IsActive = false;
+                _applicationDbContext.Entry(b).State = EntityState.Modified;//Updating the existing recrod in db set 
+                _applicationDbContext.SaveChanges();//Updating  the record to the database
+                TempData["msg"] = "Delete process successed!!";
             }
             return RedirectToAction("List");
         }

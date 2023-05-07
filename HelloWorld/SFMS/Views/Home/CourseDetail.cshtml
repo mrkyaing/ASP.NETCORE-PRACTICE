@@ -1,0 +1,38 @@
+﻿@model CourseViewModel
+@{
+    ViewData["Title"] = "Course Detail";
+}
+<!-- Header Start -->
+<div class="container-fluid page-header" style="margin-bottom: 90px;">
+    <div class="container">
+        <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
+            <h3 class="display-4 text-white text-uppercase">Courses</h3>
+            <div class="d-inline-flex text-white">
+                <p class="m-0 text-uppercase"><a class="text-white" href="">Course</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">Course Detail</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+<!--course detail start-->
+<div class="container-fluid py-5">
+    <h1>Course Detail</h1>
+    <div class="mb-3">
+        <label class="form-label">Name:@Model.Name</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Description :@Model.Description</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Opening Date:@Model.OpeningDate.ToString("yyyy-MM-dd")</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Duration In Hour :@Model.DurationInHour</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Fees (MMK) :@Model.Fees</label>
+    </div>
+</div>
+<!--course detail end-->

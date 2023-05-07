@@ -1,5 +1,4 @@
-﻿using AspNetCore.ReportingServices.ReportProcessing.ReportObjectModel;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SFMS.Models;
 using SFMS.Models.DAO;
@@ -59,7 +58,22 @@ namespace SFMS.Controllers
             }).ToList();
             return View(courses);
         }
-
+        public IActionResult CourseDetail(string courseId) {
+           CourseViewModel course=_applicationDbContext.Courses.Where(x=>x.IsActive==true&&x.Id==courseId).Select(s=>new CourseViewModel
+           {
+               Name = s.Name,
+               Description = s.Description,
+               Id = s.Id,
+               OpeningDate = s.OpeningDate,
+               DurationInHour = s.DurationInHour,
+               Fees = s.Fees,
+               IsPromotion = s.IsPromotion,
+               Fixed = s.Fixed,
+               Percetance = s.Percetance,
+               FeesAfterPromo = (s.Fees - ((s.Fees * s.Percetance) / 100) + s.Fixed)
+           }).FirstOrDefault();
+            return View(course);
+        }
         public IActionResult Teachers() {
             ViewBag.Teachers = _applicationDbContext.Teachers.ToList();
             return View();

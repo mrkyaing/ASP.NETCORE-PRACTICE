@@ -97,7 +97,7 @@ namespace SFMS.Controllers
                 model.IsActive = false;
                 _applicationDbContext.Entry(model).State = EntityState.Modified;//Updating the existing recrod in db set 
                 _applicationDbContext.SaveChanges();//Updating  the record to the database
-                TempData["msg"] = "delete success";
+                TempData["msg"] = "Delete process successed!!";
             }
             return RedirectToAction("List");
         }

@@ -84,7 +84,7 @@ namespace SFMS.Controllers
         }//end of entry post method
         public IActionResult List()
         {
-          IList<StudentViewModel> students= _applicationDbContext.Students.Select
+          IList<StudentViewModel> students= _applicationDbContext.Students.Where(x => x.IsActive == true).Select
                 (s=>new StudentViewModel{
                Id=s.Id,
               Code=s.Code,
@@ -104,8 +104,10 @@ namespace SFMS.Controllers
         public IActionResult Delete(string id) {
             Student student=_applicationDbContext.Students.Find(id);
             if (student != null) {
-                _applicationDbContext.Students.Remove(student);//remove the  student record from DBSET
-                _applicationDbContext.SaveChanges();//remove effect to the database.
+                student.IsActive = false;
+                _applicationDbContext.Entry(student).State = EntityState.Modified;//Updating the existing recrod in db set 
+                _applicationDbContext.SaveChanges();//Updating  the record to the database
+                TempData["msg"] = "Delete process successed!!";
             }
             return RedirectToAction("List");
         }
