@@ -27,7 +27,7 @@ namespace SFMS.Controllers
         }
         [Authorize(Roles = "Admin")]
         public IActionResult Entry() {
-            IList<BatchViewModel> batches = _applicationDbContext.Batches.Select(b => new BatchViewModel
+            IList<BatchViewModel> batches = _applicationDbContext.Batches.Where(x => x.IsActive == true).Select(b => new BatchViewModel
             {
                 Name = b.Name,
                 Id = b.Id,

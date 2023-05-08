@@ -34,7 +34,7 @@ namespace SFMS.Controllers
             var user = await _userManager.FindByIdAsync(userId); // to get current user 
             var role = await _userManager.GetRolesAsync(user); //to get current user's roles
             if (role.Contains("Admin")) 
-                teachers = _applicationDbContext.Teachers.Select(s => new TeacherViewModel
+                teachers = _applicationDbContext.Teachers.Where(x=>x.IsActive==true).Select(s => new TeacherViewModel
                 {
                     Code = s.Code,
                     Name = s.Name,
@@ -48,7 +48,7 @@ namespace SFMS.Controllers
                     UserId=s.UserId,
                     Courses = (from tc in _applicationDbContext.TeacherCourses
                                join c in _applicationDbContext.Courses on tc.CourseId equals c.Id
-                               where tc.TeacherId == s.Id
+                               where tc.TeacherId == s.Id && tc.IsActive==true && c.IsActive==true
                                select new CourseViewModel
                                {
                                    Name = c.Name,
@@ -56,7 +56,7 @@ namespace SFMS.Controllers
                                }).ToList()
                 }).ToList();
             else
-                teachers = _applicationDbContext.Teachers.Where(x => x.UserId.Equals(userId)).Select(s => new TeacherViewModel
+                teachers = _applicationDbContext.Teachers.Where(x => x.UserId.Equals(userId)&& x.IsActive == true).Select(s => new TeacherViewModel
                 {
                     Code = s.Code,
                     Name = s.Name,
@@ -70,7 +70,7 @@ namespace SFMS.Controllers
                     UserId = s.UserId,
                     Courses = (from tc in _applicationDbContext.TeacherCourses
                                join c in _applicationDbContext.Courses on tc.CourseId equals c.Id
-                               where tc.TeacherId == s.Id
+                               where tc.TeacherId == s.Id && tc.IsActive==true && c.IsActive==true
                                select new CourseViewModel
                                {
                                    Name = c.Name,

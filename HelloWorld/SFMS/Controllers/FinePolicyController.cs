@@ -24,7 +24,7 @@ namespace SFMS.Controllers
         }
         public IActionResult List()
         {
-           var finePolicies=_applicationDbContext.FinePolicies.Select(s=>new FinePolicyViewModel
+           var finePolicies=_applicationDbContext.FinePolicies.Where(x=>x.IsActive==true).Select(s=>new FinePolicyViewModel
             {
                Id = s.Id,
                Name= s.Name,
@@ -57,7 +57,7 @@ namespace SFMS.Controllers
             bool isSuccess = false;
             try {
                 if (ModelState.IsValid) {                  
-                    if (_applicationDbContext.FinePolicies.Any(x => x.BatchId.Equals(viewModel.BatchId) && x.IsEnable==viewModel.IsEnable))
+                    if (_applicationDbContext.FinePolicies.Where(x => x.IsActive == true).Any(x => x.BatchId.Equals(viewModel.BatchId) && x.IsEnable==viewModel.IsEnable))
                     {
                         ViewBag.AlreadyExistsMsg = $"{viewModel.Name} is already enabled on policy rule .Only 1 enabled-rule apply on Bath.";
                         BindBatches();
@@ -95,6 +95,8 @@ namespace SFMS.Controllers
                 _applicationDbContext.Entry(model).State = EntityState.Modified;//Updating the existing recrod in db set 
                 _applicationDbContext.SaveChanges();//Updating  the record to the database
                 TempData["msg"] = "Delete process successed!!";
+            }else if (model.IsEnable == true) {
+                TempData["msg"] = "can't delete because it is applied fine policy.";
             }
             else 
                 TempData["msg"] = "Delete process failed!!";

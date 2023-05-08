@@ -52,7 +52,31 @@
                 <td>@s.Address</td>
                 <td>@s.BathName</td>
                 <td><a href="/Student/Edit?Id=@s.Id" class="btn btn-success" role="button">Edit</a></td>
-                <td><a href="/Student/Delete?Id=@s.Id" onclick="return confirm('are you sure to delete this recrod?')" class="btn btn-danger" role="button">Delete</a> </td>
+                <td>
+                    <a data-toggle="modal" data-target="#DeleteModal-@s.Id" style='margin-left:5px' class="btn btn-danger" role="button">Delete</a>
+                    @using (Html.BeginForm("Delete", "Student", new { id = s.Id }, FormMethod.Get, false, null)) {
+                        @Html.AntiForgeryToken()
+                        <div class="modal" tabindex="-1" role="dialog" id="DeleteModal-@s.Id">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Delete Confirmation</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Are you sure you want to delete this record ?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </td>
      </tr>
         }
     </tbody>

@@ -50,7 +50,7 @@ namespace SFMS.Controllers
             bool isSuccess = false;
             try {
                 if (ModelState.IsValid) {
-                    if (_applicationDbContext.Batches.Any(x => x.Name.Equals(viewModel.Name)))
+                    if (_applicationDbContext.Batches.Where(x=>x.IsActive==true).Any(x => x.Name.Equals(viewModel.Name)))
                     {
                         ViewBag.AlreadyExistsMsg = $"{viewModel.Name} is already exists in system.";
                         return View(viewModel);
@@ -91,7 +91,7 @@ namespace SFMS.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Edit(string id) {
             var   batchViewModel= _applicationDbContext.Batches
-                .Where(w => w.Id == id)
+                .Where(w => w.Id == id && w.IsActive==true)
                 .Select(s => new BatchViewModel
                 {
                     Id = s.Id,
@@ -100,7 +100,7 @@ namespace SFMS.Controllers
                    CourseId= s.CourseId,
                    CourseName=s.Course.Name
                 }).SingleOrDefault();
-            ViewBag.Courses= _applicationDbContext.Courses.Where(x=>x.Id!= batchViewModel.CourseId)
+            ViewBag.Courses= _applicationDbContext.Courses.Where(x=>x.Id!= batchViewModel.CourseId && x.IsActive==true)
                 .Select(s => new SelectListItem{
                 Value = s.Id,
                 Text = s.Name

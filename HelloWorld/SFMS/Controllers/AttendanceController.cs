@@ -70,7 +70,7 @@ namespace SFMS.Controllers
         
         public IActionResult List()
         {
-          IList<AttendanceViewModel> students= _applicationDbContext.Attendances.Select
+          IList<AttendanceViewModel> students= _applicationDbContext.Attendances.Where(x=>x.IsActive==true).Select
                 (s=>new AttendanceViewModel {
                 Id=s.Id,
                 AttendaceDate=s.AttendaceDate,
