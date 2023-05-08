@@ -36,18 +36,23 @@ namespace SFMS.Controllers
         }
         [HttpPost]
         public IActionResult Contact(ContactAnyQueryViewModel viewModel) {
-            var ContactAnyQuery = new ContactAnyQuery()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name= viewModel.Name,
-                Email = viewModel.Email,
-                Subject = viewModel.Subject,
-                IP=GetLocalIPAddress(),
-                Message = viewModel.Message
-            };
-            _applicationDbContext.ContactAnyQueries.Add(ContactAnyQuery);
-            _applicationDbContext.SaveChanges();
-            ViewBag.Message = "Send your message to the system administrator.Thanks for your message.";
+            if (ModelState.IsValid) {
+                var ContactAnyQuery = new ContactAnyQuery()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = viewModel.Name,
+                    Email = viewModel.Email,
+                    Subject = viewModel.Subject,
+                    IP = GetLocalIPAddress(),
+                    Message = viewModel.Message
+                };
+                _applicationDbContext.ContactAnyQueries.Add(ContactAnyQuery);
+                _applicationDbContext.SaveChanges();
+                ViewBag.Message = "Send your message to the system administrator.Thanks for your message.";
+            }
+            else {
+                ViewBag.Message = "Oh sorry,we face some issues when you send your message to us.";
+            }
             return View();
         }
         public IActionResult About() {
