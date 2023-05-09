@@ -53,10 +53,10 @@
                 <td>@s.BathName</td>
                 <td><a href="/Student/Edit?Id=@s.Id" class="btn btn-success" role="button">Edit</a></td>
                 <td>
-                    <a data-toggle="modal" data-target="#DeleteModal-@s.Id" style='margin-left:5px' class="btn btn-danger" role="button">Delete</a>
+                    <a data-toggle="modal" data-target="#DeleteModal" style='margin-left:5px' class="btn btn-danger" role="button">Delete</a>
                     @using (Html.BeginForm("Delete", "Student", new { id = s.Id }, FormMethod.Get, false, null)) {
                         @Html.AntiForgeryToken()
-                        <div class="modal" tabindex="-1" role="dialog" id="DeleteModal-@s.Id">
+                        <div class="modal" tabindex="-1" role="dialog" id="DeleteModal">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">

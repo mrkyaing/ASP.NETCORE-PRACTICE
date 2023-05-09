@@ -68,6 +68,9 @@ namespace SFMS.Controllers
                     Position = s.Position,
                     Id = s.Id,
                     UserId = s.UserId,
+                    FacebookUrl=s.FacebookUrl,
+                    LinkedinUrl=s.LinkedinUrl,
+                    TwitterUrl=s.TwitterUrl,
                     Courses = (from tc in _applicationDbContext.TeacherCourses
                                join c in _applicationDbContext.Courses on tc.CourseId equals c.Id
                                where tc.TeacherId == s.Id && tc.IsActive==true && c.IsActive==true
@@ -122,8 +125,11 @@ namespace SFMS.Controllers
                         Address = model.Address,
                         Code = model.Code,
                         DOB = model.DOB,
-                        UserId=user.Id
-                    };
+                        UserId=user.Id,
+                            FacebookUrl = model.FacebookUrl,
+                            LinkedinUrl = model.LinkedinUrl,
+                            TwitterUrl = model.TwitterUrl,
+                        };
                     _applicationDbContext.Teachers.Add(teacher);
                    int result= _applicationDbContext.SaveChanges();
                     if (courseIds.Count() > 0 && result>0) { //there is courses selected from ui and teacher record is created first.
