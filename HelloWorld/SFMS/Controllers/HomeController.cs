@@ -125,7 +125,21 @@ namespace SFMS.Controllers
           
         }
         public IActionResult StudentFines() {
-            return View();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);// will give the user's userId
+            IList<FineTransactionViewModel> studentFine = (from ft in _applicationDbContext.FineTransactions
+                               join s in _applicationDbContext.Students
+                               on ft.StudentId equals s.Id
+                               where s.UserId == userId && s.IsActive==true && ft.IsActive==true
+                               select new FineTransactionViewModel
+                               {
+                                   FinedDate = ft.FinedDate,
+                                   InTime = ft.InTime,
+                                   OutTime = ft.OutTime,
+                                   FineAmount = ft.FineAmount,
+                                   FinePolicyId = ft.FinePolicyId,
+                                   FinePolicy = ft.FinePolicy
+                               }).ToList();
+            return View(studentFine);
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

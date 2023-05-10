@@ -1,0 +1,46 @@
+﻿@model IList<FineTransactionViewModel>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+@{
+    ViewData["Title"] = "Fine Transaction Information List";
+}
+<h1>Fine Transaction Information List</h1>
+<hr />
+@if (TempData["msg"] != null) {
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
+<table class="table table-striped" id="AttendanceDayEndTable">
+    <thead>
+        <tr>
+            <th scope="col">Fined Date</th>
+            <th scope="col">InTime</th>
+            <th scope="col">OutTime</th>
+            <th scope="col">Fine Amount (MMK)</th>
+            <th scope="col">Fine Policy Name</th>
+            <th scope="col">Fine Policy After Minutes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr scope="row">
+                <td>@item.FinedDate.ToString("yyyy-MM-dd")</td>
+                <td>@item.InTime</td>
+                <td>@item.OutTime</td>
+                <td>@item.FineAmount</td>
+                <td>@item.FinePolicy.Name</td>
+                <td>@item.FinePolicy.FineAfterMinutes</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts
+    {
+    <script src="~/lib/datatables/js/jquery.datatables.js"></script>
+}
+<script>
+    $(document).ready(function () {
+        $('#AttendanceDayEndTable').dataTable({
+        });
+    });
+</script>
