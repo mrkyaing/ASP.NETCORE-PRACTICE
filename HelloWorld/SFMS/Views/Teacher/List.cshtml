@@ -61,10 +61,10 @@
                         </td>
                         <td><a href="/Teacher/Edit?Id=@item.Id" class="btn btn-success" role="button">Edit</a></td>
                         <td>
-                            <a data-toggle="modal" data-target="#DeleteModal" style='margin-left:5px' class="btn btn-danger" role="button">Delete</a>
+                            <a data-toggle="modal" data-target="#DeleteModal-@item.Id" style='margin-left:5px' class="btn btn-danger" role="button">Delete</a>
                             @using (Html.BeginForm("Delete", "Teacher", new { id = item.Id }, FormMethod.Get, false, null)) {
                                 @Html.AntiForgeryToken()
-                                <div class="modal" tabindex="-1" role="dialog" id="DeleteModal">
+                                <div class="modal" tabindex="-1" role="dialog" id="DeleteModal-@item.Id">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">

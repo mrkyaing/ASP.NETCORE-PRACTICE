@@ -314,6 +314,29 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item menu-close">
+                            <a href="#" class="nav-link active">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Users / Roles
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/UserRoles/List" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>User Roles List</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/RoleManager/List" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> Roles List</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-item">
                            @* <form  asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                 <button type="submit" class="nav-link btn btn-danger text-white" onclick="return confirm('are you sure to logout?')"><i class="fa far fa-arrow-left nav-icon"></i>Logout</button>
