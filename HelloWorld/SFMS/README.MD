@@ -15,7 +15,7 @@
 - Reportings
 - Dashboard for each roles(Teacher,Admin,Student etc)
 # Used Technoligies
-- MVC Architecture Pattern With ASP.NET Core 7.0 MVC
+- ASP.NET Core 7.0 MVC With Repository Architecture Pattern 
 - ORM (Object Relational Mapper) With Entity Framework Core 7.0
 - Authentication & Authorization With ASP.NET Core Identity Membership 
 - UI/UX With Bootstrap 3.3 & JQuery 3.3
