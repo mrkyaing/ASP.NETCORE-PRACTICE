@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace SFMS.Controllers {
     [Authorize(Roles = "Admin")]
     public class RoleController : Controller {
+        
         private readonly RoleManager<IdentityRole> _roleManager;
         public RoleController(RoleManager<IdentityRole> roleManager) {
             _roleManager = roleManager;
