@@ -1,15 +1,17 @@
-# SFMS >> Student Fund Management System
+# SFMS/P >> Student Fund Management System/Portal
 - This system will provide for Fund Management when Student is late or leave according to Fine Policy for related batch.
 - System's stakeholders are Admin Staffs of Training/School ,Teachers ,Students and Public Users.
 # System Functionality List
-- User Management (Authentication vs Authorization) according to Roles
+- User & Role Management (Authentication vs Authorization) according to Roles
 - Course Management
 - Batch Management 
 - Teacher Management
 - Student Management
 - Fine Policy Management
 - Attendance Management 
-- Attendance Day End Process for Fine Transaction for Each Student according to attending Batch
+- Attendance Day End Process for fund transaction for each student according to attending batch
+- Fund Transaction List to get Fine amount from each student accroding to attending batch and fine policy when she/he late in class
+- Profile of student , his/her attendance records ,his/her fine transction records 
 - Reportings
 - Dashboard for each roles(Teacher,Admin,Student etc)
 # Used Technoligies
@@ -19,7 +21,7 @@
 - UI/UX With Bootstrap 3.3 & JQuery 3.3
 - Reportings With RDLC  
 - Data Storages With MS SQL Server 2014 Express Edition
-- Paging & Sorting With JQuery Datatable 
+- Paging & Sorting With JQuery DataTables.net (crd :https://datatables.net/ )
 - Admin Dashboard With AdminLTE ( crd : https://adminlte.io/)
 - Public WebSite Template (crd: https://www.free-css.com/)
 # ERD Design 
