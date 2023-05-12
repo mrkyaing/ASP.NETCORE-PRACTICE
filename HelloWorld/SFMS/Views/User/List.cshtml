@@ -1,11 +1,11 @@
-﻿@model List<UserRolesViewModel>
+﻿@model List<UserViewModel>
 <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 <link href="~/lib/datatables/css/datatables.bootstrap4.css" rel="stylesheet" />
 <script src="~/lib/jquery/dist/jquery.js"></script>
 @{
-    ViewData["Title"] = "User Roles list";
+    ViewData["Title"] = "User List";
 }
-<h1>User Roles list</h1>
+<h1>User List</h1>
 <hr />
 @if (TempData["msg"] != null) {
     <div class="alert alert-success">
@@ -14,13 +14,14 @@
 }
 <div class="wrapper">
     <div style="margin:0 auto;">
-        <table id="UserRolesTable" class="table table-striped table-bordered dt-responsive nowrap" width="100%">
+        <table id="UsersTable" class="table table-striped table-bordered dt-responsive nowrap" width="100%">
             <thead>
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th>Roles</th>
                     <th>Action</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -29,11 +30,13 @@
                         <td>@item.UserName</td>
                         <td>@item.Email</td>
                         <td>@string.Join(" , ", item.Roles.ToList())</td>
-                        @*   <td><a href="/Batch/Edit?Id=@item.Id" class="btn btn-success" role="button">Edit</a></td>*@
                         <td>
-                            <a data-toggle="modal" data-target="#DeleteModal-@item.UserId" style='margin-left:5px' class="btn btn-danger" role="button">Delete</a>
-                            @using (Html.BeginForm("DeleteRole", "RoleManager", new { id = @item.UserId }, FormMethod.Post, false, null)) {
-                                <div class="modal" tabindex="-1" role="dialog" id="DeleteModal-@item.UserId">
+                            <a class="btn btn-primary" asp-controller="User" asp-action="Manage" asp-route-userId="@item.Id">Manage Roles</a>
+                        </td>
+                        <td>
+                            <a data-toggle="modal" data-target="#DeleteModal-@item.Id" style='margin-left:5px' class="btn btn-danger" role="button">Delete</a>
+                            @using (Html.BeginForm("Delete", "User", new { id = @item.Id }, FormMethod.Post, false, null)) {
+                                <div class="modal" tabindex="-1" role="dialog" id="DeleteModal-@item.Id">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -66,6 +69,6 @@
 }
 <script>
     $(document).ready(function () {
-        $('#UserRolesTable').dataTable({});
+        $('#UsersTable').dataTable({});
     });
 </script>

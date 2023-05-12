@@ -3,16 +3,16 @@
 <link href="~/lib/datatables/css/datatables.bootstrap4.css" rel="stylesheet" />
 <script src="~/lib/jquery/dist/jquery.js"></script>
 @{
-    ViewData["Title"] = "Role Manager list";
+    ViewData["Title"] = "Role List";
 }
-<h1>Role Manager list</h1>
+<h1>Role List</h1>
 <hr />
 @if (TempData["msg"] != null) {
     <div class="alert alert-success">
         @TempData["msg"]
     </div>
 }
-<form method="post" asp-action="EntryRole" asp-controller="RoleManager">
+<form method="post" asp-action="Entry" asp-controller="Role">
     <div class="input-group">
         <input name="roleName" class="form-control w-25" placeholder="Enter role to create new one" required>
         <span class="input-group-btn">
@@ -38,7 +38,7 @@
                      @*   <td><a href="/Batch/Edit?Id=@item.Id" class="btn btn-success" role="button">Edit</a></td>*@
                         <td>
                             <a data-toggle="modal" data-target="#DeleteModal-@item.Id" style='margin-left:5px' class="btn btn-danger" role="button">Delete</a>
-                            @using (Html.BeginForm("DeleteRole", "RoleManager", new { id = @item.Id }, FormMethod.Post, false, null)) {
+                            @using (Html.BeginForm("Delete", "Role", new { id = @item.Id }, FormMethod.Post, false, null)) {
                                 <div class="modal" tabindex="-1" role="dialog" id="DeleteModal-@item.Id">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
