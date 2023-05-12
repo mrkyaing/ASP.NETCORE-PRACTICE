@@ -27,7 +27,7 @@
 # Public UI
 ![public](https://user-images.githubusercontent.com/9696016/235455001-df5f4f4f-c362-4be4-ac8f-9dc900eae169.png)
 # Admin Role Dashboard UI
-![admin](https://user-images.githubusercontent.com/9696016/235756644-9dfe2dbf-6c5c-4be4-a96b-0ec9ca300456.png)
+![admin](https://github.com/mrkyaing/ASP.NETCORE-PRACTICE/assets/9696016/eba6f75b-6c10-4cbc-89f9-f96b89776f8e)
 # Teacher Role Dashboard
 ![teacherDashboard](https://user-images.githubusercontent.com/9696016/235756798-a159010b-4988-417f-b716-7ad295ded60a.png)
 # Student Role Dashboard UI
