@@ -6,6 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SFMS.Models.DAO;
+using SFMS.Repository;
+using SFMS.Services;
+
 namespace SFMS{
     public class Startup{
         public Startup(IConfiguration configuration) {
@@ -30,6 +33,8 @@ namespace SFMS{
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
+            services.AddScoped<ICourseService,CourseService>();
+            services.AddScoped<ICourseRepository,CourseRepository>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env){

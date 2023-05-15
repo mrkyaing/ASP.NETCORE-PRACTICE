@@ -27,6 +27,7 @@ namespace SFMS.Controllers
         {
             ViewBag.TotalStudents = _applicationDbContext.Students.Count();
             ViewBag.TotalTeachers = _applicationDbContext.Teachers.Count();
+            ViewBag.TotalNewStudentRegister= _applicationDbContext.NewStudentRegisters.Count();
             return View();
         }
 
@@ -56,12 +57,38 @@ namespace SFMS.Controllers
             return View();
         }
         public IActionResult About() {
+            var courses = GetCourses();
+            return View(courses);
+        }
+        private IList<CourseViewModel> GetCourses() {
             IList<CourseViewModel> courses = _applicationDbContext.Courses.Select(c => new CourseViewModel
             {
                 Name = c.Name,
                 Id = c.Id,
             }).ToList();
-            return View(courses);
+            return courses;
+        }
+        public IActionResult NewStudentRegister(NewStudentRegisterViewModel viewModel) {
+            if (ModelState.IsValid) {
+                var newStudentRegister = new NewStudentRegister()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = viewModel.Name,
+                    Email = viewModel.Email,
+                    Phone = viewModel.Phone,
+                    IP = GetLocalIPAddress(),
+                    Remark = viewModel.Remark,
+                   CourseId = viewModel.CourseId
+                };
+                _applicationDbContext.NewStudentRegisters.Add(newStudentRegister);
+                _applicationDbContext.SaveChanges();
+                ViewBag.Message = "Send your message to the system administrator.Thanks for your message.";
+            }
+            else {
+                ViewBag.Message = "Oh sorry,we face some issues when you send your message to us.";
+            }
+            var courses = GetCourses();
+            return View("About", courses);
         }
         public IActionResult CourseDetail(string courseId) {
            CourseViewModel course=_applicationDbContext.Courses.Where(x=>x.IsActive==true&&x.Id==courseId).Select(s=>new CourseViewModel

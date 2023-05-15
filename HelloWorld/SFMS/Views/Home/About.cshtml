@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "About";
-}
+} <script type="text/javascript" src="https://www.jqueryscript.net/demo/Simple-Flexible-jQuery-Alert-Notification-Plugin-notify-js/js/notify.js"></script>
+<link rel="stylesheet" href="https://www.jqueryscript.net/demo/Simple-Flexible-jQuery-Alert-Notification-Plugin-notify-js/css/notify.css" />
 @model IList<CourseViewModel>
 <!-- Header Start -->
 <div class="container-fluid page-header" style="margin-bottom: 90px;">
@@ -63,7 +64,7 @@
                         <h1 class="m-0">Register Now</h1>
                     </div>
                     <div class="card-body rounded-bottom bg-primary p-5">
-                        <form>
+                        <form action="/Home/NewStudentRegister" method="post">
                             <div class="form-group">
                                 <input type="text" name="Name" class="form-control border-0 p-4" placeholder="Your name" required="required" />
                             </div>
@@ -86,6 +87,27 @@
                             </div>
                             <div>
                                 <button class="btn btn-dark btn-block border-0 py-3" type="submit">Register>></button>
+                            </div>
+                            <div id="success">
+                                @if (ViewBag.Message != null) {
+                                    <script type="text/javascript">
+                                        window.onload = function () {
+                                            var message = "@ViewBag.Message";
+                                            $.notify(message, {
+                                                type: 'success',
+                                                icon: 'check',  
+                                                align: "center",
+                                                verticalAlign: "top",
+                                                animation: true,
+                                                animationType: "drop",
+                                                close: true
+                                            });
+                                        };
+                                    </script>
+                                    <div class="alert alert-success">
+                                        @ViewBag.Message
+                                    </div>
+                                }
                             </div>
                         </form>
                     </div>

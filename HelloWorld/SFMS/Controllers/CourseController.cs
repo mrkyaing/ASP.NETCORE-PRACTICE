@@ -10,6 +10,7 @@ using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using SFMS.Services;
 
 namespace SFMS.Controllers
 {
@@ -17,10 +18,12 @@ namespace SFMS.Controllers
     public class CourseController : Controller
     {
         private readonly ApplicationDbContext _applicationDbContext;
+        private readonly ICourseService _courseService;
 
-        public CourseController(ApplicationDbContext applicationDbContext)
+        public CourseController(ApplicationDbContext applicationDbContext,ICourseService courseService)
         {
             this._applicationDbContext = applicationDbContext;
+            _courseService = courseService;
         }
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
@@ -34,19 +37,7 @@ namespace SFMS.Controllers
         }
             public IActionResult List()
         {
-           var courses=_applicationDbContext.Courses.Where(x=>x.IsActive==true).Select(s=>new CourseViewModel
-            {
-               Name= s.Name,
-               Description= s.Description,
-                Id= s.Id,
-                OpeningDate= s.OpeningDate,
-                DurationInHour= s.DurationInHour,
-                Fees= s.Fees,
-                IsPromotion=s.IsPromotion,
-                Fixed=s.Fixed,
-                Percetance=s.Percetance,
-               FeesAfterPromo=(s.Fees-((s.Fees*s.Percetance)/100)+s.Fixed)
-           }).ToList();
+          var courses=  _courseService.GetAll();
             return View(courses);
         }
         [Authorize(Roles ="Admin")]
