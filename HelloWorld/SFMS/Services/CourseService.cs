@@ -6,12 +6,15 @@ using System.Linq;
 
 namespace SFMS.Services {
     public class CourseService : ICourseService {
+        
         private readonly ICourseRepository _courseRepository;
         public CourseService(ICourseRepository courseRepository)
         {
             _courseRepository = courseRepository;
         }
-        public void Entry(CourseViewModel viewModel) {
+        public void Create(CourseViewModel viewModel) {
+            //Dto process here 
+            //Data Transfer Object from videModel to Model 
             var model = new Course()
             {
                 Name = viewModel.Name,
@@ -23,10 +26,29 @@ namespace SFMS.Services {
                 Fixed = viewModel.Fixed,
                 Percetance = viewModel.Percetance
             };
+            //saving the record into the database by applying repository 
             _courseRepository.Create(model);
         }
 
-        public IList<CourseViewModel> GetAll() {
+        public void Delete(string id) {
+          _courseRepository.Delete(id);
+        }
+
+        public CourseViewModel FindById(string id) {
+            var s = _courseRepository.FindById(id);
+            var viewModel =new CourseViewModel
+            {
+                Id = s.Id,
+                Description = s.Description,
+                Name = s.Name,
+                OpeningDate = s.OpeningDate,
+                DurationInHour = s.DurationInHour,
+                Fees = s.Fees,
+            };
+            return viewModel;
+        }
+
+        public IList<CourseViewModel> ReteriveActive() {
             var courses =_courseRepository.ReteriveActive().Select(s => new CourseViewModel
             {
                 Name = s.Name,
@@ -41,6 +63,19 @@ namespace SFMS.Services {
                 FeesAfterPromo = (s.Fees - ((s.Fees * s.Percetance) / 100) + s.Fixed)
             }).ToList();
             return courses;
+        }
+
+        public void Update(CourseViewModel viewModel) {
+            var model = new Course();
+            //audit columns
+            model.Id = viewModel.Id;
+             //ui columns
+            model.Name = viewModel.Name;
+            model.Description = viewModel.Description;
+            model.OpeningDate = viewModel.OpeningDate;
+            model.DurationInHour = viewModel.DurationInHour;
+            model.Fees = viewModel.Fees;
+            _courseRepository.Update(model);
         }
     }
 }

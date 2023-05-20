@@ -3,7 +3,10 @@ using System.Collections.Generic;
 
 namespace SFMS.Services {
     public interface ICourseService {
-        void Entry(CourseViewModel courseViewModel);
-        IList<CourseViewModel> GetAll();
+        void Create(CourseViewModel courseViewModel);
+        IList<CourseViewModel> ReteriveActive();
+        void  Update(CourseViewModel courseViewModel);
+        void Delete(string id);
+        CourseViewModel FindById(string id);
     }
 }

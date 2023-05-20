@@ -7,16 +7,19 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Net;
 
+
 namespace SFMS.Repository {
     public class CourseRepository : ICourseRepository {
+        
         private readonly ApplicationDbContext _applicationDbContext;
 
         public CourseRepository(ApplicationDbContext applicationDbContext) {
-            this._applicationDbContext = applicationDbContext;
+            _applicationDbContext = applicationDbContext;
         }
         public void Create(Course model) {
+            //set the  value that does not include UI
             model.Id = Guid.NewGuid().ToString();
-            model.IP=GetLocalIPAddress();
+            model.IP = GetLocalIPAddress();
             _applicationDbContext.Courses.Add(model);
             _applicationDbContext.SaveChanges();
         }
@@ -35,7 +38,11 @@ namespace SFMS.Repository {
         }
 
         public void Update(Course model) {
-            throw new System.NotImplementedException();
+            //set the  value that does not include UI
+            model.UpdatedAt = DateTime.Now;
+            model.IP = GetLocalIPAddress();//calling the method 
+            _applicationDbContext.Entry(model).State = EntityState.Modified;//Updating the existing recrod in db set 
+            _applicationDbContext.SaveChanges();//Updating  the record to the database
         }
 
         private static string GetLocalIPAddress() {
@@ -46,6 +53,10 @@ namespace SFMS.Repository {
                 }
             }
             throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
+
+        public Course FindById(string id) {
+          return  _applicationDbContext.Courses.Where(w => w.Id == id).SingleOrDefault();
         }
     }
 }

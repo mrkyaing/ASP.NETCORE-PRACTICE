@@ -7,5 +7,6 @@ namespace SFMS.Repository {
          IEnumerable<Course> ReteriveActive();
         void Update(Course model);
         void Delete(string id);
+        Course FindById(string id);
     }
 }

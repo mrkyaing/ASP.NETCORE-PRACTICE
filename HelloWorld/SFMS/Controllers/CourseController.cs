@@ -17,32 +17,22 @@ namespace SFMS.Controllers
     [Authorize]
     public class CourseController : Controller
     {
-        private readonly ApplicationDbContext _applicationDbContext;
+
         private readonly ICourseService _courseService;
 
-        public CourseController(ApplicationDbContext applicationDbContext,ICourseService courseService)
+        public CourseController(ICourseService courseService)
         {
-            this._applicationDbContext = applicationDbContext;
             _courseService = courseService;
         }
-        [AcceptVerbs("Get", "Post")]
-        [AllowAnonymous]
-        public  IActionResult IsCourseAlreadyExists(string Name) {
-            if (_applicationDbContext.Courses.Any(x => x.Name.Equals(Name))) {
-                return Json(true);
-            }
-            else {
-                return Json($"Name {Name} is already in use.");
-            }
-        }
-            public IActionResult List()
-        {
-          var courses=  _courseService.GetAll();
+
+            public IActionResult List() {
+            var courses=  _courseService.ReteriveActive();
             return View(courses);
         }
+
         [Authorize(Roles ="Admin")]
         public IActionResult Entry() {
-            return View(new CourseViewModel());
+            return View();
         }
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -51,24 +41,12 @@ namespace SFMS.Controllers
             bool isSuccess = false;
             try {
                 if (ModelState.IsValid) {
-                    if (_applicationDbContext.Courses.Any(x => x.Name.Equals(viewModel.Name)))
-                    {
-                        ViewBag.AlreadyExistsMsg = $"{viewModel.Name} is already exists in system.";
-                        return View(viewModel);
-                    }
-                    var  model = new Course(){
-                     Id = Guid.NewGuid().ToString(),
-                      Name= viewModel.Name,
-                      Description= viewModel.Description,
-                      OpeningDate= viewModel.OpeningDate,
-                      DurationInHour= viewModel.DurationInHour,
-                      Fees= viewModel.Fees,
-                      IsPromotion=viewModel.IsPromotion,
-                      Fixed=viewModel.Fixed,
-                      Percetance=viewModel.Percetance
-                    };
-                    _applicationDbContext.Courses.Add(model);
-                    _applicationDbContext.SaveChanges();
+                    //if (_applicationDbContext.Courses.Any(x => x.Name.Equals(viewModel.Name)))
+                    //{
+                    //    ViewBag.AlreadyExistsMsg = $"{viewModel.Name} is already exists in system.";
+                    //    return View(viewModel);
+                    //}
+                    _courseService.Create(viewModel);
                     isSuccess = true;
                 }
             }
@@ -83,48 +61,27 @@ namespace SFMS.Controllers
         }
         [Authorize(Roles = "Admin")]
         public IActionResult Delete(string id) {
-            var model = _applicationDbContext.Courses.Find(id);
-            if (model != null) {
-                model.IsActive = false;
-                _applicationDbContext.Entry(model).State = EntityState.Modified;//Updating the existing recrod in db set 
-                _applicationDbContext.SaveChanges();//Updating  the record to the database
+            try {
+                _courseService.Delete(id);
                 TempData["msg"] = "Delete process successed!!";
+            }catch(Exception ex) {
+                TempData["msg"] = "Error occur when delete recrod!!";
             }
+          
             return RedirectToAction("List");
         }
         [Authorize(Roles = "Admin")]
         public IActionResult Edit(string id) {
-            var   viewModel= _applicationDbContext.Courses
-                .Where(w => w.Id == id)
-                .Select(s => new CourseViewModel
-                {
-                    Id = s.Id,
-                   Description= s.Description,
-                   Name= s.Name,
-                   OpeningDate= s.OpeningDate,
-                   DurationInHour= s.DurationInHour,
-                   Fees= s.Fees,
-                }).SingleOrDefault();
+          var viewModel=_courseService.FindById(id);
             return View(viewModel);
         }
+        
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Edit(CourseViewModel viewModel) {
             bool isSuccess;
             try {
-                var  model = new Course();
-                //audit columns
-                model.Id = viewModel.Id;
-                model.UpdatedAt = DateTime.Now;
-                model.IP = GetLocalIPAddress();//calling the method 
-                //ui columns
-               model.Name=viewModel.Name;
-                model.Description = viewModel.Description;
-                model.OpeningDate = viewModel.OpeningDate;
-                model.DurationInHour = viewModel.DurationInHour;
-                model.Fees = viewModel.Fees;
-                _applicationDbContext.Entry(model).State = EntityState.Modified;//Updating the existing recrod in db set 
-                _applicationDbContext.SaveChanges();//Updating  the record to the database
+                _courseService.Update(viewModel);
                 isSuccess = true;
             }
             catch (Exception ex) {
@@ -136,15 +93,6 @@ namespace SFMS.Controllers
             else
                 TempData["msg"] = "error occur when Updating the record!!";
             return RedirectToAction("List");
-        }
-        private static string GetLocalIPAddress() {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList) {
-                if (ip.AddressFamily == AddressFamily.InterNetwork) {
-                    return ip.ToString();
-                }
-            }
-            throw new Exception("No network adapters with an IPv4 address in the system!");
         }
 
     }

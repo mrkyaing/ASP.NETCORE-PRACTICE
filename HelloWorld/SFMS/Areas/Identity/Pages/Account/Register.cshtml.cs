@@ -21,6 +21,7 @@ namespace SFMS.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
+
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 

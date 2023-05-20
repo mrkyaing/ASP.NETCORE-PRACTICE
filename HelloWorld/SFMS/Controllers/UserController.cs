@@ -19,17 +19,19 @@ namespace SFMS.Controllers {
         }
         public async Task<IActionResult> List() {
             var users = await _userManager.Users.ToListAsync();
-            var userRolesViewModel = new List<UserViewModel>();
+            //to return view result 
+            var userViewModels = new List<UserViewModel>();
+           
             foreach (IdentityUser user in users) {
-                var thisViewModel = new UserViewModel();
-                thisViewModel.Id = user.Id;
-                thisViewModel.Email = user.Email;
-               // thisViewModel.FirstName = user.FirstName;
-               // thisViewModel.LastName = user.LastName;
-                thisViewModel.Roles = await GetUserRoles(user);
-                userRolesViewModel.Add(thisViewModel);
+                var userViewModel = new UserViewModel();
+                userViewModel.Id = user.Id;
+                userViewModel.Email = user.Email;
+                // thisViewModel.FirstName = user.FirstName;
+                // thisViewModel.LastName = user.LastName;
+                userViewModel.Roles = await GetUserRoles(user);//calling GetUserRoles Method here
+                userViewModels.Add(userViewModel);
             }
-            return View(userRolesViewModel);
+            return View(userViewModels);
         }
         private async Task<List<string>> GetUserRoles(IdentityUser user) {
             return new List<string>(await _userManager.GetRolesAsync(user));
