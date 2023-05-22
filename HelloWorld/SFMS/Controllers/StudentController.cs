@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace SFMS.Controllers
 {
@@ -82,22 +83,52 @@ namespace SFMS.Controllers
             }        
             return RedirectToAction("List");
         }//end of entry post method
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
-          IList<StudentViewModel> students= _applicationDbContext.Students.Where(x => x.IsActive == true).Select
-                (s=>new StudentViewModel{
-               Id=s.Id,
-              Code=s.Code,
-              Name=s.Name,
-              Email=s.Email,
-              Address=s.Address,
-              Phone=s.Phone,
-              FatherName=s.FatherName,
-              NRC=s.NRC,
-              DOB = s.DOB,
-              BathName=s.Batch.Name,
-              UserId=s.UserId
-          }).ToList();
+            IList<StudentViewModel> students=null;
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);// will give the user's userId
+            var user = await _userManager.FindByIdAsync(userId); // to get current user 
+            var role = await _userManager.GetRolesAsync(user); //to get current user's roles
+            if (role.Contains("Admin")) {
+                students = _applicationDbContext.Students.Where(x => x.IsActive == true).Select
+                (s => new StudentViewModel
+                {
+                    Id = s.Id,
+                    Code = s.Code,
+                    Name = s.Name,
+                    Email = s.Email,
+                    Address = s.Address,
+                    Phone = s.Phone,
+                    FatherName = s.FatherName,
+                    NRC = s.NRC,
+                    DOB = s.DOB,
+                    BathName = s.Batch.Name,
+                    UserId = s.UserId
+                }).ToList();
+            }else {
+                students =(from s in _applicationDbContext.Students
+                                join b in _applicationDbContext.Batches 
+                                on s.BathId equals b.Id
+                                join tc in _applicationDbContext.TeacherCourses
+                                on b.CourseId equals tc.CourseId
+                                join t in _applicationDbContext.Teachers
+                                on tc.TeacherId equals t.Id
+                                where t.UserId==userId && s.IsActive==true && t.IsActive==true && b.IsActive==true
+                                select new StudentViewModel
+               {
+                   Id = s.Id,
+                   Code = s.Code,
+                   Name = s.Name,
+                   Email = s.Email,
+                   Address = s.Address,
+                   Phone = s.Phone,
+                   FatherName = s.FatherName,
+                   NRC = s.NRC,
+                   DOB = s.DOB,
+                   BathName = s.Batch.Name,
+                   UserId = s.UserId
+               }).ToList();
+            }
             return View(students);
         }
         [Authorize(Roles = "Admin")]
