@@ -56,9 +56,7 @@
                         <td>@item.NRC</td>
                         <td>@item.Address</td>
                         <td>@item.Position</td>
-                        <td>
-                          @item.Courses??.First().Name
-                        </td>
+                        <td>@string.Join(" , ", item.Courses.ToList())</td>
                         <td><a href="/Teacher/Edit?Id=@item.Id" class="btn btn-success" role="button">Edit</a></td>
                         <td>
                             <a data-toggle="modal" data-target="#DeleteModal-@item.Id" style='margin-left:5px' class="btn btn-danger" role="button">Delete</a>

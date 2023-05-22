@@ -49,11 +49,8 @@ namespace SFMS.Controllers
                     Courses = (from tc in _applicationDbContext.TeacherCourses
                                join c in _applicationDbContext.Courses on tc.CourseId equals c.Id
                                where tc.TeacherId == s.Id && tc.IsActive==true && c.IsActive==true
-                               select new CourseViewModel
-                               {
-                                   Name = c.Name,
-                                   Id = c.Id
-                               }).ToList()
+                               select 
+                              c.Name).ToList()
                 }).ToList();
             else
                 teachers = _applicationDbContext.Teachers.Where(x => x.UserId.Equals(userId)&& x.IsActive == true).Select(s => new TeacherViewModel
@@ -74,11 +71,7 @@ namespace SFMS.Controllers
                     Courses = (from tc in _applicationDbContext.TeacherCourses
                                join c in _applicationDbContext.Courses on tc.CourseId equals c.Id
                                where tc.TeacherId == s.Id && tc.IsActive==true && c.IsActive==true
-                               select new CourseViewModel
-                               {
-                                   Name = c.Name,
-                                   Id = c.Id
-                               }).ToList()
+                               select  c.Name).ToList()
                 }).ToList();
             return View(teachers);
         }

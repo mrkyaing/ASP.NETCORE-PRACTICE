@@ -17,7 +17,7 @@ namespace SFMS.Models.ViewModels
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Position { get; set; }
-        public virtual IList<CourseViewModel> Courses { get; set; }
+        public virtual IList<string> Courses { get; set; }
         public string UserId { get; set; }
         public virtual IdentityUser User { get; set; }
         public string FacebookUrl { get; set; }
