@@ -7,5 +7,6 @@ namespace SFMS.Repository {
         IEnumerable<Batch> ReteriveActive();
         void Update(Batch model);
         void Delete(string id);
+        Batch FindById(string id);
     }
 }

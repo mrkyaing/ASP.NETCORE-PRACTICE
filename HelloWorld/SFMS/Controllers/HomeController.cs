@@ -11,6 +11,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Net.Mail;
 
 namespace SFMS.Controllers
 {
@@ -49,6 +50,30 @@ namespace SFMS.Controllers
                 };
                 _applicationDbContext.ContactAnyQueries.Add(ContactAnyQuery);
                 _applicationDbContext.SaveChanges();
+                
+                //sending email
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress("mr.kyaing7@gmail.com");
+                mailMessage.To.Add(viewModel.Email);
+                mailMessage.Subject = viewModel.Subject;
+                mailMessage.Body = viewModel.Message;
+
+                SmtpClient smtpClient = new SmtpClient();
+                smtpClient.Host = "smtp.gmail.com";
+                smtpClient.Port = 587;
+             
+                smtpClient.Credentials = new NetworkCredential("mr.kyaing7@gmail.com", "izujavmpvbaualgx");
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.EnableSsl = true;
+                smtpClient.UseDefaultCredentials = false;
+
+                try {
+                    smtpClient.Send(mailMessage);
+                    Console.WriteLine("Email Sent Successfully.");
+                }
+                catch (Exception ex) {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
                 ViewBag.Message = "Send your message to the system administrator.Thanks for your message.";
             }
             else {
@@ -61,7 +86,7 @@ namespace SFMS.Controllers
             return View(courses);
         }
         private IList<CourseViewModel> GetCourses() {
-            IList<CourseViewModel> courses = _applicationDbContext.Courses.Select(c => new CourseViewModel
+            IList<CourseViewModel> courses = _applicationDbContext.Courses.Where(x=>x.IsActive==true).Select(c => new CourseViewModel
             {
                 Name = c.Name,
                 Id = c.Id,
@@ -107,13 +132,13 @@ namespace SFMS.Controllers
             return View(course);
         }
         public IActionResult Teachers() {
-            ViewBag.Teachers = _applicationDbContext.Teachers.ToList();
+            ViewBag.Teachers = _applicationDbContext.Teachers.Where(x => x.IsActive == true).ToList();
             return View();
         }
         public IActionResult Courses() {
-            ViewBag.PromotionCourses= _applicationDbContext.Courses.Where(x=>x.IsPromotion==true).ToList();
-            ViewBag.PopularCourses = _applicationDbContext.Courses.Where(x=>x.Batches.Count()>=5).ToList();
-            ViewBag.AllCourses = _applicationDbContext.Courses.ToList();
+            ViewBag.PromotionCourses= _applicationDbContext.Courses.Where(x=>x.IsPromotion==true && x.IsActive==true).ToList();
+            ViewBag.PopularCourses = _applicationDbContext.Courses.Where(x=>x.IsActive == true &&x.Batches.Where(y=>y.IsActive==true).Count()>=5).ToList();
+            ViewBag.AllCourses = _applicationDbContext.Courses.Where(x => x.IsActive == true).ToList();
             return View();
         }
         public IActionResult StudentProfile() {

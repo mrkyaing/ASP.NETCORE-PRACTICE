@@ -14,15 +14,12 @@ using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
 
-namespace SFMS.Controllers
-{
+namespace SFMS.Controllers {
     [Authorize]
-    public class StudentController : Controller
-    {
+    public class StudentController : Controller {
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly UserManager<IdentityUser> _userManager;
-        public StudentController(ApplicationDbContext applicationDbContext, UserManager<IdentityUser> userManager)
-        {
+        public StudentController(ApplicationDbContext applicationDbContext, UserManager<IdentityUser> userManager) {
             _applicationDbContext = applicationDbContext;
             _userManager = userManager;
         }
@@ -37,13 +34,10 @@ namespace SFMS.Controllers
         }
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> Entry(StudentViewModel studentViewModel)
-        {
+        public async Task<IActionResult> Entry(StudentViewModel studentViewModel) {
             try {
-                if (ModelState.IsValid)
-                {
-                    if (_applicationDbContext.Teachers.Any(x => x.Name.Equals(studentViewModel.Code)))
-                    {
+                if (ModelState.IsValid) {
+                    if (_applicationDbContext.Teachers.Any(x => x.Name.Equals(studentViewModel.Code))) {
                         ViewBag.AlreadyExistsMsg = $"{studentViewModel.Code} is already exists in system.";
                         return View(studentViewModel);
                     }
@@ -75,17 +69,16 @@ namespace SFMS.Controllers
                     student.UserId = user.Id;//for identity user
                     _applicationDbContext.Students.Add(student);//Adding the record Students DBSet
                     _applicationDbContext.SaveChanges();//saving the record to the database
-                     TempData["msg"] = "Saving success for " + studentViewModel.Code +" and create user for student with default password.";
-                }            
+                    TempData["msg"] = "Saving success for " + studentViewModel.Code + " and create user for student with default password.";
+                }
             }
-            catch(Exception ex) {
+            catch (Exception ex) {
                 TempData["msg"] = "Error occur when saving student information!!";
-            }        
+            }
             return RedirectToAction("List");
         }//end of entry post method
-        public async Task<IActionResult> List()
-        {
-            IList<StudentViewModel> students=null;
+        public async Task<IActionResult> List() {
+            IList<StudentViewModel> students = null;
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);// will give the user's userId
             var user = await _userManager.FindByIdAsync(userId); // to get current user 
             var role = await _userManager.GetRolesAsync(user); //to get current user's roles
@@ -105,35 +98,36 @@ namespace SFMS.Controllers
                     BathName = s.Batch.Name,
                     UserId = s.UserId
                 }).ToList();
-            }else {
-                students =(from s in _applicationDbContext.Students
-                                join b in _applicationDbContext.Batches 
-                                on s.BathId equals b.Id
-                                join tc in _applicationDbContext.TeacherCourses
-                                on b.CourseId equals tc.CourseId
-                                join t in _applicationDbContext.Teachers
-                                on tc.TeacherId equals t.Id
-                                where t.UserId==userId && s.IsActive==true && t.IsActive==true && b.IsActive==true
-                                select new StudentViewModel
-               {
-                   Id = s.Id,
-                   Code = s.Code,
-                   Name = s.Name,
-                   Email = s.Email,
-                   Address = s.Address,
-                   Phone = s.Phone,
-                   FatherName = s.FatherName,
-                   NRC = s.NRC,
-                   DOB = s.DOB,
-                   BathName = s.Batch.Name,
-                   UserId = s.UserId
-               }).ToList();
+            }
+            else {
+                students = (from s in _applicationDbContext.Students
+                            join b in _applicationDbContext.Batches
+                            on s.BathId equals b.Id
+                            join tc in _applicationDbContext.TeacherCourses
+                            on b.CourseId equals tc.CourseId
+                            join t in _applicationDbContext.Teachers
+                            on tc.TeacherId equals t.Id
+                            where t.UserId == userId && s.IsActive == true && t.IsActive == true && b.IsActive == true
+                            select new StudentViewModel
+                            {
+                                Id = s.Id,
+                                Code = s.Code,
+                                Name = s.Name,
+                                Email = s.Email,
+                                Address = s.Address,
+                                Phone = s.Phone,
+                                FatherName = s.FatherName,
+                                NRC = s.NRC,
+                                DOB = s.DOB,
+                                BathName = s.Batch.Name,
+                                UserId = s.UserId
+                            }).ToList();
             }
             return View(students);
         }
         [Authorize(Roles = "Admin")]
         public IActionResult Delete(string id) {
-            Student student=_applicationDbContext.Students.Find(id);
+            Student student = _applicationDbContext.Students.Find(id);
             if (student != null) {
                 student.IsActive = false;
                 _applicationDbContext.Entry(student).State = EntityState.Modified;//Updating the existing recrod in db set 
@@ -148,8 +142,8 @@ namespace SFMS.Controllers
                 .Where(w => w.Id == id)
                 .Select(s => new StudentViewModel
                 {
-                      Id=s.Id,
-                     Code = s.Code,
+                    Id = s.Id,
+                    Code = s.Code,
                     Name = s.Name,
                     Email = s.Email,
                     Phone = s.Phone,
@@ -157,10 +151,10 @@ namespace SFMS.Controllers
                     NRC = s.NRC,
                     DOB = s.DOB,
                     FatherName = s.FatherName,
-                    BathId=s.BathId,
+                    BathId = s.BathId,
                     BathName = s.Batch.Name,
-                    UserId=s.UserId
-        }).SingleOrDefault();
+                    UserId = s.UserId
+                }).SingleOrDefault();
             ViewBag.Bathes = _applicationDbContext.Batches.Where(x => x.Id != studentViewModel.BathId)
               .Select(s => new SelectListItem
               {
@@ -176,7 +170,7 @@ namespace SFMS.Controllers
             try {
                 Student student = new Student();
                 //audit columns
-                student.Id=studentViewModel.Id;
+                student.Id = studentViewModel.Id;
                 student.UpdatedAt = DateTime.Now;
                 student.IP = GetLocalIPAddress();//calling the method 
                 //ui columns
@@ -189,8 +183,8 @@ namespace SFMS.Controllers
                 student.DOB = studentViewModel.DOB;
                 student.FatherName = studentViewModel.FatherName;
                 student.BathId = studentViewModel.BathId;
-                student.UserId= studentViewModel.UserId;
-                _applicationDbContext.Entry(student).State=EntityState.Modified;//Updating the existing recrod in db set 
+                student.UserId = studentViewModel.UserId;
+                _applicationDbContext.Entry(student).State = EntityState.Modified;//Updating the existing recrod in db set 
                 _applicationDbContext.SaveChanges();//Updating  the record to the database
                 isSuccess = true;
             }
@@ -198,15 +192,14 @@ namespace SFMS.Controllers
                 isSuccess = false;
             }
             if (isSuccess) {
-                TempData["msg"]= "Update success";
+                TempData["msg"] = "Update success";
             }
             else
                 TempData["msg"] = "error occur when Updating student information!!";
             return RedirectToAction("List");
         }
         //finding the local ip in your machine
-        private static string GetLocalIPAddress()
-        {
+        private static string GetLocalIPAddress() {
             var host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList) {
                 if (ip.AddressFamily == AddressFamily.InterNetwork) {
