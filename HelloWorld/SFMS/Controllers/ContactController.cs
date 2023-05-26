@@ -3,9 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SFMS.Models.DAO;
 using SFMS.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Mail;
+
+using System.Net;
+
 namespace SFMS.Controllers {
     public class ContactController : Controller {
        
@@ -35,6 +40,34 @@ namespace SFMS.Controllers {
                 _applicationDbContext.SaveChanges();//Updating  the record to the database
                 TempData["msg"] = "Delete process successed!!";
             }
+            return RedirectToAction("List");
+        }
+
+        public IActionResult SendEmail(string receiverEmail) {
+            //sending email
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("mr.kyaing7@gmail.com");
+            mailMessage.To.Add(receiverEmail);
+            mailMessage.Subject = "Welcome and thanks for your Contact";
+            mailMessage.Body = "Our admin will contact you as soon as possiable.We received your contact query information.";
+
+            SmtpClient smtpClient = new SmtpClient();
+            smtpClient.Host = "smtp.gmail.com";
+            smtpClient.Port = 587;
+
+            smtpClient.Credentials = new NetworkCredential("mr.kyaing7@gmail.com", "izujavmpvbaualgx");
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtpClient.EnableSsl = true;
+            smtpClient.UseDefaultCredentials = false;
+
+            try {
+                smtpClient.Send(mailMessage);
+                Console.WriteLine("Email Sent Successfully.");
+            }
+            catch (Exception ex) {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            TempData["msg"] = "Delete process successed!!";
             return RedirectToAction("List");
         }
     }

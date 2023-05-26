@@ -50,30 +50,7 @@ namespace SFMS.Controllers
                 };
                 _applicationDbContext.ContactAnyQueries.Add(ContactAnyQuery);
                 _applicationDbContext.SaveChanges();
-                
-                //sending email
-                MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress("mr.kyaing7@gmail.com");
-                mailMessage.To.Add(viewModel.Email);
-                mailMessage.Subject = viewModel.Subject;
-                mailMessage.Body = viewModel.Message;
 
-                SmtpClient smtpClient = new SmtpClient();
-                smtpClient.Host = "smtp.gmail.com";
-                smtpClient.Port = 587;
-             
-                smtpClient.Credentials = new NetworkCredential("mr.kyaing7@gmail.com", "izujavmpvbaualgx");
-                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtpClient.EnableSsl = true;
-                smtpClient.UseDefaultCredentials = false;
-
-                try {
-                    smtpClient.Send(mailMessage);
-                    Console.WriteLine("Email Sent Successfully.");
-                }
-                catch (Exception ex) {
-                    Console.WriteLine("Error: " + ex.Message);
-                }
                 ViewBag.Message = "Send your message to the system administrator.Thanks for your message.";
             }
             else {
