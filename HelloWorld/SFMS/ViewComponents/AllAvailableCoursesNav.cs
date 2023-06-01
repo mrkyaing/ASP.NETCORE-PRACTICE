@@ -11,7 +11,7 @@ namespace SFMS.ViewComponents {
         }
 
         public IViewComponentResult Invoke() {
-            var AllCourses = _applicationDbcontext.Courses.ToList();
+            var AllCourses = _applicationDbcontext.Courses.Where(x => x.IsActive == true).ToList();
             return View("AllAvailableCoursesNav", AllCourses);
         }
     }

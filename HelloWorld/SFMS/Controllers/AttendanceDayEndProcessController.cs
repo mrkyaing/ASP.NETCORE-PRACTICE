@@ -48,7 +48,7 @@ namespace SFMS.Controllers{
             try {
                 //getting the existing fine transaction before dayend Process by student Id and between attendance Date (from & to)
                 var ftsBeforeDayEndProcess = _applicationDbContext.FineTransactions.Where(x => x.StudentId.Equals(viewModel.StudentId) 
-                                            && (x.FinedDate >= viewModel.FromDayEndDate && x.FinedDate <= viewModel.ToDayEndDate)).ToList();
+                      && (x.FinedDate >= viewModel.FromDayEndDate && x.FinedDate <= viewModel.ToDayEndDate)).ToList();
               
                 if(ftsBeforeDayEndProcess.Count()>0) {
                     _applicationDbContext.FineTransactions.RemoveRange(ftsBeforeDayEndProcess);

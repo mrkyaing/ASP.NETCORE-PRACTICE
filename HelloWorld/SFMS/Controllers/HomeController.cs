@@ -26,8 +26,8 @@ namespace SFMS.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.TotalStudents = _applicationDbContext.Students.Count();
-            ViewBag.TotalTeachers = _applicationDbContext.Teachers.Count();
+            ViewBag.TotalStudents = _applicationDbContext.Students.Where(x=>x.IsActive==true).Count();
+            ViewBag.TotalTeachers = _applicationDbContext.Teachers.Where(x => x.IsActive == true).Count();
             ViewBag.TotalNewStudentRegister= _applicationDbContext.NewStudentRegisters.Count();
             return View();
         }
