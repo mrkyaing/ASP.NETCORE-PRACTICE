@@ -37,13 +37,13 @@
 ![student-home](https://github.com/mrkyaing/ASP.NETCORE-PRACTICE/assets/9696016/dbc0073b-9fbe-41be-a12d-da1f7d28e96a)
 # Login User Credentials
 - Stuent Login
-- - user name :arkar@gmail.com
-- - password :prodev@123
+  - user name :arkar@gmail.com
+  - password :prodev@123
 - Teacher login 
-- - user name : sawyunandar1133@gmail.com
-- - password   :sfms101
+  - user name : sawyunandar1133@gmail.com
+  - password   :sfms101
 - Admin Login 
-- - user name : admin@101.com
-- - password  :prodev@123
+  - user name : admin@101.com
+  - password  :prodev@123
 
 
