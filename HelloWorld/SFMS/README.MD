@@ -27,11 +27,24 @@
 # ERD Design 
 - https://docs.google.com/spreadsheets/d/1eH7vaDPHVpRu-kuXsD2Ar5vW2pdyxaJZ/edit?usp=sharing&ouid=109497555838518947518&rtpof=true&sd=true
 # Public UI
-![public](https://user-images.githubusercontent.com/9696016/235455001-df5f4f4f-c362-4be4-ac8f-9dc900eae169.png)
+![home](https://github.com/mrkyaing/ASP.NETCORE-PRACTICE/assets/9696016/5121126b-b767-4c13-8424-1ed1cb9db461)
+
+![home2](https://github.com/mrkyaing/ASP.NETCORE-PRACTICE/assets/9696016/ad1aee09-d73b-4b66-993a-a3c27478ed73)
 # Admin Role Dashboard UI
 ![admin](https://github.com/mrkyaing/ASP.NETCORE-PRACTICE/assets/9696016/eba6f75b-6c10-4cbc-89f9-f96b89776f8e)
 # Teacher Role Dashboard
 ![teacherDashboard](https://user-images.githubusercontent.com/9696016/235756798-a159010b-4988-417f-b716-7ad295ded60a.png)
 # Student Role Dashboard UI
-![StudentUI](https://user-images.githubusercontent.com/9696016/235760247-eec57fae-f040-468c-9393-7814b6b6b825.png)
+![student-home](https://github.com/mrkyaing/ASP.NETCORE-PRACTICE/assets/9696016/dbc0073b-9fbe-41be-a12d-da1f7d28e96a)
+# Login User Credentials
+- Stuent Login
+- - user name :arkar@gmail.com
+- - password :prodev@123
+- Teacher login 
+- - user name : sawyunandar1133@gmail.com
+- - password   :sfms101
+- Admin Login 
+- - user name : admin@101.com
+- - password  :prodev@123
+
 
