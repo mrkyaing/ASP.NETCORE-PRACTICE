@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj": {}
+    "G:\\Projects\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj": {}
   },
   "projects": {
-    "C:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj": {
+    "G:\\Projects\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj",
+        "projectUniqueName": "G:\\Projects\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj",
         "projectName": "HelloWorld",
-        "projectPath": "C:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj",
+        "projectPath": "G:\\Projects\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\HelloWorld.csproj",
         "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "C:\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\obj\\",
+        "outputPath": "G:\\Projects\\ASP.NETCORE-PRACTICE\\HelloWorld\\HelloWorld\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -22,7 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -65,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

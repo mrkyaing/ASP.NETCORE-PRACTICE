@@ -1,5 +1,4 @@
 ﻿@using Microsoft.AspNetCore.Identity
-
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 <!DOCTYPE html>
@@ -30,7 +29,7 @@
             <div class="row align-items-center py-4 px-xl-5">
                 <div class="col-lg-3">
                 <a href="/Home/Index" class="text-decoration-none">
-                        <h1 class="m-0"><span class="text-primary">Pro</span>Dev</h1>
+                    <h1 class="m-0"><span class="text-primary">Pro</span>Dev <br /><span class="text-secondary">ICT Solutions & Training</span></h1>
                     </a>
                 </div>
                 <div class="col-lg-3 text-right">
@@ -38,7 +37,7 @@
                         <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
                         <div class="text-left">
                             <h6 class="font-weight-semi-bold mb-1">Our Office</h6>
-                            <small>9th Floor MTP Condo,Than Lann Street,Hlaing Township, Yangon</small>
+                            <small>No(52)(A)1st Floor,Zaya Thuka Street,Thuwunna ,Thingyangun Township, Yangon</small>
                         </div>
                     </div>
                 </div>  
@@ -47,7 +46,7 @@
                         <i class="fa fa-2x fa-envelope text-primary mr-3"></i>
                         <div class="text-left">
                             <h6 class="font-weight-semi-bold mb-1">Email Us</h6>
-                            <small>info@aceinspiration.com</small>
+                            <small>info@prodev.com</small>
                         </div>
                     </div>
                 </div>
@@ -89,7 +88,6 @@
                                 <a href="/Home/Index" class="nav-item nav-link active">Home</a>
                                 <a href="/Home/Courses" class="nav-item nav-link">Courses</a>
                             <a href="/Home/Teachers" class="nav-item nav-link">Teachers</a>
-                          
                             <a href="/Home/Contact" class="nav-item nav-link">Contact</a>
                             <a href="/Home/About" class="nav-item nav-link">About</a>
                             @if (SignInManager.IsSignedIn(User)) {
@@ -122,9 +120,9 @@
                 <div class="row">
                     <div class="col-md-6 mb-5">
                         <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Get In Touch</h5>
-                        <p><i class="fa fa-map-marker-alt mr-2"></i>9th Floor MTP Condo,Than Lann Street,Hlaing Township, Yangon</p>
+                        <p><i class="fa fa-map-marker-alt mr-2"></i>No(52)(A)1st Floor,Zaya Thuka Street,Thuwunna ,Thingyangun Township, Yangon</p>
                         <p><i class="fa fa-phone-alt mr-2"></i>+959 2562 75319</p>
-                        <p><i class="fa fa-envelope mr-2"></i>info@aceinspiration.com</p>
+                        <p><i class="fa fa-envelope mr-2"></i>info@prodev.com</p>
                         <div class="d-flex justify-content-start mt-4">
                             <a class="btn btn-outline-light btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-outline-light btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
@@ -159,7 +157,7 @@
         <div class="row">
             <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
                 <p class="m-0 text-white">
-                    &copy; <a href="#">ACE Inspiration</a>. All Rights Reserved. Designed by <a href="#">mrkyaing</a>
+                    &copy; <a href="#">ProDev ICT Solutions & Training </a>. All Rights Reserved. Designed by <a href="#">mrkyaing</a>
                 </p>
             </div>
             <div class="col-lg-6 text-center text-md-right">
