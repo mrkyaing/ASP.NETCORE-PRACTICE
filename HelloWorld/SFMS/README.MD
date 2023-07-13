@@ -27,9 +27,8 @@
 # ERD Design 
 - https://docs.google.com/spreadsheets/d/1eH7vaDPHVpRu-kuXsD2Ar5vW2pdyxaJZ/edit?usp=sharing&ouid=109497555838518947518&rtpof=true&sd=true
 # Public UI
-![home](https://github.com/mrkyaing/ASP.NETCORE-PRACTICE/assets/9696016/5121126b-b767-4c13-8424-1ed1cb9db461)
-
 ![home2](https://github.com/mrkyaing/ASP.NETCORE-PRACTICE/assets/9696016/ad1aee09-d73b-4b66-993a-a3c27478ed73)
+![home](https://github.com/mrkyaing/ASP.NETCORE-PRACTICE/assets/9696016/5121126b-b767-4c13-8424-1ed1cb9db461)
 # Admin Role Dashboard UI
 ![admin](https://github.com/mrkyaing/ASP.NETCORE-PRACTICE/assets/9696016/eba6f75b-6c10-4cbc-89f9-f96b89776f8e)
 # Teacher Role Dashboard
