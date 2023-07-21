@@ -43,11 +43,11 @@ namespace SFMS.Controllers {
             return RedirectToAction("List");
         }
 
-        public IActionResult SendEmail(string receiverEmail) {
+        public IActionResult SendEmail(string id) {
             //sending email
             MailMessage mailMessage = new MailMessage();
             mailMessage.From = new MailAddress("mr.kyaing7@gmail.com");
-            mailMessage.To.Add(receiverEmail);
+            mailMessage.To.Add(id);
             mailMessage.Subject = "Welcome and thanks for your Contact";
             mailMessage.Body = "Our admin will contact you as soon as possiable.We received your contact query information.";
 
@@ -67,7 +67,7 @@ namespace SFMS.Controllers {
             catch (Exception ex) {
                 Console.WriteLine("Error: " + ex.Message);
             }
-            TempData["msg"] = "Delete process successed!!";
+            TempData["msg"] = "Email Sent Successfully.";
             return RedirectToAction("List");
         }
     }
