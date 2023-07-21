@@ -46,6 +46,7 @@ namespace SFMS.Controllers
                     Position = s.Position,
                     Id = s.Id,
                     UserId=s.UserId,
+                    ProfileImageUrl="mk.jpeg",
                     Courses = (from tc in _applicationDbContext.TeacherCourses
                                join c in _applicationDbContext.Courses on tc.CourseId equals c.Id
                                where tc.TeacherId == s.Id && tc.IsActive==true && c.IsActive==true
@@ -68,6 +69,7 @@ namespace SFMS.Controllers
                     FacebookUrl=s.FacebookUrl,
                     LinkedinUrl=s.LinkedinUrl,
                     TwitterUrl=s.TwitterUrl,
+                    ProfileImageUrl = "mk.jpeg",
                     Courses = (from tc in _applicationDbContext.TeacherCourses
                                join c in _applicationDbContext.Courses on tc.CourseId equals c.Id
                                where tc.TeacherId == s.Id && tc.IsActive==true && c.IsActive==true

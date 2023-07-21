@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Net;
 using System.Security.Claims;
+using AspNetCore.ReportingServices.ReportProcessing.ReportObjectModel;
 
 namespace SFMS.Controllers
 {
@@ -107,7 +108,16 @@ namespace SFMS.Controllers
             return View(course);
         }
         public IActionResult Teachers() {
-            ViewBag.Teachers = _applicationDbContext.Teachers.Where(x => x.IsActive == true).ToList();
+            ViewBag.Teachers = _applicationDbContext.Teachers.Where(x => x.IsActive == true).Select(s => new TeacherViewModel
+            {
+               Email=s.Email,
+                Name = s.Name,
+                Position = s.Position,
+                FacebookUrl = s.FacebookUrl,
+                LinkedinUrl = s.LinkedinUrl,
+                TwitterUrl = s.TwitterUrl,
+                ProfileImageUrl = "mk.jpeg"
+            }).ToList();
             return View();
         }
         public IActionResult Courses() {

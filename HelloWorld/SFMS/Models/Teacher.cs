@@ -24,5 +24,6 @@ namespace SFMS.Models
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual IdentityUser User { get; set; }
+        //public string? ProfileImageUrl { get; set; }
     }
 }

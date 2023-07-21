@@ -23,5 +23,6 @@ namespace SFMS.Models.ViewModels
         public string FacebookUrl { get; set; }
         public string LinkedinUrl { get; set; }
         public string TwitterUrl { get; set; }
+        public string ProfileImageUrl { get; set; }
     }
 }

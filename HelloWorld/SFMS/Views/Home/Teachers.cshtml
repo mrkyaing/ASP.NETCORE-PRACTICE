@@ -27,7 +27,12 @@
                 <div class="col-md-6 col-lg-3 text-center team mb-4">
                     <div class="team-item rounded overflow-hidden mb-2">
                         <div class="team-img position-relative">
-                            <img class="img-fluid" src="~/img/teacher.png" alt="">
+                            @if (t.Email == "mr.kyaing7@gmail.com") {
+                                <img class="img-fluid" src="~/img/@t.ProfileImageUrl" alt="This is teacher profile image.">
+                            }
+                            else {
+                                <img class="img-fluid" src="~/img/teacher.png" alt="This is teacher profile image.">
+                            }
                             <div class="team-social">
                                 <a class="btn btn-outline-light btn-square mx-1" href="@t?.TwitterUrl"><i class="fab fa-twitter"></i></a>
                                 <a class="btn btn-outline-light btn-square mx-1" href="@t?.FacebookUrl"><i class="fab fa-facebook-f"></i></a>
