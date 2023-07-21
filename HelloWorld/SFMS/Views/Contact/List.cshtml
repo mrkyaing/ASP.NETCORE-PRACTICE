@@ -47,7 +47,7 @@
                         <td>@item.Subject</td>
                         <td>@item.Message</td>
                         <td>
-                            <a data-toggle="modal" data-target="#SendEmailModal" style='margin-left:5px' class="btn btn-danger" role="button">Delete</a>
+                            <a data-toggle="modal" data-target="#SendEmailModal" style='margin-left:5px' class="btn btn-primary" role="button">Send Email</a>
                             @using (Html.BeginForm("SendEmail", "Contact", new { id = item.Email }, FormMethod.Get, false, null)) {
                                 <div class="modal" tabindex="-1" role="dialog" id="SendEmailModal">
                                     <div class="modal-dialog" role="document">

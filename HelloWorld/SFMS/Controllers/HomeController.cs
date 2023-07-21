@@ -10,8 +10,6 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Net;
 using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Net.Mail;
 
 namespace SFMS.Controllers
 {
