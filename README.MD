@@ -1,5 +1,23 @@
 # ASP.NET Core 3.1 MVC 5 Practices
-## What ASP.NET Core MVC?
-## What is MVC Architecture Pattern?
-## ASP.NET Core MVC Overview
-##  ASP.NET Core MVC Details
+- C# Language Fundamentals 
+- OOP with C# Language
+- Design Pattern (most commonly-used patterns)
+- Design infrastructure persistence layer with **Repository pattern**
+- Dependency Injection
+- Asynchronous programming with async and await
+- MVC (Model-View-Controller) Architecture Pattern
+- ASP.NET Core MVC5 With Repository Architecture Pattern
+- Data Storages With MS SQL Server 2014/2019 Express/Developer Edition
+- ORM (Object Relational Mapper) With Entity Framework Core 7.0
+- LINQ (Language-Integrated Query)
+- Authentication & Authorization With ASP.NET Core Identity Membership
+- Email Sending & OPT Verification process for KYC (Know Your Customer)
+- Reporting with RDLC
+- JavaScript & jQuery, AJAX, CSS & HTML5
+- Razor View & UI/UX With Bootstrap 3.3 & JQuery 3.3
+- Paging & Sorting With JQuery DataTables.net (credit:https://datatables.net/ )
+- Admin Dashboard With AdminLTE (credit: https://adminlte.io/)
+- Public Website Template (credit: https://www.free-css.com/)
+- Unit Test with xUnit
+- Version Control with Git
+- Azure Cloud & DevOps (Introduction to)
